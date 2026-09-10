@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070a12" />
+  <meta name="description" content="FutureX Lab — research, trust intelligence, AI detection and technology signals." />
+  <title>FutureX Lab — Build what comes next</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet" />
+  <style>
+:root{
+--bg:#070a12; --surface:#0c0f1b; --surface-2:#111526; --surface-3:#151a2a;
+--ink:#f4f7ff; --muted:#b8c0d2; --dim:#7d879d; --violet:#8967ff; --violet-2:#b5a8ff;
+--cyan:#62d8ff; --mint:#65e6c1; --warm:#ffb36b; --red:#ff6d83; --gold:#f4d06f; --lilac:#d8c9ff; --coral:#ff8f70;
+--line:rgba(255,255,255,.105); --line-strong:rgba(255,255,255,.18);
+--shadow:0 30px 100px rgba(0,0,0,.42); --ease:cubic-bezier(.16,1,.3,1);
+--sans:'DM Sans',sans-serif; --serif:'Playfair Display',serif; --mono:'DM Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-2;background:radial-gradient(circle at 14% 18%,rgba(216,201,255,.045),transparent 22%),radial-gradient(circle at 84% 38%,rgba(101,230,193,.035),transparent 20%),radial-gradient(circle at 48% 92%,rgba(255,143,112,.03),transparent 22%)}
+body.cursor-ready{cursor:none}
+a,button,input,textarea,select{font:inherit;color:inherit}a{text-decoration:none}button{border:0;background:none}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--violet-2);outline-offset:4px}
+::selection{background:rgba(137,103,255,.35);color:#fff}
+::-webkit-scrollbar{width:9px}::-webkit-scrollbar-track{background:#070a12}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:20px}
+
+/* CURSOR */
+.cursor-system{position:fixed;inset:0;pointer-events:none;z-index:9999}
+.cursor-lens{position:fixed;left:0;top:0;width:42px;height:42px;border:1px solid rgba(218,211,255,.9);border-radius:50%;transform:translate3d(-50%,-50%,0);background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.15),rgba(137,103,255,.045) 42%,rgba(0,0,0,.02));backdrop-filter:blur(2px);box-shadow:0 0 0 1px rgba(137,103,255,.08),0 0 32px rgba(137,103,255,.16);transition:width .28s var(--ease),height .28s var(--ease),background .28s,border-color .28s}
+.lens-glint{position:absolute;width:11px;height:4px;border-radius:100%;background:rgba(255,255,255,.7);transform:rotate(-35deg);left:8px;top:8px;filter:blur(.2px)}
+.lens-crosshair{position:absolute;background:rgba(213,207,255,.78);left:50%;top:50%;opacity:.8}.lens-crosshair-h{height:1px;width:14px;transform:translate(-50%,-50%)}.lens-crosshair-v{width:1px;height:14px;transform:translate(-50%,-50%)}
+.lens-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-49%);font:500 12px var(--mono);color:#ddd7ff}
+.cursor-orbit{position:fixed;width:6px;height:6px;border:1px solid rgba(181,168,255,.55);border-radius:50%;transform:translate3d(-50%,-50%,0);opacity:.9}.cursor-orbit-a{width:56px;height:56px;border-style:dashed;border-color:rgba(137,103,255,.18)}.cursor-orbit-b{width:66px;height:66px;border-color:rgba(98,216,255,.08);border-style:dotted}
+.cursor-lens.is-hover{width:58px;height:58px;background:rgba(137,103,255,.1);border-color:#c7bcff}.cursor-lens.is-ai{width:70px;height:70px;border-style:dashed;border-color:var(--cyan);background:rgba(98,216,255,.08);box-shadow:0 0 45px rgba(98,216,255,.14)}.cursor-lens.is-ai .lens-center{font-size:19px;color:var(--cyan)}
+.cursor-lens.is-launch{width:64px;height:64px;border-color:#fff}.cursor-lens.is-brand{width:52px;height:52px}
+@media(pointer:coarse){.cursor-system{display:none}body{cursor:auto!important}.magnetic-target{cursor:pointer!important}}
+
+/* GLOBAL */
+.page-progress{position:fixed;top:0;left:0;width:100%;height:2px;z-index:500;background:transparent}.page-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--violet),var(--cyan));box-shadow:0 0 12px rgba(137,103,255,.7)}
+.nav{position:fixed;top:0;left:0;right:0;height:86px;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;z-index:400;transition:height .45s var(--ease),padding .45s var(--ease),background .45s,border .45s}.nav.scrolled{height:72px;padding:14px 40px;background:rgba(7,10,18,.74);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:21px;letter-spacing:-.055em;position:relative;z-index:2}.brand em{font-family:var(--serif);font-weight:500}.mark{width:28px;height:28px;border:1px solid rgba(255,255,255,.85);display:grid;place-items:center;transform:rotate(45deg);transition:transform .7s var(--ease),box-shadow .4s}.brand:hover .mark{transform:rotate(135deg);box-shadow:0 0 22px rgba(137,103,255,.22)}.mark i{width:9px;height:9px;border-radius:50%;background:#b09bff;box-shadow:0 0 18px rgba(176,155,255,.55)}
+.nav-pill{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:3px;padding:5px;border:1px solid var(--line);border-radius:999px;background:rgba(17,20,33,.38);backdrop-filter:blur(18px);box-shadow:0 14px 40px rgba(0,0,0,.12)}
+.nav-link{position:relative;padding:9px 15px;border-radius:999px;color:rgba(255,255,255,.68);font-size:13px;font-weight:600;transition:color .25s,background .25s}.nav-link span{position:absolute;left:15px;right:15px;bottom:5px;height:1px;background:var(--violet-2);transform:scaleX(0);transform-origin:left;transition:transform .32s var(--ease)}.nav-link:hover,.nav-link.active{color:#fff;background:rgba(255,255,255,.085)}.nav-link:hover span,.nav-link.active span{transform:scaleX(1)}
+.nav-cta{display:inline-flex;align-items:center;gap:10px;padding:11px 15px 11px 17px;border:1px solid var(--line-strong);border-radius:999px;background:rgba(255,255,255,.025);font-size:13px;font-weight:700;transition:transform .3s var(--ease),background .3s,border-color .3s}.nav-cta b{font-size:16px;color:var(--violet-2);transition:transform .3s var(--ease)}.nav-cta:hover{background:#fff;color:#0a0d16;border-color:#fff;transform:translateY(-2px)}.nav-cta:hover b{transform:translate(2px,-2px);color:#6e52da}
+.menu-toggle{display:none;width:42px;height:42px;border:1px solid var(--line-strong);border-radius:50%;position:relative}.menu-toggle span{position:absolute;width:15px;height:1px;background:#fff;left:50%;top:50%;transform:translate(-50%,-4px);transition:transform .25s}.menu-toggle span+span{transform:translate(-50%,4px)}.menu-toggle.open span{transform:translate(-50%,0) rotate(45deg)}.menu-toggle.open span+span{transform:translate(-50%,0) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:72px 0 auto 0;height:calc(100vh - 72px);z-index:350;background:rgba(6,9,15,.96);backdrop-filter:blur(24px);opacity:0;pointer-events:none;transform:translateY(-12px);transition:.4s var(--ease);border-top:1px solid var(--line)}.mobile-menu.open{opacity:1;pointer-events:auto;transform:none}.mobile-menu-inner{padding:30px 22px}.mobile-link{display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--line);font-size:25px;letter-spacing:-.04em}.mobile-link span{font:500 11px var(--mono);color:var(--violet-2);align-self:center}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;background:#070a12;isolation:isolate}.hero-img{position:absolute;inset:0;background-size:cover;background-position:center}.hero-base{background-image:linear-gradient(105deg,rgba(3,5,12,.8),rgba(3,5,12,.2) 58%,rgba(3,5,12,.6)),url('https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260609_195923_b0ba8ace-1d1d-4f2c-9a28-1ab84b330680.png&w=1280&q=85');animation:heroZoom 2s var(--ease) forwards}.hero-reveal{background-image:linear-gradient(105deg,rgba(3,5,12,.4),rgba(3,5,12,.1)),url('https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260609_201152_bba90a12-bf12-459f-91f0-51f237dbaf3b.png&w=1280&q=85');z-index:2;pointer-events:none}.grain{position:absolute;inset:0;z-index:3;opacity:.12;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");mix-blend-mode:soft-light}.hero-vignette{position:absolute;inset:0;z-index:4;background:radial-gradient(circle at 50% 46%,transparent 0,transparent 42%,rgba(3,5,12,.22) 78%,rgba(3,5,12,.56) 100%);pointer-events:none}
+.hero-content{position:relative;z-index:5;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:0 9vw 60px}.headline{margin-top:18vh;text-align:center;pointer-events:none}.eyebrow{font:500 12px var(--mono);letter-spacing:.2em;color:var(--violet-2);text-transform:uppercase;margin-bottom:24px}.headline h1{margin:0;font-size:clamp(3rem,7vw,7.5rem);line-height:.85;letter-spacing:-.06em;font-weight:600}.headline .accent{display:block;font:500 italic clamp(3rem,7vw,7.5rem) var(--serif);letter-spacing:-.05em;color:#fff}.hero-bottom{display:grid;grid-template-columns:280px minmax(280px,380px);justify-content:space-between;align-items:end;gap:40px}.hero-note{margin:0;color:rgba(255,255,255,.85);font-size:15px;line-height:1.6}.hero-action{display:flex;flex-direction:column;align-items:flex-start;gap:24px}.btn-launch,.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:12px;background:var(--violet);color:white;border-radius:999px;padding:15px 20px;font-size:14px;font-weight:700;box-shadow:0 16px 40px rgba(115,83,255,.27);transition:transform .32s var(--ease),background .32s,box-shadow .32s}.btn-launch:hover,.btn-primary:hover{background:#9d83ff;transform:translateY(-3px);box-shadow:0 20px 48px rgba(115,83,255,.42)}.btn-launch span,.btn-primary span{font-size:18px;line-height:1}.hero-scroll-cue{position:absolute;right:40px;bottom:34px;z-index:6;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.56)}.hero-scroll-cue span{display:block;width:1px;height:58px;background:linear-gradient(180deg,transparent,#fff)}.hero-scroll-cue small{font:500 9px var(--mono);letter-spacing:.12em;text-transform:uppercase;writing-mode:vertical-rl}
+.anim-rise{opacity:0;animation:rise 1.2s var(--ease) forwards}.d-1{animation-delay:.2s}.d-2{animation-delay:.4s}.d-3{animation-delay:.6s}.d-4{animation-delay:.8s}@keyframes rise{from{opacity:0;transform:translateY(30px);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}@keyframes heroZoom{from{transform:scale(1.1)}to{transform:scale(1)}}
+
+/* SECTIONS */
+.ambient-divider{height:38px;background:#0a0d16;display:flex;align-items:center;justify-content:center;gap:10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.ambient-divider span{display:block;width:4px;height:4px;border-radius:50%;background:var(--violet-2);opacity:.5}.ambient-divider span:nth-child(2){width:38px;height:1px;border-radius:0;opacity:.22}.section{position:relative;padding:135px 9vw;border-top:1px solid rgba(255,255,255,.05);overflow:hidden}.work-section{background:radial-gradient(circle at 90% 20%,rgba(137,103,255,.08),transparent 30%),linear-gradient(180deg,#090c14,#080b13)}.trust-section{background:radial-gradient(circle at 100% 0,rgba(137,103,255,.13),transparent 42%),#0a0d16}.detection-section{background:radial-gradient(circle at 0 50%,rgba(98,216,255,.08),transparent 38%),#090c14}.signals-section{background:linear-gradient(180deg,#090c14,#070a12)}.news-section{background:radial-gradient(circle at 50% 0,rgba(137,103,255,.07),transparent 35%),#070a12}.about-section{background:radial-gradient(circle at 70% 40%,rgba(137,103,255,.16),transparent 45%),#080b14}
+.section-topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.kicker,.micro-label{font:500 11px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--violet-2)}.section-index{font:500 11px var(--mono);color:var(--dim)}.section-title{font-size:clamp(2.8rem,5.8vw,6.2rem);line-height:.92;letter-spacing:-.065em;font-weight:600;max-width:950px}.section-title em{font:500 italic .95em var(--serif);color:#fff}.section-intro{font-size:18px;color:var(--muted);line-height:1.65;max-width:680px}.section-lead-row{margin-top:36px;display:flex;justify-content:space-between;gap:60px;align-items:flex-end}.mini-stamp{min-width:160px;display:flex;gap:12px;align-items:flex-end;justify-content:flex-end;color:var(--dim)}.mini-stamp span{font:500 26px var(--mono);color:var(--violet-2)}.mini-stamp b{font:500 8px/1.5 var(--mono);letter-spacing:.12em}
+.reveal-on-scroll{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--delay,0s)}.reveal-on-scroll.is-visible{opacity:1;transform:none}
+
+/* WORK */
+.work-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:18px;margin-top:70px}.feature-card{min-height:530px;padding:26px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,rgba(137,103,255,.09),rgba(255,255,255,.018));position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;transition:transform .45s var(--ease),border-color .45s,background .45s}.feature-card:hover{transform:translateY(-8px);border-color:rgba(181,168,255,.36);background:linear-gradient(145deg,rgba(137,103,255,.14),rgba(255,255,255,.028))}.feature-card-large{min-height:590px}.card-glow{position:absolute;inset:-50% auto auto -20%;width:500px;height:500px;background:radial-gradient(circle,rgba(137,103,255,.22),transparent 65%);pointer-events:none}.card-glow.cyan{background:radial-gradient(circle,rgba(98,216,255,.17),transparent 65%);inset:-50% -20% auto auto}.card-glow.warm{background:radial-gradient(circle,rgba(255,179,107,.16),transparent 65%);inset:auto -25% -45% auto}.feature-top{display:flex;justify-content:space-between;color:var(--dim);font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.09em;position:relative;z-index:1}.feature-top i{font-style:normal;color:#fff;opacity:.55;transition:transform .3s var(--ease)}.feature-card:hover .feature-top i{transform:translate(3px,-3px);color:var(--violet-2)}.feature-copy{position:relative;z-index:1}.feature-copy h3{font-size:30px;letter-spacing:-.04em;margin-bottom:10px}.feature-copy p{font-size:14px;line-height:1.6;color:var(--muted);max-width:420px}.feature-visual{position:relative;display:grid;place-items:center;flex:1}.visual-orbit{min-height:220px}.orbit-ring{position:absolute;border:1px solid rgba(181,168,255,.22);border-radius:50%;transform:rotate(-18deg)}.orbit-ring.one{width:230px;height:110px;animation:float1 8s ease-in-out infinite}.orbit-ring.two{width:310px;height:150px;border-color:rgba(98,216,255,.12);transform:rotate(45deg);animation:float2 10s ease-in-out infinite}.orbit-core{width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#b9abff,var(--violet) 45%,#3e327e 100%);box-shadow:0 0 60px rgba(137,103,255,.34);font:500 16px var(--mono)}.visual-grid{grid-template-columns:repeat(3,34px);grid-auto-rows:34px;gap:10px;align-content:center;opacity:.75}.visual-grid span{border:1px solid rgba(98,216,255,.35);background:linear-gradient(145deg,rgba(98,216,255,.16),transparent);transform:rotate(45deg);animation:gridPulse 3s infinite}.visual-grid span:nth-child(2n){animation-delay:.4s}.visual-type{align-items:end;padding-bottom:30px}.visual-type span{display:block;font-size:clamp(28px,4vw,52px);letter-spacing:-.06em;line-height:.86;color:rgba(255,255,255,.11);transition:color .4s var(--ease),transform .4s var(--ease)}.feature-card:hover .visual-type span{color:rgba(255,255,255,.65);transform:translateX(4px)}
+@keyframes float1{0%,100%{transform:rotate(-18deg) translateY(0)}50%{transform:rotate(-13deg) translateY(-8px)}}@keyframes float2{0%,100%{transform:rotate(45deg) scale(1)}50%{transform:rotate(52deg) scale(1.05)}}@keyframes gridPulse{0%,100%{opacity:.25}50%{opacity:.9}}
+
+/* TRUST */
+.split-heading{display:grid;grid-template-columns:1.2fr .55fr;gap:8vw;align-items:end}.split-heading>p{font-size:16px;color:var(--muted);line-height:1.65;padding-bottom:8px}.trust-shell{display:grid;grid-template-columns:255px 1fr;margin-top:65px;border:1px solid var(--line);border-radius:26px;overflow:hidden;background:rgba(10,13,22,.7);box-shadow:var(--shadow)}.trust-sidebar{padding:26px 18px;border-right:1px solid var(--line);background:rgba(255,255,255,.02);display:flex;flex-direction:column}.tool-tab{padding:16px 12px;text-align:left;border-bottom:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center;transition:color .25s,background .25s,border .25s}.tool-tab span{font:500 10px var(--mono);color:var(--dim)}.tool-tab:hover,.tool-tab.active{color:#fff;background:linear-gradient(90deg,rgba(137,103,255,.13),transparent);border-bottom-color:rgba(137,103,255,.3)}.tool-tab.active{box-shadow:inset 2px 0 0 var(--violet)}.trust-side-note{margin-top:auto;padding:18px 12px;border:1px solid var(--line);border-radius:14px;background:rgba(0,0,0,.16);display:flex;flex-direction:column;gap:6px}.trust-side-note b{font-size:12px}.trust-side-note span{font:500 10px/1.5 var(--mono);color:var(--dim)}.tool-viewport{min-width:0;position:relative}.tool-panel{display:none;padding:38px}.tool-panel.active{display:block;animation:panelIn .5s var(--ease)}.tool-heading{display:flex;justify-content:space-between;gap:30px;margin-bottom:28px}.tool-heading h3{font-size:clamp(1.8rem,3vw,2.7rem);letter-spacing:-.05em;line-height:1.02;max-width:800px;margin-top:9px}.tool-number{font:500 10px var(--mono);color:var(--dim)}.input-row{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:end}.input-row.stacked{grid-template-columns:1fr auto}.input-wrap label{display:block;font:500 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:9px}.premium-input{width:100%;padding:17px 18px;border:1px solid var(--line-strong);background:#0e1320;border-radius:14px;color:#fff;outline:none;transition:border .25s,box-shadow .25s,background .25s}.premium-input:focus{border-color:rgba(181,168,255,.7);background:#101626;box-shadow:0 0 0 4px rgba(137,103,255,.08)}textarea.premium-input{min-height:150px;resize:vertical}.demo-hints{display:flex;align-items:center;gap:12px;margin-top:12px}.demo-hints span{font:500 9px var(--mono);color:var(--dim)}.hint{font:500 10px var(--mono);color:var(--violet-2);border-bottom:1px dashed rgba(181,168,255,.4)}.analysis-loader{display:none;border-top:1px solid var(--line);padding:30px 38px;align-items:center;gap:16px}.analysis-loader.active{display:flex}.loader-orbit{width:34px;height:34px;border:1px solid rgba(137,103,255,.25);border-top-color:var(--violet-2);border-radius:50%;animation:spin 1s linear infinite;position:relative}.loader-orbit span{width:4px;height:4px;position:absolute;left:50%;top:-2px;transform:translateX(-50%);border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}.analysis-loader b{display:block;font-size:13px}.analysis-loader small{display:block;color:var(--dim);font:500 10px var(--mono);margin-top:3px}.analysis-results{display:none;border-top:1px solid var(--line);padding:34px 38px}.analysis-results.active{display:block;animation:panelIn .45s var(--ease)}.score-panel{display:flex;align-items:center;gap:24px}.score-ring{position:relative;width:105px;height:105px;flex:0 0 105px}.score-ring svg{width:100%;height:100%;transform:rotate(-90deg)}.ring-bg,.ring-progress{fill:none;stroke-width:6}.ring-bg{stroke:rgba(255,255,255,.09)}.ring-progress{stroke:var(--violet);stroke-linecap:round;stroke-dasharray:0 314;transition:stroke-dasharray 1s var(--ease),stroke .35s}.score-ring strong{position:absolute;inset:0;display:grid;place-items:center;font-size:26px;letter-spacing:-.05em}.score-panel h4{font-size:21px;margin:5px 0 6px}.score-panel p:last-child{color:var(--muted);font-size:13px;line-height:1.5;max-width:600px}.signals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}.signal-card{border:1px solid var(--line);border-radius:15px;padding:17px;background:rgba(255,255,255,.024);display:flex;gap:12px}.signal-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;flex:0 0 32px;background:rgba(137,103,255,.12);color:var(--violet-2);font-weight:700}.signal-card.good .signal-icon{background:rgba(101,230,193,.1);color:var(--mint)}.signal-card.warn .signal-icon{background:rgba(255,179,107,.1);color:var(--warm)}.signal-card.bad .signal-icon{background:rgba(255,109,131,.1);color:var(--red)}.signal-card h5{font-size:13px;margin-bottom:4px}.signal-card p{font-size:11px;line-height:1.5;color:var(--dim)}
+
+/* DETECTION */
+.detection-stage{display:grid;grid-template-columns:180px 1fr;border:1px solid var(--line);border-radius:26px;overflow:hidden;margin-top:65px;background:#0b0f1b;box-shadow:var(--shadow)}.detection-rail{padding:22px;border-right:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.025),transparent)}.detect-tab{width:100%;padding:13px 12px;text-align:left;border-bottom:1px solid var(--line);color:var(--muted);font-size:13px}.detect-tab:hover,.detect-tab.active{color:#fff;background:rgba(137,103,255,.1);box-shadow:inset 2px 0 var(--violet)}.rail-foot{font:500 9px/1.5 var(--mono);text-transform:uppercase;letter-spacing:.13em;color:var(--dim);margin-top:auto;padding-top:28px}.detection-main{min-width:0}.detect-panel{display:none;padding:36px}.detect-panel.active{display:block;animation:panelIn .45s var(--ease)}.panel-title{display:flex;gap:14px;align-items:center;margin-bottom:18px}.panel-title span{font:500 10px var(--mono);color:var(--violet-2)}.panel-title h3{font-size:23px;letter-spacing:-.035em}.detection-btn{margin-top:14px}.upload-zone{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:180px;border:1px dashed rgba(255,255,255,.2);border-radius:18px;background:linear-gradient(145deg,rgba(137,103,255,.04),transparent);text-align:center;transition:border .25s,background .25s,transform .3s var(--ease)}.upload-zone:hover{border-color:rgba(181,168,255,.55);background:rgba(137,103,255,.07);transform:translateY(-3px)}.upload-zone input{display:none}.upload-icon{font-size:32px;color:var(--violet-2);margin-bottom:10px}.upload-zone b{font-size:13px}.upload-zone small{font:500 9px var(--mono);color:var(--dim);margin-top:5px}.detection-result{margin:0 36px 36px;padding:24px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(98,216,255,.05),rgba(137,103,255,.04));display:grid;grid-template-columns:.75fr 1.25fr;gap:28px;align-items:center}.detect-meter{min-width:0}.meter-track{height:7px;border-radius:10px;background:rgba(255,255,255,.08);overflow:hidden}.meter-track span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--cyan));transition:width 1s var(--ease)}.meter-meta{display:flex;align-items:baseline;gap:8px;margin-top:10px}.meter-meta strong{font-size:28px}.meter-meta span{font:500 9px var(--mono);color:var(--dim)}.detect-copy h4{font-size:17px;margin:6px 0}.detect-copy p:last-child{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* SIGNALS */
+.signals-intro{display:flex;justify-content:space-between;gap:60px;align-items:flex-end}.live-chip{display:inline-flex;align-items:center;gap:7px;margin-top:20px;font:500 9px var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--dim);border:1px solid var(--line);padding:8px 10px;border-radius:999px}.live-chip i{width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px rgba(101,230,193,.7)}.signal-map{height:530px;position:relative;margin-top:65px;border:1px solid var(--line);border-radius:26px;overflow:hidden;background:radial-gradient(circle at 50% 50%,rgba(137,103,255,.13),transparent 30%),#080c16}.signal-map-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:42px 42px;mask-image:radial-gradient(circle at center,black 20%,transparent 82%);opacity:.65}.map-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:110px;height:110px;border-radius:50%;border:1px solid rgba(181,168,255,.34);display:grid;place-items:center;background:radial-gradient(circle,#1a2040,rgba(12,15,27,.5));box-shadow:0 0 100px rgba(137,103,255,.2)}.map-center span{font:500 22px var(--mono);color:var(--violet-2)}.map-center small{position:absolute;bottom:21px;font:500 7px var(--mono);color:var(--dim)}.map-pulse{position:absolute;display:flex;flex-direction:column;gap:3px}.map-pulse i{width:11px;height:11px;border-radius:50%;background:var(--violet-2);box-shadow:0 0 0 0 rgba(181,168,255,.5);animation:pulse 2.4s infinite}.map-pulse b{font-size:13px}.map-pulse small{font:500 9px var(--mono);color:var(--dim)}.p1{left:17%;top:24%}.p2{left:70%;top:28%}.p3{left:75%;top:68%}.p4{left:26%;top:70%}.p5{left:48%;top:17%}.p2 i{background:var(--cyan);animation-delay:.4s}.p3 i{background:var(--warm);animation-delay:.8s}.p4 i{background:var(--mint);animation-delay:1.2s}.p5 i{background:#d49cff;animation-delay:1.5s}.signal-list{margin-top:24px;border-top:1px solid var(--line)}.signal-row{width:100%;display:grid;grid-template-columns:60px 1fr auto;align-items:center;gap:20px;padding:23px 0;border-bottom:1px solid var(--line);text-align:left;transition:padding .3s var(--ease),background .3s}.signal-row:hover{padding-left:10px;padding-right:10px;background:linear-gradient(90deg,rgba(137,103,255,.05),transparent 70%)}.signal-row>span{font:500 10px var(--mono);color:var(--dim)}.signal-row b{display:block;font-size:16px}.signal-row small{display:block;font-size:11px;color:var(--dim);margin-top:4px}.signal-row strong{font:500 10px var(--mono);color:var(--violet-2)}
+
+/* NEWS */
+.news-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:40px}.news-tools{display:flex;gap:10px;align-items:center}.news-search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:9px 12px;background:rgba(255,255,255,.02)}.news-search span{color:var(--dim)}.news-search input{border:0;outline:0;background:transparent;min-width:220px;font-size:12px}.news-tools select{appearance:none;background:#0d1220;color:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 13px;font-size:11px}.news-filters{display:flex;gap:8px;overflow:auto;padding-bottom:4px;margin:43px 0 25px}.filter-pill{white-space:nowrap;padding:9px 14px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px;transition:all .25s}.filter-pill:hover,.filter-pill.active{background:#fff;color:#090c14;border-color:#fff}.news-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}.news-card{grid-column:span 4;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#0b0f1b;transition:transform .45s var(--ease),border-color .45s}.news-card:hover{transform:translateY(-7px);border-color:rgba(181,168,255,.35)}.news-card.featured{grid-column:span 12;display:grid;grid-template-columns:1.1fr .9fr;min-height:420px}.news-card.hidden{display:none}.news-image{min-height:240px;position:relative;overflow:hidden}.featured .news-image{min-height:420px}.news-image:before,.news-image:after{content:"";position:absolute;inset:0}.image-ai{background:linear-gradient(135deg,rgba(7,10,18,.12),rgba(7,10,18,.58)),url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1400&auto=format&fit=crop') center/cover}.image-ai:before{background:linear-gradient(90deg,transparent 49%,rgba(181,168,255,.15) 50%,transparent 51%),linear-gradient(0deg,transparent 49%,rgba(181,168,255,.12) 50%,transparent 51%);background-size:55px 55px;transform:scale(1.3) rotate(10deg)}.image-data{background:linear-gradient(135deg,rgba(7,10,18,.08),rgba(7,10,18,.58)),url('https://images.unsplash.com/photo-1563206767-5b18f218e8de?q=80&w=1100&auto=format&fit=crop') center/cover}.image-data:after{background:repeating-linear-gradient(90deg,transparent 0 12px,rgba(98,216,255,.12) 13px 14px);transform:skewX(-22deg)}.image-cyber{background:linear-gradient(135deg,rgba(7,10,18,.10),rgba(7,10,18,.64)),url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1100&auto=format&fit=crop') center/cover}.image-cyber:after{background:repeating-linear-gradient(0deg,transparent 0 7px,rgba(255,255,255,.04) 8px 9px);animation:scan 4s linear infinite}.image-network{background:linear-gradient(135deg,rgba(7,10,18,.08),rgba(7,10,18,.6)),url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1100&auto=format&fit=crop') center/cover}.image-network:after{background-image:radial-gradient(circle,rgba(101,230,193,.35) 1px,transparent 1px);background-size:22px 22px}.image-agent{background:radial-gradient(circle at 40% 35%,rgba(212,156,255,.25),transparent 25%),linear-gradient(145deg,#17112a,#080b13)}.image-agent:after{background:linear-gradient(120deg,transparent 0 42%,rgba(212,156,255,.23) 43% 44%,transparent 45%);transform:scale(2)}.news-content{padding:27px}.news-card.featured .news-content{display:flex;flex-direction:column;justify-content:center;padding:40px}.news-meta{display:flex;justify-content:space-between;gap:15px;font:500 9px var(--mono);letter-spacing:.1em;color:var(--violet-2);text-transform:uppercase;margin-bottom:14px}.news-meta time{color:var(--dim)}.news-card h3{font-size:21px;line-height:1.12;letter-spacing:-.04em}.featured h3{font-size:clamp(2rem,3.5vw,3.8rem);max-width:700px}.news-card p{color:var(--muted);font-size:12px;line-height:1.6;margin:14px 0 20px;max-width:590px}.news-link{display:inline-flex;align-items:center;gap:10px;color:#fff;font-size:12px;font-weight:700;transition:gap .25s var(--ease)}.news-link b{color:var(--violet-2)}.news-card:hover .news-link{gap:15px}
+@keyframes scan{from{transform:translateY(-20px)}to{transform:translateY(20px)}}
+
+/* ABOUT */
+.about-hero{display:flex;justify-content:space-between;gap:50px;align-items:flex-end}.about-image-wrap{height:560px;margin-top:75px;border-radius:28px;overflow:hidden;position:relative;border:1px solid var(--line);box-shadow:var(--shadow)}.about-image{position:absolute;inset:0;background:linear-gradient(0deg,rgba(7,10,18,.8),transparent 60%),url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop') center/cover;filter:saturate(.78) contrast(1.08)}.about-overlay{position:absolute;inset:auto 0 0 0;padding:36px;display:flex;align-items:end;justify-content:space-between;gap:20px}.about-overlay p{font:500 italic clamp(2rem,4vw,4rem)/.92 var(--serif);letter-spacing:-.04em}.about-line{width:20%;height:1px;background:rgba(255,255,255,.25)}.about-metrics{display:grid;grid-template-columns:repeat(4,1fr);margin-top:18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.about-metrics div{padding:28px 14px;border-right:1px solid var(--line)}.about-metrics div:last-child{border-right:0}.about-metrics strong{display:block;font:500 clamp(2.2rem,4vw,4.2rem) var(--serif);letter-spacing:-.05em}.about-metrics span{font:500 9px var(--mono);letter-spacing:.11em;color:var(--dim);text-transform:uppercase}
+
+/* FOOTER */
+.footer{padding:38px 9vw 48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px;align-items:end;border-top:1px solid var(--line);background:#06090f}.footer-brand{font-size:18px}.footer-brand .mark{width:24px;height:24px}.footer-brand .mark i{width:8px;height:8px}.footer p{font:500 9px var(--mono);color:var(--dim);letter-spacing:.11em;text-transform:uppercase;margin-top:13px}.footer-center{text-align:center;font:500 9px var(--mono);color:var(--dim);letter-spacing:.12em}.footer-right{display:flex;justify-content:flex-end;gap:22px;font:500 10px var(--mono);color:var(--dim)}.footer-right a{color:var(--violet-2)}
+
+/* AI */
+.ai-fab{position:fixed;right:30px;bottom:28px;z-index:300;display:flex;align-items:center;gap:10px;padding:8px 13px 8px 8px;border:1px solid rgba(255,255,255,.17);border-radius:999px;background:rgba(15,19,32,.82);backdrop-filter:blur(18px);box-shadow:0 18px 50px rgba(0,0,0,.35);font-size:12px;font-weight:700;transition:transform .35s var(--ease),border .35s,background .35s}.ai-fab:hover{transform:translateY(-4px);border-color:rgba(98,216,255,.38);background:rgba(20,25,42,.92)}.ai-fab>i{font-style:normal;color:var(--cyan);font-size:14px;margin-left:2px}.ai-core{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#b9abff,var(--violet));position:relative;box-shadow:0 0 28px rgba(137,103,255,.28)}.ai-core:after{content:"";position:absolute;inset:-4px;border:1px solid rgba(137,103,255,.35);border-radius:50%;animation:pulseRing 2.2s infinite}.chat-window{position:fixed;right:30px;bottom:90px;width:390px;height:550px;z-index:290;display:flex;flex-direction:column;border:1px solid var(--line-strong);border-radius:24px;overflow:hidden;background:rgba(10,13,22,.96);backdrop-filter:blur(26px);box-shadow:0 35px 100px rgba(0,0,0,.55);opacity:0;pointer-events:none;transform:translateY(18px) scale(.96);transform-origin:bottom right;transition:.4s var(--ease)}.chat-window.open{opacity:1;pointer-events:auto;transform:none}.chat-header{padding:18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.chat-header-info{display:flex;align-items:center;gap:10px}.chat-status{display:block;width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px rgba(101,230,193,.65)}.chat-title{display:block;font-size:13px;font-weight:700}.chat-sub{display:block;color:var(--dim);font:500 9px var(--mono);margin-top:2px}.chat-close{font-size:24px;color:var(--dim);transition:color .2s}.chat-close:hover{color:#fff}.chat-context{padding:9px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;font:500 9px var(--mono);color:var(--dim)}.chat-context b{color:var(--violet-2);font-weight:500}.chat-body{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:12px}.msg{max-width:86%;padding:11px 13px;border-radius:14px;font-size:12px;line-height:1.5}.msg.bot{align-self:flex-start;background:#20263a;color:#e9edfa;border-bottom-left-radius:4px}.msg.user{align-self:flex-end;background:var(--violet);color:#fff;border-bottom-right-radius:4px}.typing-indicator{display:none;gap:4px;margin:0 18px 10px;padding:10px 12px;width:max-content;border-radius:13px;background:#20263a}.typing-indicator.active{display:flex}.typing-indicator span{width:5px;height:5px;border-radius:50%;background:#b8c0d2;animation:typing 1.2s infinite}.typing-indicator span:nth-child(2){animation-delay:.15s}.typing-indicator span:nth-child(3){animation-delay:.3s}.chat-footer{padding:12px;border-top:1px solid var(--line);background:rgba(0,0,0,.18)}.chat-suggestions{display:flex;gap:6px;overflow:auto;margin-bottom:10px}.chat-suggest{white-space:nowrap;padding:7px 10px;border:1px solid var(--line);border-radius:999px;color:var(--dim);font:500 9px var(--mono)}.chat-suggest:hover{color:#fff;background:rgba(255,255,255,.06)}.chat-input-area{display:flex;gap:7px}.chat-input-area input{flex:1;min-width:0;border:1px solid var(--line);background:#0e1320;border-radius:12px;padding:11px 12px;outline:none;font-size:12px}.chat-input-area input:focus{border-color:rgba(181,168,255,.55)}.chat-send{width:42px;height:42px;border-radius:12px;background:var(--violet);display:grid;place-items:center;font-weight:700}.chat-send:hover{background:#9d83ff}
+@keyframes typing{0%,80%,100%{transform:scale(.5);opacity:.45}40%{transform:scale(1);opacity:1}}@keyframes pulseRing{0%{transform:scale(.75);opacity:.6}100%{transform:scale(1.35);opacity:0}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(181,168,255,.45)}70%{box-shadow:0 0 0 20px rgba(181,168,255,0)}100%{box-shadow:0 0 0 0 rgba(181,168,255,0)}}@keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* VISUAL POLISH */
+.section:nth-of-type(3n+1){--section-accent:var(--violet)}
+.trust-section{background:radial-gradient(700px 420px at 82% 6%,rgba(98,216,255,.09),transparent 62%),radial-gradient(520px 360px at 8% 80%,rgba(216,201,255,.07),transparent 65%),#090d17!important}
+.detection-section{background:radial-gradient(680px 420px at 86% 16%,rgba(255,143,112,.075),transparent 60%),radial-gradient(520px 420px at 12% 78%,rgba(101,230,193,.07),transparent 64%),#0b1018!important}
+.signals-section{background:radial-gradient(640px 460px at 15% 20%,rgba(244,208,111,.055),transparent 60%),radial-gradient(700px 500px at 84% 85%,rgba(137,103,255,.08),transparent 62%),#080c14!important}
+.news-section{background:radial-gradient(720px 500px at 20% 0%,rgba(98,216,255,.055),transparent 60%),radial-gradient(640px 520px at 100% 100%,rgba(255,143,112,.05),transparent 62%),#070a12!important}
+.about-section{background:radial-gradient(760px 460px at 50% 20%,rgba(216,201,255,.08),transparent 62%),radial-gradient(520px 420px at 82% 80%,rgba(101,230,193,.045),transparent 60%),#080b13!important}
+
+.feature-card,.trust-shell,.detection-stage,.news-card,.about-image-wrap,.signal-map{box-shadow:0 36px 110px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.035)}
+.feature-card,.news-card,.signal-row,.tool-tab,.detect-tab,.filter-pill,.nav-link,.nav-cta,.btn-primary,.btn-launch,.hint,.ai-fab,.chat-suggest{-webkit-tap-highlight-color:transparent}
+.feature-card::after,.news-card::after,.trust-shell::after,.detection-stage::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,transparent 10%,rgba(255,255,255,.055) 48%,transparent 72%);transform:translateX(-120%);transition:transform .9s var(--ease)}
+.feature-card:hover::after,.news-card:hover::after,.trust-shell:hover::after,.detection-stage:hover::after{transform:translateX(120%)}
+.nav-link:hover{color:var(--lilac)!important}.nav-link.active{color:#fff!important}.nav-link.active span{background:linear-gradient(90deg,var(--violet),var(--cyan))!important}
+.kicker{color:color-mix(in srgb,var(--violet-2) 78%,var(--cyan))}
+.news-tag{color:var(--cyan)!important}
+.news-card:nth-child(3n) .news-tag{color:var(--warm)!important}
+.news-card:nth-child(4n) .news-tag{color:var(--mint)!important}
+.score-ring .ring-progress{filter:drop-shadow(0 0 12px rgba(137,103,255,.35))}
+.signal-card.good{border-color:rgba(101,230,193,.22)!important}
+.signal-card.warn{border-color:rgba(244,208,111,.22)!important}
+.signal-card.bad{border-color:rgba(255,109,131,.22)!important}
+/* Scientific cursor should feel like an optical instrument, not a generic pointer. */
+.cursor-lens{background:
+radial-gradient(circle at 32% 28%,rgba(255,255,255,.22),rgba(98,216,255,.055) 24%,rgba(137,103,255,.055) 46%,rgba(7,10,18,.02) 72%);
+box-shadow:0 0 0 1px rgba(255,255,255,.035),0 0 34px rgba(137,103,255,.18),inset 0 0 20px rgba(255,255,255,.035)}
+.cursor-lens::before{content:'🔍';position:absolute;right:-6px;bottom:-7px;font-size:12px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.5))}
+.cursor-lens.is-ai{border-color:var(--cyan)!important;box-shadow:0 0 0 1px rgba(98,216,255,.1),0 0 44px rgba(98,216,255,.24),inset 0 0 22px rgba(98,216,255,.06)!important}
+.cursor-lens.is-ai::before{content:'🤖';right:-9px;bottom:-9px}
+
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{box-shadow:0 0 0 3px rgba(98,216,255,.15),0 0 0 1px var(--cyan);outline:none}
+.section-title{max-width:980px;letter-spacing:-.055em}
+.section-intro{max-width:720px}
+
+@media(max-width:1100px){.nav-pill{position:static;transform:none;margin-left:auto;margin-right:18px}.nav{gap:15px}.work-grid{grid-template-columns:1fr 1fr}.feature-card-large{grid-column:span 2}.news-card.standard{grid-column:span 6}.news-card.featured{grid-column:span 12}.about-hero{display:block}.about-hero .section-intro{margin-top:25px}.split-heading{grid-template-columns:1fr .7fr}.trust-shell{grid-template-columns:205px 1fr}.signals-grid{grid-template-columns:1fr 1fr}}
+
+@media(max-width:800px){
+.nav{padding:15px 20px;height:70px}.nav.scrolled{height:64px;padding:12px 20px}.nav-pill,.nav-cta{display:none}.menu-toggle{display:block}.mobile-menu{inset:64px 0 auto 0;height:calc(100vh - 64px)}.hero-content{padding:0 22px 36px}.headline{text-align:left;margin-top:20vh}.headline h1,.headline .accent{font-size:clamp(2.8rem,13vw,4.6rem)}.hero-bottom{grid-template-columns:1fr}.hero-bottom>.hero-note{display:none}.hero-scroll-cue{display:none}.section{padding:88px 22px}.section-topline{margin-bottom:18px}.section-lead-row,.signals-intro{display:block}.mini-stamp{justify-content:flex-start;margin-top:26px}.work-grid{grid-template-columns:1fr}.feature-card-large{grid-column:span 1}.feature-card,.feature-card-large{min-height:430px}.split-heading{display:block}.split-heading>p{margin-top:24px}.trust-shell,.detection-stage{grid-template-columns:1fr}.trust-sidebar,.detection-rail{border-right:0;border-bottom:1px solid var(--line)}.trust-sidebar{display:grid;grid-template-columns:repeat(3,1fr);gap:0}.trust-sidebar .micro-label{grid-column:1/-1;margin-bottom:8px}.trust-side-note{display:none}.tool-tab{border-bottom:0;border-right:1px solid var(--line);font-size:11px;padding:12px}.tool-tab:last-child{border-right:0}.tool-panel,.detect-panel{padding:26px 20px}.input-row,.input-row.stacked{grid-template-columns:1fr}.analysis-results{padding:25px 20px}.signals-grid{grid-template-columns:1fr}.detection-result{margin:0 20px 20px;grid-template-columns:1fr;padding:18px}.detection-rail{display:grid;grid-template-columns:repeat(3,1fr);gap:0}.detection-rail .micro-label{grid-column:1/-1;margin-bottom:8px}.detect-tab{border-bottom:0;border-right:1px solid var(--line);padding:11px}.detect-tab:last-of-type{border-right:0}.rail-foot{display:none}.signal-map{height:420px}.map-pulse b{font-size:11px}.map-pulse small{font-size:8px}.p1{left:9%;top:21%}.p2{left:63%;top:25%}.p3{left:68%;top:73%}.p4{left:14%;top:70%}.p5{left:44%;top:11%}.news-heading{display:block}.news-tools{margin-top:24px}.news-search{width:100%}.news-search input{width:100%;min-width:0}.news-grid{grid-template-columns:1fr}.news-card,.news-card.featured{grid-column:1;display:block}.featured .news-image{min-height:280px}.news-card .news-content{padding:23px}.featured h3{font-size:2rem}.about-image-wrap{height:430px}.about-overlay{padding:24px}.about-metrics{grid-template-columns:1fr 1fr}.about-metrics div:nth-child(2){border-right:0}.about-metrics div:nth-child(1),.about-metrics div:nth-child(2){border-bottom:1px solid var(--line)}.footer{grid-template-columns:1fr}.footer-center{text-align:left}.footer-right{justify-content:space-between}.ai-fab{right:16px;bottom:16px}.chat-window{left:12px;right:12px;bottom:78px;width:auto;height:65vh}
+}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.anim-rise,.hero-base{animation:none;opacity:1;transform:none;filter:none}.reveal-on-scroll{opacity:1;transform:none;transition:none}.cursor-orbit,.feature-visual *,.loader-orbit,.typing-indicator span,.ai-core:after,.image-cyber:after{animation:none!important}}
+
+.lens-center{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif!important;font-size:16px!important;line-height:1!important;filter:saturate(.9) drop-shadow(0 0 7px rgba(181,168,255,.25))}
+.cursor-lens{background:radial-gradient(circle at 32% 25%,rgba(255,255,255,.18),rgba(98,216,255,.06) 34%,rgba(137,103,255,.05) 57%,rgba(0,0,0,.04) 100%)}
+.cursor-lens:before{content:"";position:absolute;inset:4px;border:1px solid rgba(255,255,255,.08);border-radius:50%}
+.cursor-lens.is-hover{background:radial-gradient(circle at 32% 25%,rgba(255,255,255,.22),rgba(137,103,255,.13) 40%,rgba(98,216,255,.06) 72%);box-shadow:0 0 0 1px rgba(98,216,255,.12),0 0 42px rgba(137,103,255,.2),inset 0 0 22px rgba(255,255,255,.04)}
+.cursor-lens.is-ai{background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.15),rgba(98,216,255,.12) 44%,rgba(98,216,255,.04) 75%)}
+
+.nav-pill{box-shadow:0 10px 45px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.05)}
+.nav-link:before{content:"";position:absolute;inset:1px;border-radius:999px;background:linear-gradient(120deg,rgba(137,103,255,.16),rgba(98,216,255,.08),transparent 75%);opacity:0;transform:scale(.92);transition:.35s var(--ease);pointer-events:none}
+.nav-link:hover:before,.nav-link.active:before{opacity:1;transform:scale(1)}
+.nav-link:hover{color:#dcd6ff;text-shadow:0 0 18px rgba(181,168,255,.16)}
+.nav-link.active{color:#fff;background:linear-gradient(180deg,rgba(137,103,255,.17),rgba(255,255,255,.06));box-shadow:inset 0 0 20px rgba(137,103,255,.07)}
+
+.work-section:before,.trust-section:before,.detection-section:before,.signals-section:before,.news-section:before,.about-section:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.75}
+.work-section:before{background:radial-gradient(circle at 12% 18%,rgba(137,103,255,.08),transparent 26%),radial-gradient(circle at 82% 72%,rgba(98,216,255,.055),transparent 28%)}
+.trust-section:before{background:radial-gradient(circle at 88% 22%,rgba(98,216,255,.1),transparent 22%),radial-gradient(circle at 18% 82%,rgba(137,103,255,.08),transparent 28%)}
+.detection-section:before{background:radial-gradient(circle at 82% 20%,rgba(255,179,107,.07),transparent 24%),radial-gradient(circle at 15% 78%,rgba(98,216,255,.09),transparent 26%)}
+.signals-section:before{background:radial-gradient(circle at 50% 50%,rgba(101,230,193,.055),transparent 28%),linear-gradient(90deg,transparent,rgba(137,103,255,.035),transparent)}
+.news-section:before{background:radial-gradient(circle at 85% 12%,rgba(181,168,255,.08),transparent 22%),radial-gradient(circle at 15% 85%,rgba(255,179,107,.045),transparent 23%)}
+.about-section:before{background:radial-gradient(circle at 70% 24%,rgba(98,216,255,.06),transparent 24%),radial-gradient(circle at 24% 72%,rgba(137,103,255,.09),transparent 27%)}
+
+.section-title{font-size:clamp(2.65rem,5.6vw,6rem);max-width:980px;text-wrap:balance}
+.section-intro{font-size:clamp(1rem,1.35vw,1.18rem);max-width:760px}
+.kicker{color:#c4baff;text-shadow:0 0 16px rgba(181,168,255,.1)}
+.split-heading>p,.signals-intro>p{font-size:clamp(1rem,1.45vw,1.25rem);line-height:1.7;color:#c3c9d8}
+
+.feature-card,.tool-panel,.detection-panel,.news-card,.trust-shell,.signal-map-wrap,.about-image-wrap{box-shadow:0 26px 90px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.035)}
+.feature-card,.news-card{isolation:isolate}
+.feature-card:after,.news-card:after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(255,255,255,.16),transparent 28%,transparent 72%,rgba(137,103,255,.16));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.75;pointer-events:none;transition:opacity .4s}
+.feature-card:hover:after,.news-card:hover:after{opacity:1}
+.feature-card:nth-child(2){--accent-local:var(--cyan)}
+.feature-card:nth-child(3){--accent-local:var(--warm)}
+.feature-card:nth-child(1){--accent-local:var(--violet-2)}
+.feature-card .feature-top span,.news-meta span{color:var(--accent-local,var(--violet-2))}
+
+.feature-card-large{background:linear-gradient(145deg,rgba(137,103,255,.10),rgba(7,10,18,.55) 62%),#0a0d16}
+.feature-card:nth-child(2){background:linear-gradient(145deg,rgba(98,216,255,.085),rgba(7,10,18,.62) 66%),#0a0d16}
+.feature-card:nth-child(3){background:linear-gradient(145deg,rgba(255,179,107,.075),rgba(7,10,18,.64) 66%),#0a0d16}
+
+.image-ai:after,.image-data:after,.image-cyber:after,.image-network:after,.image-agent:after{mix-blend-mode:screen;opacity:.28}
+.image-ai:after{background:linear-gradient(120deg,transparent 30%,rgba(181,168,255,.25),transparent 70%)}
+.image-data:after{background:linear-gradient(135deg,transparent 28%,rgba(98,216,255,.18),transparent 72%)}
+.image-cyber:after{background:linear-gradient(120deg,transparent 25%,rgba(255,109,131,.15),transparent 68%)}
+.image-network:after{background:linear-gradient(135deg,transparent 25%,rgba(101,230,193,.17),transparent 70%)}
+.news-card:nth-child(2){--accent-local:var(--cyan)}
+.news-card:nth-child(3){--accent-local:var(--red)}
+.news-card:nth-child(4){--accent-local:var(--mint)}
+.news-card:nth-child(5){--accent-local:var(--violet-2)}
+.news-card:hover .news-image{transform:scale(1.035)}
+.news-image{transition:transform .8s var(--ease),filter .8s var(--ease)}
+
+.premium-input{background:linear-gradient(145deg,rgba(17,21,38,.96),rgba(9,13,23,.96));box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 12px 35px rgba(0,0,0,.08)}
+.premium-input:hover{border-color:rgba(181,168,255,.26)}
+.btn-launch,.btn-primary{position:relative;overflow:hidden}
+.btn-launch:after,.btn-primary:after{content:"";position:absolute;inset:1px;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.18),transparent 38%,transparent 72%,rgba(98,216,255,.12));opacity:.8;pointer-events:none}
+.btn-launch:hover,.btn-primary:hover{filter:saturate(1.06)}
+.ai-fab{border-color:rgba(98,216,255,.14);background:linear-gradient(135deg,rgba(18,21,38,.84),rgba(13,24,36,.82))}
+.ai-fab:hover{box-shadow:0 22px 60px rgba(0,0,0,.42),0 0 34px rgba(98,216,255,.08)}
+.section:not(#work){border-top-color:rgba(255,255,255,.065)}
+
+@media (max-width:800px){
+  .lens-center{font-size:18px!important}
+  .section-title{font-size:clamp(2.35rem,12vw,4.4rem)}
+  .section-intro{font-size:1rem}
+}
+  </style>
+  <body>
+  <div class="cursor-system" aria-hidden="true">
+    <div class="cursor-orbit cursor-orbit-a"></div>
+    <div class="cursor-orbit cursor-orbit-b"></div>
+    <div class="cursor-lens" id="cursorLens">
+      <span class="lens-glint"></span>
+      <span class="lens-crosshair lens-crosshair-h"></span>
+      <span class="lens-crosshair lens-crosshair-v"></span>
+      <span class="lens-center" id="cursorCenter" aria-hidden="true">🔍</span>
+    </div>
+  </div>
+
+  <div class="page-progress" id="pageProgress"><span></span></div>
+
+  <nav class="nav" id="navbar" aria-label="Main navigation">
+    <a href="#top" class="brand magnetic-target" data-cursor="brand" aria-label="FutureX Lab home">
+      <span class="mark" aria-hidden="true"><i></i></span>
+      <span>Future<em>X</em></span>
+    </a>
+
+    <div class="nav-pill">
+       <a href="#Verify" class="nav-link magnetic-target">Trust<span></span></a>
+      <a href="#ai-detect" class="nav-link magnetic-target">AI<span></span></a>
+      <a href="#signals" class="nav-link magnetic-target">Signals<span></span></a>
+      <a href="#news" class="nav-link magnetic-target">News<span></span></a>
+      <a href="#about" class="nav-link magnetic-target">About<span></span></a>
+    </div>
+    <button class="menu-toggle magnetic-target" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <p class="micro-label">Navigation / 00</p>
+      <a href="#work" class="mobile-link">Work <span>01</span></a>
+      <a href="#trust" class="mobile-link">Trust <span>02</span></a>
+      <a href="#news" class="mobile-link">News <span>03</span></a>
+      <a href="#signals" class="mobile-link">Signals <span>04</span></a>
+      <a href="#ai-detect" class="mobile-link">AI <span>05</span></a>
+      <a href="#about" class="mobile-link">About <span>06</span></a>
+    </div>
+  </div>
+
+  <main class="hero" id="top">
+    <div class="hero-img hero-base"></div>
+    <div class="hero-img hero-reveal" id="heroReveal"></div>
+    <div class="grain"></div>
+    <div class="hero-vignette"></div>
+
+    <div class="hero-content">
+      <header class="headline">
+        <div class="eyebrow anim-rise d-1">FutureX Lab</div>
+        <h1>
+          <span class="accent anim-rise d-1">Navigate the</span>
+          <span class="anim-rise d-2"> digital future</span>
+        </h1>
+      </header>
+
+      <div class="hero-bottom">
+        <p class="hero-note anim-rise d-3">
+          FutureX Lab — Building intelligent tools to help you verify, protect, and understand the digital world.
+        </p>
+
+        <div class="hero-action anim-rise d-4">
+          <p class="hero-note">We combine research, design and rapid prototyping to turn emerging technology into useful human experiences.</p>
+          <a href="#work" class="btn-launch magnetic-target">Explore the lab <span>↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-cue" aria-hidden="true">
+      <span></span>
+      <small>Scroll to explore</small>
+    </div>
+  </main>
+
+  <div class="ambient-divider" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <section class="section work-section" id="work">
+    <div class="section-topline reveal-on-scroll">
+      <p class="kicker">What we make</p>
+      <span class="section-index">01 / 06</span>
+    </div>
+
+    <h2 class="section-title reveal-on-scroll">
+      Small experiments.<br><em>Useful signals.</em><br>Bigger possibilities.
+    </h2>
+
+    <div class="section-lead-row reveal-on-scroll">
+      <p class="section-intro">
+        We explore emerging technology with a practical lens: what might help people learn, work, create, and participate more meaningfully in a rapidly shifting digital landscape?
+      </p>
+      <div class="mini-stamp"><span>FXL</span><b>RESEARCH<br>PROTOTYPE<br>STUDIO</b></div>
+    </div>
+
+    <div class="work-grid">
+      <article class="feature-card feature-card-large reveal-on-scroll magnetic-card">
+        <div class="card-glow"></div>
+        <div class="feature-top"><span>01 / Research</span><i>↗</i></div>
+        <div class="feature-visual visual-orbit">
+          <div class="orbit-ring one"></div>
+          <div class="orbit-ring two"></div>
+          <div class="orbit-core">FX</div>
+        </div>
+        <div class="feature-copy">
+          <h3>Future sensing</h3>
+          <p>We track changing behaviours, technologies, and cultural signals to frame opportunities worth exploring.</p>
+        </div>
+      </article>
+
+      <article class="feature-card reveal-on-scroll magnetic-card">
+        <div class="card-glow cyan"></div>
+        <div class="feature-top"><span>02 / Prototypes</span><i>↗</i></div>
+        <div class="feature-visual visual-grid">
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+        </div>
+        <div class="feature-copy">
+          <h3>Ideas made tangible</h3>
+          <p>We turn hypotheses into lightweight interactive tools that make a future scenario easier to test and debate.</p>
+        </div>
+      </article>
+
+      <article class="feature-card reveal-on-scroll magnetic-card">
+        <div class="card-glow warm"></div>
+        <div class="feature-top"><span>03 / Learning</span><i>↗</i></div>
+        <div class="feature-visual visual-type"><span>MAKE</span><span>LEARN</span><span>QUESTION</span></div>
+        <div class="feature-copy">
+          <h3>Skills in practice</h3>
+          <p>Workshops and shared tools that help teams build confidence with new ways of thinking, making, and governing.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section trust-section" id="trust">
+    <div class="section-topline reveal-on-scroll">
+      <p class="kicker">Trust Intelligence</p>
+      <span class="section-index">02 / 06</span>
+    </div>
+
+    <div class="split-heading reveal-on-scroll">
+      <h2 class="section-title">Analyze the fine print<br><em>without the fog.</em></h2>
+      <p>One interface for privacy policies, terms, app practices, and the signals hidden inside them.</p>
+    </div>
+
+    <div class="trust-shell reveal-on-scroll">
+      <div class="trust-sidebar">
+        <p class="micro-label">Intelligence tools</p>
+        <button class="tool-tab active magnetic-target" data-target="privacy-panel">Privacy Policy <span>01</span></button>
+        <button class="tool-tab magnetic-target" data-target="terms-panel">Terms & Conditions <span>02</span></button>
+        <button class="tool-tab magnetic-target" data-target="platform-panel">App / Platform <span>03</span></button>
+        <div class="trust-side-note"><b>Prototype engine</b><span>Frontend simulation • API-ready</span></div>
+      </div>
+
+      <div class="tool-viewport">
+        <div class="tool-panel active" id="privacy-panel">
+          <div class="tool-heading">
+            <div>
+              <p class="micro-label">Privacy policy checker</p>
+              <h3>What does this service really do with your data?</h3>
+            </div>
+            <span class="tool-number">P-01</span>
+          </div>
+
+          <div class="input-row">
+            <div class="input-wrap">
+              <label for="policyInput">Target URL or policy text</label>
+              <input id="policyInput" class="premium-input" type="text" placeholder="https://example.com/privacy or paste text…" />
+            </div>
+            <button class="btn-primary analyze-btn magnetic-target" data-type="privacy">Analyze <span>↗</span></button>
+          </div>
+
+          <div class="demo-hints">
+            <button class="hint magnetic-target" data-fill="privacy">Try a demo policy</button>
+            <span>Demo mode until backend/API integration</span>
+          </div>
+        </div>
+
+        <div class="tool-panel" id="terms-panel">
+          <div class="tool-heading">
+            <div>
+              <p class="micro-label">Terms & conditions</p>
+              <h3>Surface obligations, renewals, liability and hidden clauses.</h3>
+            </div>
+            <span class="tool-number">T-02</span>
+          </div>
+
+          <div class="input-row stacked">
+            <div class="input-wrap">
+              <label for="termsInput">Paste Terms & Conditions</label>
+              <textarea id="termsInput" class="premium-input" placeholder="Paste the terms here…"></textarea>
+            </div>
+            <button class="btn-primary analyze-btn magnetic-target" data-type="terms">Scan terms <span>↗</span></button>
+          </div>
+        </div>
+
+        <div class="tool-panel" id="platform-panel">
+          <div class="tool-heading">
+            <div>
+              <p class="micro-label">App / platform policy</p>
+              <h3>See how a digital product handles tracking, data and permissions.</h3>
+            </div>
+            <span class="tool-number">A-03</span>
+          </div>
+
+          <div class="input-row">
+            <div class="input-wrap">
+              <label for="platformInput">App URL or policy text</label>
+              <input id="platformInput" class="premium-input" type="text" placeholder="https://apps.apple.com/... or paste a manifest" />
+            </div>
+            <button class="btn-primary analyze-btn magnetic-target" data-type="platform">Evaluate <span>↗</span></button>
+          </div>
+        </div>
+
+        <div class="analysis-loader" id="trustLoading">
+          <div class="loader-orbit"><span></span></div>
+          <div><b>Cross-referencing signals</b><small>Parsing language, risk patterns and user-control clauses…</small></div>
+        </div>
+
+        <div class="analysis-results" id="trustResults">
+          <div class="score-panel">
+            <div class="score-ring">
+              <svg viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="50" class="ring-bg"/>
+                <circle cx="60" cy="60" r="50" class="ring-progress" id="resultCircle"/>
+              </svg>
+              <strong id="resultScore">0</strong>
+            </div>
+            <div>
+              <p class="micro-label">Trust score</p>
+              <h4 id="resultTitle">Analysis complete</h4>
+              <p id="resultDesc">Review the signals detected by the prototype engine.</p>
+            </div>
+          </div>
+          <div class="signals-grid" id="resultSignals"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section detection-section" id="ai-detect">
+    <div class="section-topline reveal-on-scroll">
+      <p class="kicker">Authentication</p>
+      <span class="section-index">03 / 06</span>
+    </div>
+
+    <div class="split-heading reveal-on-scroll">
+      <h2 class="section-title">Inspect the origin<br><em>of digital media.</em></h2>
+      <p>One place to explore AI-generated text, images, and video—designed to show evidence and confidence, not false certainty.</p>
+    </div>
+
+    <div class="detection-stage reveal-on-scroll">
+      <div class="detection-rail">
+        <p class="micro-label">Media modes</p>
+        <button class="detect-tab active magnetic-target" data-mode="text">Text</button>
+        <button class="detect-tab magnetic-target" data-mode="image">Image</button>
+        <button class="detect-tab magnetic-target" data-mode="video">Video</button>
+        <div class="rail-foot">Prototype<br>analysis</div>
+      </div>
+
+      <div class="detection-main">
+        <div class="detect-panel active" data-panel="text">
+          <div class="panel-title"><span>01</span><h3>Language provenance</h3></div>
+          <textarea id="detectText" class="premium-input" placeholder="Paste text you want to inspect…"></textarea>
+          <button class="btn-primary detection-btn magnetic-target" data-type="text">Inspect text <span>→</span></button>
+        </div>
+
+        <div class="detect-panel" data-panel="image">
+          <div class="panel-title"><span>02</span><h3>Image provenance</h3></div>
+          <label class="upload-zone magnetic-target" for="imageUpload">
+            <input id="imageUpload" type="file" accept="image/*"/>
+            <span class="upload-icon">⌁</span>
+            <b>Drop an image or browse</b>
+            <small>PNG, JPG, WEBP • Demo interface</small>
+          </label>
+          <button class="btn-primary detection-btn magnetic-target" data-type="image">Inspect image <span>→</span></button>
+        </div>
+
+        <div class="detect-panel" data-panel="video">
+          <div class="panel-title"><span>03</span><h3>Video provenance</h3></div>
+          <label class="upload-zone magnetic-target" for="videoUpload">
+            <input id="videoUpload" type="file" accept="video/*"/>
+            <span class="upload-icon">◌</span>
+            <b>Drop a video or browse</b>
+            <small>MP4, MOV, WEBM • Demo interface</small>
+          </label>
+          <button class="btn-primary detection-btn magnetic-target" data-type="video">Inspect video <span>→</span></button>
+        </div>
+
+        <div class="detection-result" id="detectResult">
+          <div class="detect-meter">
+            <div class="meter-track"><span id="detectMeter"></span></div>
+            <div class="meter-meta"><strong id="detectScore">—</strong><span id="detectConfidence">Waiting for analysis</span></div>
+          </div>
+          <div class="detect-copy">
+            <p class="micro-label">Prototype result</p>
+            <h4 id="detectTitle">No media inspected yet</h4>
+            <p id="detectDesc">Connect a detection model/API in production. This interface intentionally uses simulated results.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section signals-section" id="signals">
+    <div class="section-topline reveal-on-scroll">
+      <p class="kicker">Horizon Scanning</p>
+      <span class="section-index">04 / 06</span>
+    </div>
+
+    <div class="signals-intro reveal-on-scroll">
+      <h2 class="section-title">What is moving<br><em>beneath the surface?</em></h2>
+      <div>
+        <p class="section-intro">A visual map of emerging signals across technology, regulation and culture.</p>
+        <span class="live-chip"><i></i> Prototype signal feed</span>
+      </div>
+    </div>
+
+    <div class="signal-map reveal-on-scroll">
+      <div class="signal-map-grid"></div>
+      <div class="map-center"><span>FX</span><small>NOW / 2026</small></div>
+      <div class="map-pulse p1"><i></i><b>AI agents</b><small>accelerating</small></div>
+      <div class="map-pulse p2"><i></i><b>Privacy UX</b><small>maturing</small></div>
+      <div class="map-pulse p3"><i></i><b>Synthetic media</b><small>early stage</small></div>
+      <div class="map-pulse p4"><i></i><b>AI governance</b><small>accelerating</small></div>
+      <div class="map-pulse p5"><i></i><b>Local AI</b><small>emerging</small></div>
+    </div>
+
+    <div class="signal-list reveal-on-scroll">
+      <button class="signal-row magnetic-target" data-signal="agents"><span>01</span><div><b>Autonomous Agents Policy</b><small>Governance frameworks are moving from concept to implementation.</small></div><strong>Accelerating ↗</strong></button>
+      <button class="signal-row magnetic-target" data-signal="privacy"><span>02</span><div><b>Privacy as Product UX</b><small>Users increasingly expect controls to be visible, understandable and immediate.</small></div><strong>Maturing ↗</strong></button>
+      <button class="signal-row magnetic-target" data-signal="synthetic"><span>03</span><div><b>Synthetic Media Provenance</b><small>Watermarking, provenance and authenticity signals are becoming product primitives.</small></div><strong>Early stage ↗</strong></button>
+    </div>
+  </section>
+
+  <section class="section news-section" id="news">
+    <div class="section-topline reveal-on-scroll">
+      <p class="kicker">Intelligence</p>
+      <span class="section-index">05 / 06</span>
+    </div>
+
+    <div class="news-heading reveal-on-scroll">
+      <div><h2 class="section-title">The world is changing.<br><em>Track the signal.</em></h2></div>
+      <div class="news-tools">
+        <div class="news-search"><span>⌕</span><input id="newsSearch" type="search" placeholder="Search intelligence…" /></div>
+        <select id="newsSort" aria-label="Sort news">
+          <option value="newest">Newest</option>
+          <option value="impact">Impact</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="news-filters reveal-on-scroll">
+      <button class="filter-pill active magnetic-target" data-filter="all">All updates</button>
+      <button class="filter-pill magnetic-target" data-filter="ai">AI</button>
+      <button class="filter-pill magnetic-target" data-filter="privacy">Privacy</button>
+      <button class="filter-pill magnetic-target" data-filter="security">Security</button>
+      <button class="filter-pill magnetic-target" data-filter="business">Business</button>
+      <button class="filter-pill magnetic-target" data-filter="regulation">Regulation</button>
+    </div>
+
+    <div class="news-grid" id="newsGrid">
+      <article class="news-card featured reveal-on-scroll magnetic-card" data-category="regulation" data-impact="98" data-date="20260802">
+        <div class="news-image image-ai"></div>
+        <div class="news-content">
+          <div class="news-meta"><span>REGULATION</span><time>02 AUG 2026</time></div>
+          <h3>AI transparency rules enter a new phase across major markets.</h3>
+          <p>Regulators are pushing disclosure, traceability and user-facing transparency into the product layer.</p>
+          <a href="#about" class="news-link magnetic-target">Open briefing <b>↗</b></a>
+        </div>
+      </article>
+
+      <article class="news-card reveal-on-scroll magnetic-card" data-category="privacy" data-impact="88" data-date="20260801">
+        <div class="news-image image-data"></div>
+        <div class="news-content">
+          <div class="news-meta"><span>PRIVACY</span><time>01 AUG 2026</time></div>
+          <h3>Privacy UX is becoming a competitive feature.</h3>
+          <p>Clearer consent, local processing and granular controls are reshaping user expectations.</p>
+          <a href="#trust" class="news-link magnetic-target">Read signal <b>↗</b></a>
+        </div>
+      </article>
+
+      <article class="news-card reveal-on-scroll magnetic-card" data-category="security" data-impact="91" data-date="20260730">
+        <div class="news-image image-cyber"></div>
+        <div class="news-content">
+          <div class="news-meta"><span>SECURITY</span><time>30 JUL 2026</time></div>
+          <h3>Threat modelling gets an AI-assisted layer.</h3>
+          <p>Security teams are pairing structured threat analysis with model-assisted scenario exploration.</p>
+          <a href="#signals" class="news-link magnetic-target">Read signal <b>↗</b></a>
+        </div>
+      </article>
+
+      <article class="news-card reveal-on-scroll magnetic-card" data-category="business" data-impact="79" data-date="20260727">
+        <div class="news-image image-network"></div>
+        <div class="news-content">
+          <div class="news-meta"><span>BUSINESS</span><time>27 JUL 2026</time></div>
+          <h3>Data governance moves closer to the boardroom.</h3>
+          <p>Data practices are increasingly treated as product, legal and strategic risk—not just infrastructure.</p>
+          <a href="#about" class="news-link magnetic-target">Read signal <b>↗</b></a>
+        </div>
+      </article>
+
+      <article class="news-card reveal-on-scroll magnetic-card" data-category="ai" data-impact="86" data-date="20260724">
+        <div class="news-image image-agent"></div>
+        <div class="news-content">
+          <div class="news-meta"><span>AI</span><time>24 JUL 2026</time></div>
+          <h3>Agentic software is changing the shape of user interfaces.</h3>
+          <p>Interfaces are shifting from command-and-control screens toward delegated, observable workflows.</p>
+          <a href="#ai-detect" class="news-link magnetic-target">Read signal <b>↗</b></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section about-section" id="about">
+    <div class="section-topline reveal-on-scroll">
+      <p class="kicker">About the lab</p>
+      <span class="section-index">06 / 06</span>
+    </div>
+
+    <div class="about-hero reveal-on-scroll">
+      <h2 class="section-title">Designing for trust<br><em>in complex systems.</em></h2>
+      <p class="section-intro">
+        We believe good innovation is optimistic but grounded. We help teams navigate uncertainty by researching, prototyping and stress-testing human impact, privacy safeguards and technological limits together.
+      </p>
+    </div>
+
+    <div class="about-image-wrap reveal-on-scroll">
+      <div class="about-image"></div>
+      <div class="about-overlay">
+        <span class="micro-label">FutureX Lab / Field notes</span>
+        <p>Build with curiosity.<br>Ship with evidence.</p>
+        <span class="about-line"></span>
+      </div>
+    </div>
+
+    <div class="about-metrics reveal-on-scroll">
+      <div><strong>04</strong><span>Years mapping AI</span></div>
+      <div><strong>120+</strong><span>Prototype concepts</span></div>
+      <div><strong>15</strong><span>Global collaborators</span></div>
+      <div><strong>∞</strong><span>Questions worth asking</span></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>
+      <a class="brand footer-brand" href="#top"><span class="mark"><i></i></span><span>Future<em>X</em></span></a>
+      <p>Research & Prototype Studio</p>
+    </div>
+    <div class="footer-center"><span>AI / PRIVACY / TRUST / SIGNALS</span></div>
+    <div class="footer-right"><span>© 2026 FutureX Lab</span><a href="#top" class="magnetic-target">Back to top ↑</a></div>
+  </footer>
+
+  <button class="ai-fab magnetic-target" id="aiToggle" aria-expanded="false" aria-controls="chatWindow">
+    <span class="ai-core">✦</span><span>Ask Lab Guide</span><i>↗</i>
+  </button>
+
+  <aside class="chat-window" id="chatWindow" aria-label="FutureX AI assistant">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <span class="chat-status"></span>
+        <div><span class="chat-title">Lab Guide AI</span><span class="chat-sub">Online • Strategic Assistant</span></div>
+      </div>
+      <button class="chat-close magnetic-target" id="chatClose" aria-label="Close assistant">×</button>
+    </div>
+
+    <div class="chat-context"><span>Context</span><b>FutureX / General</b></div>
+
+    <div class="chat-body" id="chatMessages">
+      <div class="msg bot">Hello. I’m the FutureX intelligence guide. Ask me about our research, tools, privacy signals, or the lab’s work.</div>
+    </div>
+
+    <div class="typing-indicator" id="chatTyping"><span></span><span></span><span></span></div>
+
+    <div class="chat-footer">
+      <div class="chat-suggestions">
+        <button class="chat-suggest magnetic-target" data-suggestion="How does the policy scanner work?">Policy Scanner</button>
+        <button class="chat-suggest magnetic-target" data-suggestion="What are the emerging signals?">Signals</button>
+        <button class="chat-suggest magnetic-target" data-suggestion="How can I work with FutureX?">Work with us</button>
+      </div>
+
+      <form id="chatForm" class="chat-input-area">
+        <input id="chatInput" type="text" placeholder="Ask the lab…" autocomplete="off"/>
+        <button class="chat-send magnetic-target" type="submit">↑</button>
+      </form>
+    </div>
+  </aside>
+  <script>
+(() => {
+  'use strict';
+
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const coarsePointer = matchMedia('(pointer: coarse)').matches;
+
+  document.body.classList.toggle('cursor-ready', !coarsePointer);
+
+  const progress = $('#pageProgress span');
+  const navbar = $('#navbar');
+  const menuToggle = $('#menuToggle');
+  const mobileMenu = $('#mobileMenu');
+
+  function updatePage() {
+    const height = document.documentElement.scrollHeight - innerHeight;
+    if (progress) progress.style.width = `${height ? (scrollY / height) * 100 : 0}%`;
+    navbar?.classList.toggle('scrolled', scrollY > 46);
+  }
+
+  addEventListener('scroll', updatePage, { passive: true });
+  addEventListener('resize', updatePage);
+  updatePage();
+
+  /* Cursor and hero spotlight */
+  const cursor = $('#cursorLens');
+  const cursorCenter = $('#cursorCenter');
+  const orbitA = $('.cursor-orbit-a');
+  const orbitB = $('.cursor-orbit-b');
+  const heroReveal = $('#heroReveal');
+
+  const pointer = { x: innerWidth / 2, y: innerHeight / 2 };
+  const smooth = { ...pointer };
+  const slow = { ...pointer };
+
+  addEventListener('pointermove', (event) => {
+    pointer.x = event.clientX;
+    pointer.y = event.clientY;
+  }, { passive: true });
+
+  function moveElement(element, x, y) {
+    if (element) {
+      element.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+    }
+  }
+
+  function animateCursor() {
+    if (coarsePointer || reduceMotion) return;
+
+    smooth.x += (pointer.x - smooth.x) * 0.2;
+    smooth.y += (pointer.y - smooth.y) * 0.2;
+    slow.x += (pointer.x - slow.x) * 0.08;
+    slow.y += (pointer.y - slow.y) * 0.08;
+
+    moveElement(cursor, smooth.x, smooth.y);
+    moveElement(orbitA, slow.x, slow.y);
+    moveElement(orbitB, slow.x, slow.y);
+
+    if (heroReveal) {
+      const radius = Math.min(320, Math.max(180, innerWidth * 0.22));
+      const mask = `radial-gradient(circle ${radius}px at ${slow.x}px ${slow.y}px, #000 0%, #000 40%, rgba(0,0,0,.8) 60%, transparent 100%)`;
+
+      heroReveal.style.webkitMaskImage = mask;
+      heroReveal.style.maskImage = mask;
+    }
+
+    requestAnimationFrame(animateCursor);
+  }
+
+  if (!coarsePointer && !reduceMotion) requestAnimationFrame(animateCursor);
+
+  $$('a, button, input, textarea, select').forEach((element) => {
+    element.addEventListener('mouseenter', () => {
+      if (!cursor || coarsePointer) return;
+      cursor.classList.add('is-hover');
+      cursorCenter.textContent = element.id === 'aiToggle' ? '🤖' : '⌕';
+    });
+
+    element.addEventListener('mouseleave', () => {
+      if (!cursor || coarsePointer) return;
+      cursor.classList.remove('is-hover', 'is-ai', 'is-launch', 'is-brand');
+      cursorCenter.textContent = '⌕';
+    });
+  });
+
+  /* Mobile menu */
+  menuToggle?.addEventListener('click', () => {
+    const open = mobileMenu?.classList.toggle('open');
+    menuToggle.classList.toggle('open', open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+  });
+
+  $$('.mobile-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.remove('open');
+      menuToggle?.classList.remove('open');
+      menuToggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* Active navigation and section entrance */
+  const navLinks = $$('.nav-link');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        navLinks.forEach((link) => {
+          link.classList.toggle(
+            'active',
+            link.getAttribute('href') === `#${entry.target.id}`
+          );
+        });
+
+        entry.target.classList.add('is-visible');
+      });
+    }, { rootMargin: '-25% 0px -50% 0px', threshold: 0.1 });
+
+    $$('main[id], section[id], .reveal-on-scroll').forEach((item) => observer.observe(item));
+  } else {
+    $$('.reveal-on-scroll').forEach((item) => item.classList.add('is-visible'));
+  }
+
+  /* Card movement */
+  $$('.magnetic-card').forEach((card) => {
+    if (coarsePointer || reduceMotion) return;
+
+    card.addEventListener('pointermove', (event) => {
+      const box = card.getBoundingClientRect();
+      const x = (event.clientX - box.left) / box.width - 0.5;
+      const y = (event.clientY - box.top) / box.height - 0.5;
+
+      card.style.transform =
+        `perspective(900px) rotateX(${(-y * 2.6).toFixed(2)}deg) rotateY(${(x * 3.2).toFixed(2)}deg) translateY(-7px)`;
+    });
+
+    card.addEventListener('pointerleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  /* Trust intelligence */
+  const trustData = {
+    privacy: {
+      score: 78,
+      title: 'Privacy policy assessment',
+      description: 'Several safeguards are present, but user control and third-party sharing deserve a closer read.',
+      signals: [
+        ['warn', 'Third-party sharing', 'Partner and analytics sharing language should be checked for scope.'],
+        ['good', 'Retention language', 'A defined deletion and retention policy appears in this demo analysis.'],
+        ['bad', 'Opt-out path', 'The user-control flow may require a manual request rather than a direct toggle.']
+      ]
+    },
+    terms: {
+      score: 62,
+      title: 'Terms & conditions scan',
+      description: 'Several clauses may materially affect users and should be explained before acceptance.',
+      signals: [
+        ['bad', 'Arbitration', 'The demo flags a potentially restrictive dispute-resolution clause.'],
+        ['warn', 'Auto-renewal', 'Subscription renewal language deserves explicit attention.'],
+        ['good', 'Content ownership', 'The demo indicates comparatively clear user content rights.']
+      ]
+    },
+    platform: {
+      score: 84,
+      title: 'Platform policy evaluation',
+      description: 'The demo shows generally clear controls with one notable tracking-related concern.',
+      signals: [
+        ['good', 'Security', 'Strong security language is surfaced in the simulated result.'],
+        ['warn', 'Location access', 'Precise background location may deserve user scrutiny.'],
+        ['good', 'User controls', 'Account-level controls are represented as relatively clear.']
+      ]
+    }
+  };
+
+  $$('.tool-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.target;
+
+      $$('.tool-tab').forEach((item) => item.classList.toggle('active', item === tab));
+      $$('.tool-panel').forEach((panel) => {
+        panel.classList.toggle('active', panel.id === target);
+      });
+
+      $('#trustResults')?.classList.remove('active');
+      $('#trustLoading')?.classList.remove('active');
+    });
+  });
+
+  function displayTrustResult(type) {
+    const data = trustData[type] || trustData.privacy;
+    const loader = $('#trustLoading');
+    const results = $('#trustResults');
+    const scoreCircle = $('#resultCircle');
+    const scoreText = $('#resultScore');
+
+    loader?.classList.add('active');
+    results?.classList.remove('active');
+
+    setTimeout(() => {
+      loader?.classList.remove('active');
+      results?.classList.add('active');
+
+      $('#resultTitle').textContent = data.title;
+      $('#resultDesc').textContent = data.description;
+
+      $('#resultSignals').innerHTML = data.signals.map(([kind, title, description]) => `
+        <div class="signal-card ${kind}">
+          <div class="signal-icon">${kind === 'good' ? '✓' : kind === 'warn' ? '!' : '×'}</div>
+          <div><h5>${title}</h5><p>${description}</p></div>
+        </div>
+      `).join('');
+
+      const circumference = 314;
+      scoreCircle.style.stroke = data.score >= 75 ? '#65e6c1' : data.score >= 55 ? '#ffb36b' : '#ff6d83';
+      scoreCircle.setAttribute('stroke-dasharray', `${(data.score / 100) * circumference} ${circumference}`);
+
+      let value = 0;
+      const interval = setInterval(() => {
+        value += 2;
+        if (value >= data.score) {
+          value = data.score;
+          clearInterval(interval);
+        }
+        scoreText.textContent = value;
+      }, 20);
+    }, 800);
+  }
+
+  $$('.analyze-btn').forEach((button) => {
+    button.addEventListener('click', () => displayTrustResult(button.dataset.type));
+  });
+
+  $('.hint[data-fill="privacy"]')?.addEventListener('click', () => {
+    $('#policyInput').value = 'https://example.com/privacy-policy';
+  });
+
+  /* Media-analysis prototype */
+  const detectionData = {
+    text: [73, 'Moderate confidence', 'AI-generation signal detected', 'This prototype detected a pattern worth reviewing. Production results should come from a validated detection model and present uncertainty clearly.'],
+    image: [81, 'Moderate-high confidence', 'Synthetic-media signal detected', 'The interface is ready for metadata, provenance, and model-based image analysis.'],
+    video: [68, 'Moderate confidence', 'Mixed provenance signal', 'Production analysis could combine frames, audio, metadata, and provenance signals.']
+  };
+
+  $$('.detect-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      $$('.detect-tab').forEach((item) => item.classList.toggle('active', item === tab));
+      $$('.detect-panel').forEach((panel) => {
+        panel.classList.toggle('active', panel.dataset.panel === tab.dataset.mode);
+      });
+    });
+  });
+
+  $$('.detection-btn').forEach((button) => {
+    button.addEventListener('click', () => {
+      const [score, confidence, title, description] = detectionData[button.dataset.type] || detectionData.text;
+      button.disabled = true;
+      const savedHTML = button.innerHTML;
+      button.innerHTML = 'Analyzing <span>…</span>';
+
+      setTimeout(() => {
+        button.disabled = false;
+        button.innerHTML = savedHTML;
+        $('#detectMeter').style.width = `${score}%`;
+        $('#detectScore').textContent = `${score}%`;
+        $('#detectConfidence').textContent = confidence;
+        $('#detectTitle').textContent = title;
+        $('#detectDesc').textContent = description;
+      }, 900);
+    });
+  });
+
+  $$('input[type="file"]').forEach((input) => {
+    input.addEventListener('change', () => {
+      const file = input.files?.[0];
+      const label = input.closest('.upload-zone')?.querySelector('b');
+      if (file && label) label.textContent = file.name;
+    });
+  });
+
+  /* News filters */
+  let activeFilter = 'all';
+
+  function filterNews() {
+    const search = ($('#newsSearch')?.value || '').trim().toLowerCase();
+
+    $$('.news-card').forEach((card) => {
+      const categoryMatches = activeFilter === 'all' || card.dataset.category === activeFilter;
+      const searchMatches = !search || card.textContent.toLowerCase().includes(search);
+      card.classList.toggle('hidden', !(categoryMatches && searchMatches));
+    });
+  }
+
+  $$('.filter-pill').forEach((filter) => {
+    filter.addEventListener('click', () => {
+      activeFilter = filter.dataset.filter;
+      $$('.filter-pill').forEach((item) => item.classList.toggle('active', item === filter));
+      filterNews();
+    });
+  });
+
+  $('#newsSearch')?.addEventListener('input', filterNews);
+
+  $('#newsSort')?.addEventListener('change', (event) => {
+    const grid = $('#newsGrid');
+    const key = event.target.value === 'impact' ? 'impact' : 'date';
+
+    [...grid.children]
+      .sort((a, b) => Number(b.dataset[key]) - Number(a.dataset[key]))
+      .forEach((card) => grid.appendChild(card));
+  });
+
+  /* AI chat */
+  const aiToggle = $('#aiToggle');
+  const chatWindow = $('#chatWindow');
+  const chatClose = $('#chatClose');
+  const chatForm = $('#chatForm');
+  const chatInput = $('#chatInput');
+  const chatMessages = $('#chatMessages');
+  const chatTyping = $('#chatTyping');
+
+  function openChat() {
+    chatWindow?.classList.add('open');
+    aiToggle?.setAttribute('aria-expanded', 'true');
+    chatInput?.focus();
+  }
+
+  function closeChat() {
+    chatWindow?.classList.remove('open');
+    aiToggle?.setAttribute('aria-expanded', 'false');
+  }
+
+  function addMessage(text, sender) {
+    const message = document.createElement('div');
+    message.className = `msg ${sender}`;
+    message.textContent = text;
+    chatMessages?.appendChild(message);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  async function getAIResponse(message) {
+    /*
+      This endpoint must run on your own server.
+      The server stores your real API key safely and calls the AI provider.
+    */
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message,
+        system: 'You are the FutureX Lab assistant. Respond concisely and helpfully about AI, technology, trust, and privacy.'
+      })
+    });
+
+    if (!response.ok) throw new Error('AI service unavailable');
+
+    const data = await response.json();
+    return data.reply || 'I could not generate a response right now.';
+  }
+
+  aiToggle?.addEventListener('click', () => {
+    chatWindow?.classList.contains('open') ? closeChat() : openChat();
+  });
+
+  chatClose?.addEventListener('click', closeChat);
+
+  chatForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const text = chatInput?.value.trim();
+    if (!text) return;
+
+    addMessage(text, 'user');
+    chatInput.value = '';
+    chatTyping?.classList.add('active');
+
+    try {
+      const response = await getAIResponse(text);
+      addMessage(response, 'bot');
+    } catch {
+      addMessage('The AI service is not connected yet. Please try again after configuring your server.', 'bot');
+    } finally {
+      chatTyping?.classList.remove('active');
+    }
+  });
+
+  $$('.chat-suggest').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (chatInput) chatInput.value = button.dataset.suggestion || button.textContent.trim();
+      openChat();
+      chatForm?.requestSubmit();
+    });
+  });
+
+  addEventListener('pointerdown', (event) => {
+    if (chatWindow?.classList.contains('open') && !chatWindow.contains(event.target) && !aiToggle.contains(event.target)) {
+      closeChat();
+    }
+  });
+
+  addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    closeChat();
+    mobileMenu?.classList.remove('open');
+    menuToggle?.classList.remove('open');
+    menuToggle?.setAttribute('aria-expanded', 'false');
+  });
+})();
+</script>
+</body>
+</html>
