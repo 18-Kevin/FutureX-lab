@@ -915,12 +915,32 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   }
 
   $$('.analyze-btn').forEach((button) => {
-    button.addEventListener('click', () => displayTrustResult(button.dataset.type));
-  });
+  button.addEventListener('click', () => {
+    const input = $('#policyInput');
+    const trustResults = $('#trustResults');
+    const trustLoading = $('#trustLoading');
+    const resultScore = $('#resultScore');
+    const resultCircle = $('#resultCircle');
 
-  $('.hint[data-fill="privacy"]')?.addEventListener('click', () => {
-    $('#policyInput').value = 'https://example.com/privacy-policy';
+    if (!input || !input.value.trim()) {
+      trustLoading?.classList.remove('active');
+      trustResults?.classList.remove('active');
+
+      if (resultScore) {
+        resultScore.textContent = '0';
+      }
+
+      if (resultCircle) {
+        resultCircle.style.stroke = '#ff6d83';
+        resultCircle.setAttribute('stroke-dasharray', '0 314');
+      }
+
+      return;
+    }
+
+    displayTrustResult(button.dataset.type);
   });
+});
 
   /* Media-analysis prototype */
   const detectionData = {
