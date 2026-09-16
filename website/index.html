@@ -185,7 +185,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .btn-launch:hover,.btn-primary:hover{filter:saturate(1.06)}
 .ai-fab{border-color:rgba(98,216,255,.14);background:linear-gradient(135deg,rgba(18,21,38,.84),rgba(13,24,36,.82))}
 .ai-fab:hover{box-shadow:0 22px 60px rgba(0,0,0,.42),0 0 34px rgba(98,216,255,.08)}
-.section:not(#work){border-top-color:rgba(255,255,255,.065)}
+.section{border-top-color:rgba(255,255,255,.065)}
 
 @media (max-width:800px){
   .lens-center{font-size:18px!important}
@@ -194,6 +194,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 }
 
 .auth-card{overflow:hidden;background:linear-gradient(145deg,rgba(22,26,48,.98),rgba(9,13,24,.98));box-shadow:0 30px 100px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.08)}.auth-card::before{content:'';position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--violet),var(--cyan),var(--mint));}.auth-kicker{display:flex;align-items:center;gap:8px;margin-bottom:18px;font:500 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}.auth-kicker i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}.auth-form label{color:#aeb8ce}.auth-form input{min-height:48px;background:rgba(4,7,15,.54);border-color:rgba(255,255,255,.15);transition:border-color .2s,box-shadow .2s,background .2s}.auth-form input:hover{border-color:rgba(181,168,255,.38)}.auth-submit{min-height:48px;background:linear-gradient(110deg,#8060f4,#5da9ff);box-shadow:0 14px 28px rgba(98,135,255,.22);transition:transform .2s,filter .2s,opacity .2s}.auth-submit:hover{filter:brightness(1.1);transform:translateY(-2px)}.auth-submit:disabled{opacity:.65;cursor:wait;transform:none}.auth-password-wrap{position:relative}.auth-password-wrap input{padding-right:72px}.auth-password-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);padding:6px 7px;color:var(--dim);font:500 10px var(--mono);text-transform:uppercase}.auth-password-toggle:hover{color:#fff}.auth-error{padding:8px 10px;border-radius:8px;background:rgba(255,109,131,.08)}
+.auth-card{animation:authCardIn .35s var(--ease) both}.auth-modal.open .auth-card{transform:translateY(0)}@keyframes authCardIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}.auth-modal[aria-hidden="true"]{visibility:hidden}.auth-modal[aria-hidden="false"]{visibility:visible}.auth-form input::placeholder{color:rgba(255,255,255,.3)}.auth-submit:focus-visible,.auth-switch button:focus-visible,.auth-password-toggle:focus-visible,.auth-close:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
   </style>
   </head>
   <body>
@@ -217,12 +218,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     </a>
 
     <div class="nav-pill">
-       <a href="#Verify" class="nav-link magnetic-target">Trust<span></span></a>
       <a href="#ai-detect" class="nav-link magnetic-target">AI<span></span></a>
       <a href="#signals" class="nav-link magnetic-target">Signals<span></span></a>
       <a href="#news" class="nav-link magnetic-target">News<span></span></a>
-      <a href="#about" class="nav-link 
-      magnetic-target">About<span></span></a>
+      <a href="#about" class="nav-link magnetic-target">About<span></span></a>
     </div>
     <div class="auth-controls">
       <button class="auth-button magnetic-target" id="authButton" type="button">Sign in</button>
@@ -236,12 +235,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-inner">
       <p class="micro-label">Navigation / 00</p>
-      <a href="#work" class="mobile-link">Work <span>01</span></a>
-      <a href="#trust" class="mobile-link">Trust <span>02</span></a>
+      <a href="#ai-detect" class="mobile-link">AI <span>01</span></a>
+      <a href="#signals" class="mobile-link">Signals <span>02</span></a>
       <a href="#news" class="mobile-link">News <span>03</span></a>
-      <a href="#signals" class="mobile-link">Signals <span>04</span></a>
-      <a href="#ai-detect" class="mobile-link">AI <span>05</span></a>
-      <a href="#about" class="mobile-link">About <span>06</span></a>
+      <a href="#about" class="mobile-link">About <span>04</span></a>
     </div>
   </div>
 
@@ -284,7 +281,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 
         <div class="hero-action anim-rise d-4">
           <p class="hero-note">We combine research, design and rapid prototyping to turn emerging technology into useful human experiences.</p>
-          <a href="#work" class="btn-launch magnetic-target">Explore the lab <span>↗</span></a>
+          <a href="#ai-detect" class="btn-launch magnetic-target">Explore the lab <span>↗</span></a>
         </div>
       </div>
     </div>
@@ -297,68 +294,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 
   <div class="ambient-divider" aria-hidden="true"><span></span><span></span><span></span></div>
 
-  <section class="section work-section" id="work">
-    <div class="section-topline reveal-on-scroll">
-      <p class="kicker">What we make</p>
-      <span class="section-index">01 / 06</span>
-    </div>
-
-    <h2 class="section-title reveal-on-scroll">
-      Small experiments.<br><em>Useful signals.</em><br>Bigger possibilities.
-    </h2>
-
-    <div class="section-lead-row reveal-on-scroll">
-      <p class="section-intro">
-        We explore emerging technology with a practical lens: what might help people learn, work, create, and participate more meaningfully in a rapidly shifting digital landscape?
-      </p>
-      <div class="mini-stamp"><span>FXL</span><b>RESEARCH<br>PROTOTYPE<br>STUDIO</b></div>
-    </div>
-
-    <div class="work-grid">
-      <article class="feature-card feature-card-large reveal-on-scroll magnetic-card">
-        <div class="card-glow"></div>
-        <div class="feature-top"><span>01 / Research</span><i>↗</i></div>
-        <div class="feature-visual visual-orbit">
-          <div class="orbit-ring one"></div>
-          <div class="orbit-ring two"></div>
-          <div class="orbit-core">FX</div>
-        </div>
-        <div class="feature-copy">
-          <h3>Future sensing</h3>
-          <p>We track changing behaviours, technologies, and cultural signals to frame opportunities worth exploring.</p>
-        </div>
-      </article>
-
-      <article class="feature-card reveal-on-scroll magnetic-card">
-        <div class="card-glow cyan"></div>
-        <div class="feature-top"><span>02 / Prototypes</span><i>↗</i></div>
-        <div class="feature-visual visual-grid">
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
-        </div>
-        <div class="feature-copy">
-          <h3>Ideas made tangible</h3>
-          <p>We turn hypotheses into lightweight interactive tools that make a future scenario easier to test and debate.</p>
-        </div>
-      </article>
-
-      <article class="feature-card reveal-on-scroll magnetic-card">
-        <div class="card-glow warm"></div>
-        <div class="feature-top"><span>03 / Learning</span><i>↗</i></div>
-        <div class="feature-visual visual-type"><span>MAKE</span><span>LEARN</span><span>QUESTION</span></div>
-        <div class="feature-copy">
-          <h3>Skills in practice</h3>
-          <p>Workshops and shared tools that help teams build confidence with new ways of thinking, making, and governing.</p>
-        </div>
-      </article>
-    </div>
-  </section>
-
   <section class="section trust-section" id="trust">
     <div class="section-topline reveal-on-scroll">
       <p class="kicker">Trust Intelligence</p>
-      <span class="section-index">02 / 06</span>
+      <span class="section-index">01 / 04</span>
     </div>
 
     <div class="split-heading reveal-on-scroll">
@@ -464,7 +403,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   <section class="section detection-section" id="ai-detect">
     <div class="section-topline reveal-on-scroll">
       <p class="kicker">Authentication</p>
-      <span class="section-index">03 / 06</span>
+      <span class="section-index">02 / 04</span>
     </div>
 
     <div class="split-heading reveal-on-scroll">
@@ -528,7 +467,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   <section class="section signals-section" id="signals">
     <div class="section-topline reveal-on-scroll">
       <p class="kicker">Horizon Scanning</p>
-      <span class="section-index">04 / 06</span>
+      <span class="section-index">03 / 04</span>
     </div>
 
     <div class="signals-intro reveal-on-scroll">
@@ -559,7 +498,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   <section class="section news-section" id="news">
     <div class="section-topline reveal-on-scroll">
       <p class="kicker">Intelligence</p>
-      <span class="section-index">05 / 06</span>
+      <span class="section-index">04 / 04</span>
     </div>
 
     <div class="news-heading reveal-on-scroll">
@@ -599,7 +538,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
           <div class="news-meta"><span>PRIVACY</span><time>01 AUG 2026</time></div>
           <h3>Privacy UX is becoming a competitive feature.</h3>
           <p>Clearer consent, local processing and granular controls are reshaping user expectations.</p>
-          <a href="#trust" class="news-link magnetic-target">Read signal <b>↗</b></a>
+          <a href="#ai-detect" class="news-link magnetic-target">Read signal <b>↗</b></a>
         </div>
       </article>
 
@@ -638,7 +577,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   <section class="section about-section" id="about">
     <div class="section-topline reveal-on-scroll">
       <p class="kicker">About the lab</p>
-      <span class="section-index">06 / 06</span>
+      <span class="section-index">05 / 05</span>
     </div>
 
     <div class="about-hero reveal-on-scroll">
@@ -670,7 +609,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       <a class="brand footer-brand" href="#top"><span class="mark"><i></i></span><span>Future<em>X</em></span></a>
       <p>Research & Prototype Studio</p>
     </div>
-    <div class="footer-center"><span>AI / PRIVACY / TRUST / SIGNALS</span></div>
+    <div class="footer-center"><span>AI / PRIVACY / SIGNALS</span></div>
     <div class="footer-right"><span>© 2026 FutureX Lab</span><a href="#top" class="magnetic-target">Back to top ↑</a></div>
   </footer>
 
