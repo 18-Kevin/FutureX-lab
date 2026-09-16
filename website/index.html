@@ -44,9 +44,11 @@ a,button,input,textarea,select{font:inherit;color:inherit}a{text-decoration:none
 .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:21px;letter-spacing:-.055em;position:relative;z-index:2}.brand em{font-family:var(--serif);font-weight:500}.mark{width:28px;height:28px;border:1px solid rgba(255,255,255,.85);display:grid;place-items:center;transform:rotate(45deg);transition:transform .7s var(--ease),box-shadow .4s}.brand:hover .mark{transform:rotate(135deg);box-shadow:0 0 22px rgba(137,103,255,.22)}.mark i{width:9px;height:9px;border-radius:50%;background:#b09bff;box-shadow:0 0 18px rgba(176,155,255,.55)}
 .nav-pill{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:3px;padding:5px;border:1px solid var(--line);border-radius:999px;background:rgba(17,20,33,.38);backdrop-filter:blur(18px);box-shadow:0 14px 40px rgba(0,0,0,.12)}
 .nav-link{position:relative;padding:9px 15px;border-radius:999px;color:rgba(255,255,255,.68);font-size:13px;font-weight:600;transition:color .25s,background .25s}.nav-link span{position:absolute;left:15px;right:15px;bottom:5px;height:1px;background:var(--violet-2);transform:scaleX(0);transform-origin:left;transition:transform .32s var(--ease)}.nav-link:hover,.nav-link.active{color:#fff;background:rgba(255,255,255,.085)}.nav-link:hover span,.nav-link.active span{transform:scaleX(1)}
+.auth-controls{display:flex;align-items:center;gap:10px}.auth-button{padding:10px 16px;border:1px solid var(--line-strong);border-radius:999px;background:rgba(255,255,255,.04);font-size:12px;font-weight:700;transition:.25s}.auth-button:hover{background:#fff;color:#0a0d16;border-color:#fff}.auth-user{display:flex;align-items:center;gap:10px;font-size:12px;color:rgba(255,255,255,.72)}.auth-user strong{color:#fff}.auth-logout{color:var(--violet-2);font-size:11px}
 .nav-cta{display:inline-flex;align-items:center;gap:10px;padding:11px 15px 11px 17px;border:1px solid var(--line-strong);border-radius:999px;background:rgba(255,255,255,.025);font-size:13px;font-weight:700;transition:transform .3s var(--ease),background .3s,border-color .3s}.nav-cta b{font-size:16px;color:var(--violet-2);transition:transform .3s var(--ease)}.nav-cta:hover{background:#fff;color:#0a0d16;border-color:#fff;transform:translateY(-2px)}.nav-cta:hover b{transform:translate(2px,-2px);color:#6e52da}
 .menu-toggle{display:none;width:42px;height:42px;border:1px solid var(--line-strong);border-radius:50%;position:relative}.menu-toggle span{position:absolute;width:15px;height:1px;background:#fff;left:50%;top:50%;transform:translate(-50%,-4px);transition:transform .25s}.menu-toggle span+span{transform:translate(-50%,4px)}.menu-toggle.open span{transform:translate(-50%,0) rotate(45deg)}.menu-toggle.open span+span{transform:translate(-50%,0) rotate(-45deg)}
 .mobile-menu{position:fixed;inset:72px 0 auto 0;height:calc(100vh - 72px);z-index:350;background:rgba(6,9,15,.96);backdrop-filter:blur(24px);opacity:0;pointer-events:none;transform:translateY(-12px);transition:.4s var(--ease);border-top:1px solid var(--line)}.mobile-menu.open{opacity:1;pointer-events:auto;transform:none}.mobile-menu-inner{padding:30px 22px}.mobile-link{display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--line);font-size:25px;letter-spacing:-.04em}.mobile-link span{font:500 11px var(--mono);color:var(--violet-2);align-self:center}
+.auth-modal{position:fixed;inset:0;z-index:600;display:grid;place-items:center;padding:20px;background:rgba(3,5,12,.76);backdrop-filter:blur(14px);opacity:0;pointer-events:none;transition:.3s}.auth-modal.open{opacity:1;pointer-events:auto}.auth-card{position:relative;width:min(100%,430px);padding:36px;border:1px solid var(--line-strong);border-radius:24px;background:linear-gradient(145deg,#121526,#0b0e18);box-shadow:0 30px 100px rgba(0,0,0,.5)}.auth-card h2{margin:0 0 8px;font-size:2.2rem;letter-spacing:-.06em}.auth-card>p{margin:0 0 26px;color:rgba(255,255,255,.6);font-size:14px}.auth-form{display:grid;gap:14px}.auth-form label{display:grid;gap:7px;font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.62)}.auth-form input{width:100%;padding:13px 14px;border:1px solid var(--line-strong);border-radius:10px;background:rgba(255,255,255,.045);font:14px var(--sans);outline:none}.auth-form input:focus{border-color:var(--violet-2);box-shadow:0 0 0 3px rgba(137,103,255,.15)}.auth-submit{margin-top:5px;padding:14px;border-radius:10px;background:var(--violet);font-weight:700}.auth-submit:hover{background:#9d83ff}.auth-error{min-height:18px;margin:0;color:#ff9fbd;font-size:12px}.auth-switch{margin:20px 0 0!important;text-align:center;color:rgba(255,255,255,.55)!important;font-size:12px!important}.auth-switch button{color:var(--violet-2);font-weight:700}.auth-close{position:absolute;top:15px;right:18px;color:rgba(255,255,255,.65);font-size:26px}.auth-close:hover{color:#fff}
 
 /* HERO */
 .hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;background:#070a12;isolation:isolate}.hero-img{position:absolute;inset:0;background-size:cover;background-position:center}.hero-base{background-image:linear-gradient(105deg,rgba(3,5,12,.8),rgba(3,5,12,.2) 58%,rgba(3,5,12,.6)),url('https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260609_195923_b0ba8ace-1d1d-4f2c-9a28-1ab84b330680.png&w=1280&q=85');animation:heroZoom 2s var(--ease) forwards}.hero-reveal{background-image:linear-gradient(105deg,rgba(3,5,12,.4),rgba(3,5,12,.1)),url('https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260609_201152_bba90a12-bf12-459f-91f0-51f237dbaf3b.png&w=1280&q=85');z-index:2;pointer-events:none}.grain{position:absolute;inset:0;z-index:3;opacity:.12;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");mix-blend-mode:soft-light}.hero-vignette{position:absolute;inset:0;z-index:4;background:radial-gradient(circle at 50% 46%,transparent 0,transparent 42%,rgba(3,5,12,.22) 78%,rgba(3,5,12,.56) 100%);pointer-events:none}
@@ -190,7 +192,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   .section-title{font-size:clamp(2.35rem,12vw,4.4rem)}
   .section-intro{font-size:1rem}
 }
+
+.auth-card{overflow:hidden;background:linear-gradient(145deg,rgba(22,26,48,.98),rgba(9,13,24,.98));box-shadow:0 30px 100px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.08)}.auth-card::before{content:'';position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--violet),var(--cyan),var(--mint));}.auth-kicker{display:flex;align-items:center;gap:8px;margin-bottom:18px;font:500 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}.auth-kicker i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}.auth-form label{color:#aeb8ce}.auth-form input{min-height:48px;background:rgba(4,7,15,.54);border-color:rgba(255,255,255,.15);transition:border-color .2s,box-shadow .2s,background .2s}.auth-form input:hover{border-color:rgba(181,168,255,.38)}.auth-submit{min-height:48px;background:linear-gradient(110deg,#8060f4,#5da9ff);box-shadow:0 14px 28px rgba(98,135,255,.22);transition:transform .2s,filter .2s,opacity .2s}.auth-submit:hover{filter:brightness(1.1);transform:translateY(-2px)}.auth-submit:disabled{opacity:.65;cursor:wait;transform:none}.auth-password-wrap{position:relative}.auth-password-wrap input{padding-right:72px}.auth-password-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);padding:6px 7px;color:var(--dim);font:500 10px var(--mono);text-transform:uppercase}.auth-password-toggle:hover{color:#fff}.auth-error{padding:8px 10px;border-radius:8px;background:rgba(255,109,131,.08)}
   </style>
+  </head>
   <body>
   <div class="cursor-system" aria-hidden="true">
     <div class="cursor-orbit cursor-orbit-a"></div>
@@ -216,7 +221,12 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       <a href="#ai-detect" class="nav-link magnetic-target">AI<span></span></a>
       <a href="#signals" class="nav-link magnetic-target">Signals<span></span></a>
       <a href="#news" class="nav-link magnetic-target">News<span></span></a>
-      <a href="#about" class="nav-link magnetic-target">About<span></span></a>
+      <a href="#about" class="nav-link 
+      magnetic-target">About<span></span></a>
+    </div>
+    <div class="auth-controls">
+      <button class="auth-button magnetic-target" id="authButton" type="button">Sign in</button>
+      <div class="auth-user" id="authUser" hidden><strong id="authUserName"></strong><button class="auth-logout magnetic-target" id="authLogout" type="button">Log out</button></div>
     </div>
     <button class="menu-toggle magnetic-target" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation">
       <span></span><span></span>
@@ -232,6 +242,23 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       <a href="#signals" class="mobile-link">Signals <span>04</span></a>
       <a href="#ai-detect" class="mobile-link">AI <span>05</span></a>
       <a href="#about" class="mobile-link">About <span>06</span></a>
+    </div>
+  </div>
+
+  <div class="auth-modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="auth-card">
+      <button class="auth-close magnetic-target" id="authClose" type="button" aria-label="Close sign in dialog">×</button>
+      <div class="auth-kicker"><i></i> FutureX member access</div>
+      <h2 id="authTitle">Welcome back</h2>
+      <p id="authDescription">Sign in to keep your FutureX experience connected.</p>
+      <form class="auth-form" id="authForm">
+        <label id="nameField">Name<input id="authName" type="text" autocomplete="name" required minlength="2" maxlength="80" /></label>
+        <label>Email<input id="authEmail" type="email" autocomplete="email" required /></label>
+        <label>Password<div class="auth-password-wrap"><input id="authPassword" type="password" autocomplete="current-password" required minlength="8" /><button class="auth-password-toggle" id="authPasswordToggle" type="button" aria-label="Show password">Show</button></div></label>
+        <p class="auth-error" id="authError" role="alert"></p>
+        <button class="auth-submit" id="authSubmit" type="submit">Sign in</button>
+      </form>
+      <p class="auth-switch"><span id="authSwitchText">New to FutureX?</span> <button id="authSwitch" type="button">Create an account</button></p>
     </div>
   </div>
 
@@ -697,6 +724,120 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   const navbar = $('#navbar');
   const menuToggle = $('#menuToggle');
   const mobileMenu = $('#mobileMenu');
+  const authModal = $('#authModal');
+  const authButton = $('#authButton');
+  const authUser = $('#authUser');
+  const authUserName = $('#authUserName');
+  const authLogout = $('#authLogout');
+  const authClose = $('#authClose');
+  const authForm = $('#authForm');
+  const authName = $('#authName');
+  const authEmail = $('#authEmail');
+  const authPassword = $('#authPassword');
+  const authPasswordToggle = $('#authPasswordToggle');
+  const authError = $('#authError');
+  const authTitle = $('#authTitle');
+  const authDescription = $('#authDescription');
+  const authSubmit = $('#authSubmit');
+  const authSwitch = $('#authSwitch');
+  const authSwitchText = $('#authSwitchText');
+  const nameField = $('#nameField');
+  let authMode = 'login';
+
+  function setAuthMode(mode) {
+    authMode = mode;
+    const isLogin = mode === 'login';
+    authTitle.textContent = isLogin ? 'Welcome back' : 'Join FutureX';
+    authDescription.textContent = isLogin
+      ? 'Sign in to keep your FutureX experience connected.'
+      : 'Create an account to keep your FutureX experience connected.';
+    authSubmit.textContent = isLogin ? 'Sign in' : 'Create account';
+    authSwitchText.textContent = isLogin ? 'New to FutureX?' : 'Already have an account?';
+    authSwitch.textContent = isLogin ? 'Create an account' : 'Sign in';
+    nameField.hidden = isLogin;
+    authName.required = !isLogin;
+    authPassword.autocomplete = isLogin ? 'current-password' : 'new-password';
+    authError.textContent = '';
+  }
+
+  function openAuth(mode = 'login') {
+    setAuthMode(mode);
+    authModal.classList.add('open');
+    authModal.setAttribute('aria-hidden', 'false');
+    (mode === 'login' ? authEmail : authName).focus();
+  }
+
+  function closeAuth() {
+    authModal.classList.remove('open');
+    authModal.setAttribute('aria-hidden', 'true');
+    authForm.reset();
+    authError.textContent = '';
+    authPassword.type = 'password';
+    authPasswordToggle.textContent = 'Show';
+    authPasswordToggle.setAttribute('aria-label', 'Show password');
+  }
+
+  function updateAuth(user) {
+    const signedIn = Boolean(user);
+    authButton.hidden = signedIn;
+    authUser.hidden = !signedIn;
+    if (signedIn) authUserName.textContent = user.name;
+  }
+
+  authButton?.addEventListener('click', () => openAuth());
+  authClose?.addEventListener('click', closeAuth);
+  authPasswordToggle?.addEventListener('click', () => {
+    const showing = authPassword.type === 'text';
+    authPassword.type = showing ? 'password' : 'text';
+    authPasswordToggle.textContent = showing ? 'Show' : 'Hide';
+    authPasswordToggle.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+  });
+  authSwitch?.addEventListener('click', () => setAuthMode(authMode === 'login' ? 'register' : 'login'));
+  authModal?.addEventListener('click', (event) => {
+    if (event.target === authModal) closeAuth();
+  });
+
+  authForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    authSubmit.disabled = true;
+    authError.textContent = '';
+
+    try {
+      const payload = {
+        name: authName.value,
+        email: authEmail.value,
+        password: authPassword.value
+      };
+      const response = await fetch(`/api/auth/${authMode}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Authentication failed.');
+      if (!data.user) throw new Error('The server did not return an account. Please try again.');
+      updateAuth(data.user);
+      closeAuth();
+    } catch (error) {
+      authError.textContent = error instanceof TypeError
+        ? 'Unable to reach FutureX. Make sure the server is running and try again.'
+        : error.message;
+    } finally {
+      authSubmit.disabled = false;
+    }
+  });
+
+  authLogout?.addEventListener('click', async () => {
+    const response = await fetch('/api/auth/logout', { method: 'POST' });
+    if (!response.ok) return;
+    updateAuth(null);
+  });
+
+  fetch('/api/auth/me')
+    .then(response => response.json())
+    .then(data => updateAuth(data.user))
+    .catch(() => updateAuth(null));
+  setAuthMode('login');
 
   function updatePage() {
     const height = document.documentElement.scrollHeight - innerHeight;
@@ -915,32 +1056,12 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   }
 
   $$('.analyze-btn').forEach((button) => {
-  button.addEventListener('click', () => {
-    const input = $('#policyInput');
-    const trustResults = $('#trustResults');
-    const trustLoading = $('#trustLoading');
-    const resultScore = $('#resultScore');
-    const resultCircle = $('#resultCircle');
-
-    if (!input || !input.value.trim()) {
-      trustLoading?.classList.remove('active');
-      trustResults?.classList.remove('active');
-
-      if (resultScore) {
-        resultScore.textContent = '0';
-      }
-
-      if (resultCircle) {
-        resultCircle.style.stroke = '#ff6d83';
-        resultCircle.setAttribute('stroke-dasharray', '0 314');
-      }
-
-      return;
-    }
-
-    displayTrustResult(button.dataset.type);
+    button.addEventListener('click', () => displayTrustResult(button.dataset.type));
   });
-});
+
+  $('.hint[data-fill="privacy"]')?.addEventListener('click', () => {
+    $('#policyInput').value = 'https://example.com/privacy-policy';
+  });
 
   /* Media-analysis prototype */
   const detectionData = {
@@ -1050,7 +1171,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       This endpoint must run on your own server.
       The server stores your real API key safely and calls the AI provider.
     */
-    const response = await fetch('https://futurex-ai.onrender.com/api/chat', {
+    const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1107,6 +1228,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 
   addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
+    closeAuth();
     closeChat();
     mobileMenu?.classList.remove('open');
     menuToggle?.classList.remove('open');
