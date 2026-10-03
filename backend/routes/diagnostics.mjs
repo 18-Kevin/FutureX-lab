@@ -171,11 +171,29 @@ async function probePort(port) {
   }
 }
 
+async function brevoCheck() {
+  const apiKey = (process.env.BREVO_API_KEY || '').trim();
+  if (!apiKey || apiKey.includes('PASTE_') || apiKey.includes('your_brevo')) {
+    return { present: false };
+  }
+  try {
+    const res = await fetch('https://api.brevo.com/v3/account', {
+      headers: { 'api-key': apiKey },
+      signal: AbortSignal.timeout(10000)
+    });
+    const body = await res.text();
+    return { present: true, ok: res.ok, status: res.status, body: body.slice(0, 400) };
+  } catch (err) {
+    return { present: true, ok: false, error: err.code || err.message };
+  }
+}
+
 router.get('/email', async (req, res) => {
   try {
     const result = {
       configured: emailConfigured(),
       host: HOST,
+      brevo: await brevoCheck(),
       probes: {}
     };
     if (result.configured) {
