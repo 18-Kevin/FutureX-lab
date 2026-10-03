@@ -199,6 +199,15 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .auth-delete{color:#ff8fa3;margin-left:6px}.auth-delete:hover{color:#ff6d83}
 .auth-submit-danger{background:linear-gradient(110deg,#d4355a,#ff6d83);box-shadow:0 14px 28px rgba(255,109,131,.2)}.auth-submit-danger:hover{filter:brightness(1.08)}
 .auth-kicker-danger{color:#ff8fa3}.auth-kicker-danger i{background:#ff6d83;box-shadow:0 0 12px #ff6d83}
+.auth-button{position:relative;overflow:hidden;padding:12px 30px;border-radius:999px;border:1px solid rgba(140,240,255,.5);background:linear-gradient(135deg,rgba(115,235,255,.24),rgba(88,145,255,.16) 48%,rgba(150,255,235,.22));backdrop-filter:blur(10px);color:#eaffff;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 0 14px rgba(115,235,255,.4),0 0 36px rgba(88,200,255,.24),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -9px 18px rgba(70,180,255,.24);text-shadow:0 0 9px rgba(150,240,255,.85);transition:transform .3s var(--ease),box-shadow .3s,background .3s,border-color .3s,color .3s}
+.auth-button::before{content:'';position:absolute;top:-45%;left:-45%;width:42%;height:190%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-22deg);animation:iceSheen 3.8s ease-in-out infinite;pointer-events:none}
+.auth-button::after{content:'';position:absolute;left:10%;bottom:16%;width:30%;height:30%;border-radius:50%;background:radial-gradient(circle,rgba(190,255,255,.75),transparent 70%);filter:blur(5px);animation:liquidBlob 5.5s ease-in-out infinite alternate;pointer-events:none}
+@keyframes iceSheen{0%{left:-45%}60%,100%{left:140%}}
+@keyframes liquidBlob{from{transform:translate(0,0) scale(1);opacity:.7}to{transform:translate(190%,-45%) scale(1.6);opacity:1}}
+.auth-button:hover{background:linear-gradient(135deg,rgba(140,250,255,.4),rgba(100,170,255,.3) 48%,rgba(170,255,245,.38));border-color:rgba(160,245,255,.85);color:#fff;transform:translateY(-2px) scale(1.05);box-shadow:0 0 24px rgba(130,245,255,.8),0 0 60px rgba(80,210,255,.5),inset 0 1px 0 rgba(255,255,255,.75)}
+.auth-button:active{transform:scale(.96)}
+.account-actions{display:grid;gap:12px;margin-top:22px}
+.account-actions .auth-submit{margin-top:0}
 
 /* SCAM SHIELD — verdict, chips, how-it-works, stats, extension, recent scans */
 .verdict-chip{display:inline-block;padding:6px 14px;border-radius:999px;font:700 11px var(--mono);letter-spacing:.1em;margin-bottom:10px}
@@ -270,8 +279,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       <a href="#about" class="nav-link magnetic-target">About<span></span></a>
     </div>
     <div class="auth-controls">
-      <button class="auth-button magnetic-target" id="authButton" type="button">Sign in</button>
-      <div class="auth-user" id="authUser" hidden><strong id="authUserName"></strong><button class="auth-logout magnetic-target" id="authLogout" type="button">Log out</button><button class="auth-logout magnetic-target auth-delete" id="authDelete" type="button">Delete</button></div>
+      <button class="auth-button magnetic-target" id="authButton" type="button">Login</button>
     </div>
     <button class="menu-toggle magnetic-target" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation">
       <span></span><span></span>
@@ -292,18 +300,29 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   <div class="auth-modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
     <div class="auth-card">
       <button class="auth-close magnetic-target" id="authClose" type="button" aria-label="Close sign in dialog">×</button>
-      <div class="auth-kicker"><i></i> FutureX member access</div>
-      <h2 id="authTitle">Welcome back</h2>
-      <p id="authDescription">Sign in to keep your FutureX experience connected.</p>
-      <form class="auth-form" id="authForm">
-        <label id="nameField">Name<input id="authName" type="text" autocomplete="name" required minlength="2" maxlength="80" /></label>
-        <label>Email<input id="authEmail" type="email" autocomplete="email" required /></label>
-        <label>Password<div class="auth-password-wrap"><input id="authPassword" type="password" autocomplete="current-password" required minlength="8" /><button class="auth-password-toggle" id="authPasswordToggle" type="button" aria-label="Show password">Show</button></div></label>
-        <button class="auth-forgot" id="forgotPassword" type="button">Forgot password?</button>
-        <p class="auth-error" id="authError" role="alert"></p>
-        <button class="auth-submit" id="authSubmit" type="submit">Sign in</button>
-      </form>
-      <p class="auth-switch"><span id="authSwitchText">New to FutureX?</span> <button id="authSwitch" type="button">Create an account</button></p>
+      <div id="authPane">
+        <div class="auth-kicker"><i></i> FutureX member access</div>
+        <h2 id="authTitle">Welcome back</h2>
+        <p id="authDescription">Sign in to keep your FutureX experience connected.</p>
+        <form class="auth-form" id="authForm">
+          <label id="nameField">Name<input id="authName" type="text" autocomplete="name" required minlength="2" maxlength="80" /></label>
+          <label>Email<input id="authEmail" type="email" autocomplete="email" required /></label>
+          <label>Password<div class="auth-password-wrap"><input id="authPassword" type="password" autocomplete="current-password" required minlength="8" /><button class="auth-password-toggle" id="authPasswordToggle" type="button" aria-label="Show password">Show</button></div></label>
+          <button class="auth-forgot" id="forgotPassword" type="button">Forgot password?</button>
+          <p class="auth-error" id="authError" role="alert"></p>
+          <button class="auth-submit" id="authSubmit" type="submit">Sign in</button>
+        </form>
+        <p class="auth-switch"><span id="authSwitchText">New to FutureX?</span> <button id="authSwitch" type="button">Create an account</button></p>
+      </div>
+      <div id="accountPane" hidden>
+        <div class="auth-kicker"><i></i> FutureX account</div>
+        <h2>Hi, <span id="accountName">there</span></h2>
+        <p>You're signed in. Manage your account below.</p>
+        <div class="account-actions">
+          <button class="auth-submit" id="authLogout" type="button">Log out</button>
+          <button class="auth-submit auth-submit-danger" id="authDelete" type="button">Delete account</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -858,9 +877,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   const mobileMenu = $('#mobileMenu');
   const authModal = $('#authModal');
   const authButton = $('#authButton');
-  const authUser = $('#authUser');
-  const authUserName = $('#authUserName');
   const authLogout = $('#authLogout');
+  const authPane = $('#authPane');
+  const accountPane = $('#accountPane');
+  const accountName = $('#accountName');
   const authClose = $('#authClose');
   const authForm = $('#authForm');
   const authName = $('#authName');
@@ -876,6 +896,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   const nameField = $('#nameField');
   const forgotPasswordButton = $('#forgotPassword');
   let authMode = 'login';
+  let currentUser = null;
 
   const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
     ? ''
@@ -917,10 +938,19 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   }
 
   function openAuth(mode = 'login') {
-    setAuthMode(mode);
+    if (currentUser) {
+      authPane.hidden = true;
+      accountPane.hidden = false;
+      accountName.textContent = currentUser.name;
+    } else {
+      authPane.hidden = false;
+      accountPane.hidden = true;
+      setAuthMode(mode);
+    }
     authModal.classList.add('open');
     authModal.setAttribute('aria-hidden', 'false');
-    (mode === 'login' ? authEmail : authName).focus();
+    if (currentUser) authLogout?.focus();
+    else (mode === 'login' ? authEmail : authName).focus();
   }
 
   function closeAuth() {
@@ -1111,6 +1141,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.error || 'Could not delete the account.');
       closeDelete();
+      closeAuth();
       setToken(null);
       updateAuth(null);
       showAppNotice('Your account has been permanently deleted.', 'success');
@@ -1122,10 +1153,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   });
 
   function updateAuth(user) {
-    const signedIn = Boolean(user);
-    authButton.hidden = signedIn;
-    authUser.hidden = !signedIn;
-    if (signedIn) authUserName.textContent = user.name;
+    currentUser = user || null;
   }
 
   authButton?.addEventListener('click', () => openAuth());
@@ -1190,6 +1218,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     } catch { /* offline — sign out locally anyway */ }
     setToken(null);
     updateAuth(null);
+    closeAuth();
+    showAppNotice('You are logged out.', 'success');
   });
 
   fetch(`${API_BASE}/api/auth/me`, { headers: authHeaders() })
