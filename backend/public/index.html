@@ -199,23 +199,30 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .auth-delete{color:#ff8fa3;margin-left:6px}.auth-delete:hover{color:#ff6d83}
 .auth-submit-danger{background:linear-gradient(110deg,#d4355a,#ff6d83);box-shadow:0 14px 28px rgba(255,109,131,.2)}.auth-submit-danger:hover{filter:brightness(1.08)}
 .auth-kicker-danger{color:#ff8fa3}.auth-kicker-danger i{background:#ff6d83;box-shadow:0 0 12px #ff6d83}
-.auth-button{position:relative;overflow:hidden;padding:12px 30px;border-radius:999px;border:1px solid rgba(140,240,255,.5);background:linear-gradient(135deg,rgba(115,235,255,.24),rgba(88,145,255,.16) 48%,rgba(150,255,235,.22));backdrop-filter:blur(10px);color:#eaffff;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 0 14px rgba(115,235,255,.4),0 0 36px rgba(88,200,255,.24),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -9px 18px rgba(70,180,255,.24);text-shadow:0 0 9px rgba(150,240,255,.85);transition:transform .3s var(--ease),box-shadow .3s,background .3s,border-color .3s,color .3s}
+.auth-button{position:relative;overflow:hidden;padding:12px 30px;border-radius:999px;border:1px solid rgba(140,255,220,.5);background:linear-gradient(135deg,rgba(120,255,215,.24),rgba(70,235,185,.16) 48%,rgba(165,255,235,.22));backdrop-filter:blur(10px);color:#eafffb;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 0 14px rgba(120,255,215,.45),0 0 36px rgba(70,245,190,.26),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -9px 18px rgba(70,225,175,.24);text-shadow:0 0 9px rgba(165,255,235,.85);transition:transform .3s var(--ease),box-shadow .3s,background .3s,border-color .3s,color .3s}
 .auth-button::before{content:'';position:absolute;top:-45%;left:-45%;width:42%;height:190%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-22deg);animation:iceSheen 3.8s ease-in-out infinite;pointer-events:none}
-.auth-button::after{content:'';position:absolute;left:10%;bottom:16%;width:30%;height:30%;border-radius:50%;background:radial-gradient(circle,rgba(190,255,255,.75),transparent 70%);filter:blur(5px);animation:liquidBlob 5.5s ease-in-out infinite alternate;pointer-events:none}
+.auth-button::after{content:'';position:absolute;left:10%;bottom:16%;width:30%;height:30%;border-radius:50%;background:radial-gradient(circle,rgba(205,255,242,.75),transparent 70%);filter:blur(5px);animation:liquidBlob 5.5s ease-in-out infinite alternate;pointer-events:none}
 @keyframes iceSheen{0%{left:-45%}60%,100%{left:140%}}
 @keyframes liquidBlob{from{transform:translate(0,0) scale(1);opacity:.7}to{transform:translate(190%,-45%) scale(1.6);opacity:1}}
-.auth-button:hover{background:linear-gradient(135deg,rgba(140,250,255,.4),rgba(100,170,255,.3) 48%,rgba(170,255,245,.38));border-color:rgba(160,245,255,.85);color:#fff;transform:translateY(-2px) scale(1.05);box-shadow:0 0 24px rgba(130,245,255,.8),0 0 60px rgba(80,210,255,.5),inset 0 1px 0 rgba(255,255,255,.75)}
+.auth-button:hover{background:linear-gradient(135deg,rgba(150,255,230,.4),rgba(90,250,200,.3) 48%,rgba(185,255,240,.38));border-color:rgba(165,255,225,.85);color:#fff;transform:translateY(-2px) scale(1.05);box-shadow:0 0 24px rgba(130,255,220,.8),0 0 60px rgba(70,250,195,.5),inset 0 1px 0 rgba(255,255,255,.75)}
 .auth-button:active{transform:scale(.96)}
 .account-actions{display:grid;gap:12px;margin-top:22px}
 .account-actions .auth-submit{margin-top:0}
-.brand{color:transparent;background:linear-gradient(120deg,#d6fdff 0%,#7de9ff 34%,#8fb8ff 66%,#bcfff4 100%);-webkit-background-clip:text;background-clip:text;animation:brandGlow 4.5s ease-in-out infinite}
-.brand em{color:#9ff2ff;text-shadow:0 0 12px rgba(130,240,255,.9),0 0 30px rgba(90,190,255,.5)}
-@keyframes brandGlow{0%,100%{filter:drop-shadow(0 0 8px rgba(120,235,255,.45)) drop-shadow(0 0 22px rgba(90,190,255,.25))}50%{filter:drop-shadow(0 0 15px rgba(140,245,255,.75)) drop-shadow(0 0 38px rgba(100,210,255,.42))}}
-.mark{position:relative;border-color:rgba(150,245,255,.85);background:linear-gradient(145deg,rgba(115,235,255,.2),rgba(88,145,255,.12));box-shadow:0 0 12px rgba(115,235,255,.55),0 0 30px rgba(88,200,255,.3),inset 0 0 12px rgba(115,235,255,.28)}
-.mark::before{content:'';position:absolute;inset:4px;border:1px solid rgba(190,255,255,.5);box-shadow:inset 0 0 8px rgba(130,240,255,.35)}
-.mark i{position:relative;z-index:1;width:10px;height:10px;background:radial-gradient(circle at 34% 30%,#f2ffff,#7de9ff 46%,#4aa8ff);box-shadow:0 0 13px rgba(130,240,255,.95),0 0 28px rgba(90,190,255,.6);animation:orbPulse 3s ease-in-out infinite}
-@keyframes orbPulse{0%,100%{transform:scale(1);box-shadow:0 0 12px rgba(130,240,255,.9),0 0 26px rgba(90,190,255,.5)}50%{transform:scale(1.28);box-shadow:0 0 20px rgba(150,250,255,1),0 0 46px rgba(90,210,255,.85)}}
-.brand:hover .mark{box-shadow:0 0 24px rgba(130,245,255,.9),0 0 56px rgba(80,210,255,.5),inset 0 0 16px rgba(130,240,255,.4)}
+.brand{color:transparent;background:linear-gradient(120deg,#d9fff5 0%,#7dffd4 34%,#8ff0d8 66%,#c6fff0 100%);-webkit-background-clip:text;background-clip:text;animation:brandGlow 4.5s ease-in-out infinite}
+.brand em{color:#9ff8e2;text-shadow:0 0 12px rgba(130,255,220,.9),0 0 30px rgba(70,245,190,.5)}
+@keyframes brandGlow{0%,100%{filter:drop-shadow(0 0 8px rgba(120,255,215,.45)) drop-shadow(0 0 22px rgba(70,245,190,.25))}50%{filter:drop-shadow(0 0 15px rgba(140,255,225,.75)) drop-shadow(0 0 38px rgba(70,250,195,.42))}}
+.mark{position:relative;border-color:rgba(150,255,220,.85);background:linear-gradient(145deg,rgba(120,255,215,.2),rgba(70,235,185,.12));box-shadow:0 0 12px rgba(120,255,215,.55),0 0 30px rgba(70,245,190,.3),inset 0 0 12px rgba(120,255,215,.28)}
+.mark::before{content:'';position:absolute;inset:4px;border:1px solid rgba(205,255,242,.5);box-shadow:inset 0 0 8px rgba(130,255,220,.35)}
+.mark i{position:relative;z-index:1;width:10px;height:10px;background:radial-gradient(circle at 34% 30%,#f2fff9,#7dffd4 46%,#35e0ab);box-shadow:0 0 13px rgba(130,255,220,.95),0 0 28px rgba(70,245,190,.6);animation:orbPulse 3s ease-in-out infinite}
+@keyframes orbPulse{0%,100%{transform:scale(1);box-shadow:0 0 12px rgba(130,255,220,.9),0 0 26px rgba(70,245,190,.5)}50%{transform:scale(1.28);box-shadow:0 0 20px rgba(150,255,230,1),0 0 46px rgba(70,255,200,.85)}}
+.brand:hover .mark{box-shadow:0 0 24px rgba(130,255,220,.9),0 0 56px rgba(70,250,195,.5),inset 0 0 16px rgba(130,255,220,.4)}
+.btn-launch{background:linear-gradient(135deg,#41e8b4,#65e6c1 45%,#8ff5da);color:#04140e;box-shadow:0 16px 40px rgba(70,245,190,.35),0 0 30px rgba(101,230,193,.3)}
+.btn-launch:hover{background:linear-gradient(135deg,#5cf5c6,#7dffd4 45%,#a8ffe6);color:#04140e;box-shadow:0 20px 48px rgba(70,250,195,.5),0 0 44px rgba(101,240,205,.45)}
+.ai-fab{border-color:rgba(120,255,215,.5);background:linear-gradient(135deg,rgba(16,34,30,.88),rgba(12,28,32,.85));box-shadow:0 18px 50px rgba(0,0,0,.35),0 0 24px rgba(101,230,193,.25)}
+.ai-fab:hover{border-color:rgba(140,255,225,.85);background:rgba(20,42,38,.94);box-shadow:0 22px 60px rgba(0,0,0,.42),0 0 40px rgba(101,240,205,.45)}
+.ai-fab>i{color:var(--mint)}
+.ai-core{background:radial-gradient(circle at 35% 30%,#b9ffe9,#3fd9a8);box-shadow:0 0 28px rgba(101,230,193,.45)}
+.ai-core:after{border-color:rgba(101,230,193,.5)}
 
 /* SCAM SHIELD — verdict, chips, how-it-works, stats, extension, recent scans */
 .verdict-chip{display:inline-block;padding:6px 14px;border-radius:999px;font:700 11px var(--mono);letter-spacing:.1em;margin-bottom:10px}
