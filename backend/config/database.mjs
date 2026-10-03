@@ -127,6 +127,36 @@ export async function updateUser(id, updates) {
   return user || null;
 }
 
+export async function deleteUser(id) {
+  if (usingMongo()) {
+    await collections.users.deleteOne({ _id: id });
+    return;
+  }
+  const before = db.users.length;
+  db.users = db.users.filter(user => user._id !== id);
+  if (db.users.length !== before) saveDB();
+}
+
+export async function deleteVerificationTokensForUser(userId) {
+  if (usingMongo()) {
+    await collections.email_verifications.deleteMany({ userId });
+    return;
+  }
+  const before = db.email_verifications.length;
+  db.email_verifications = db.email_verifications.filter(item => item.userId !== userId);
+  if (db.email_verifications.length !== before) saveDB();
+}
+
+export async function deleteResetTokensForUser(userId) {
+  if (usingMongo()) {
+    await collections.password_reset_tokens.deleteMany({ userId });
+    return;
+  }
+  const before = db.password_reset_tokens.length;
+  db.password_reset_tokens = db.password_reset_tokens.filter(item => item.userId !== userId);
+  if (db.password_reset_tokens.length !== before) saveDB();
+}
+
 /* ---------- Email verification tokens ---------- */
 
 export async function findVerificationToken(token) {

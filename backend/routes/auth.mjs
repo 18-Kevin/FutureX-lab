@@ -1,5 +1,5 @@
 import express from 'express';
-import { findUserByEmail, createUser, findUserById, updateUser, findVerificationToken, createVerificationToken, deleteVerificationToken, findResetToken, createResetToken, deleteResetToken } from '../config/database.mjs';
+import { findUserByEmail, createUser, findUserById, updateUser, deleteUser, deleteVerificationTokensForUser, deleteResetTokensForUser, findVerificationToken, createVerificationToken, deleteVerificationToken, findResetToken, createResetToken, deleteResetToken } from '../config/database.mjs';
 import { hashPassword, verifyPassword, generateToken, generateRandomToken } from '../config/auth.mjs';
 import { sendVerificationEmail, sendPasswordResetEmail, emailConfigured } from '../config/email.mjs';
 import { authenticateToken, optionalAuth } from '../middleware/auth.mjs';
@@ -311,6 +311,30 @@ router.post('/reset-password', async (req, res) => {
 // Logout (stateless - client discards token)
 router.post('/logout', (req, res) => {
   res.json({ message: 'Logged out successfully' });
+});
+
+// Delete account (requires password confirmation)
+router.post('/delete-account', authenticateToken, async (req, res) => {
+  try {
+    const { password } = req.body;
+
+    if (!password) {
+      return res.status(400).json({ error: 'Enter your password to confirm deletion.' });
+    }
+
+    if (!(await verifyPassword(password, req.user.passwordHash))) {
+      return res.status(401).json({ error: 'Password is incorrect.' });
+    }
+
+    await deleteUser(req.user._id);
+    await deleteVerificationTokensForUser(req.user._id);
+    await deleteResetTokensForUser(req.user._id);
+
+    res.json({ message: 'Your account has been deleted.' });
+  } catch (error) {
+    console.error('Delete account error:', error);
+    res.status(500).json({ error: 'Server error while deleting the account.' });
+  }
 });
 
 // Change password (for authenticated users)

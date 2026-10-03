@@ -195,6 +195,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 
 .auth-card{overflow:hidden;background:linear-gradient(145deg,rgba(22,26,48,.98),rgba(9,13,24,.98));box-shadow:0 30px 100px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.08)}.auth-card::before{content:'';position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--violet),var(--cyan),var(--mint));}.auth-kicker{display:flex;align-items:center;gap:8px;margin-bottom:18px;font:500 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}.auth-kicker i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}.auth-form label{color:#aeb8ce}.auth-form input{min-height:48px;background:rgba(4,7,15,.54);border-color:rgba(255,255,255,.15);transition:border-color .2s,box-shadow .2s,background .2s}.auth-form input:hover{border-color:rgba(181,168,255,.38)}.auth-submit{min-height:48px;background:linear-gradient(110deg,#8060f4,#5da9ff);box-shadow:0 14px 28px rgba(98,135,255,.22);transition:transform .2s,filter .2s,opacity .2s}.auth-submit:hover{filter:brightness(1.1);transform:translateY(-2px)}.auth-submit:disabled{opacity:.65;cursor:wait;transform:none}.auth-password-wrap{position:relative}.auth-password-wrap input{padding-right:72px}.auth-password-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);padding:6px 7px;color:var(--dim);font:500 10px var(--mono);text-transform:uppercase}.auth-password-toggle:hover{color:#fff}.auth-error{padding:8px 10px;border-radius:8px;background:rgba(255,109,131,.08)}
 .auth-card{animation:authCardIn .35s var(--ease) both}.auth-modal.open .auth-card{transform:translateY(0)}@keyframes authCardIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}.auth-modal[aria-hidden="true"]{visibility:hidden}.auth-modal[aria-hidden="false"]{visibility:visible}.auth-form input::placeholder{color:rgba(255,255,255,.3)}.auth-submit:focus-visible,.auth-switch button:focus-visible,.auth-password-toggle:focus-visible,.auth-close:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.auth-forgot{display:block;margin:-6px 0 0;padding:0;border:0;background:none;color:var(--dim);font:500 11px var(--mono);letter-spacing:.06em;cursor:pointer;text-align:right}.auth-forgot:hover{color:#fff}.auth-forgot:disabled{opacity:.6;cursor:wait}
+.auth-delete{color:#ff8fa3;margin-left:6px}.auth-delete:hover{color:#ff6d83}
+.auth-submit-danger{background:linear-gradient(110deg,#d4355a,#ff6d83);box-shadow:0 14px 28px rgba(255,109,131,.2)}.auth-submit-danger:hover{filter:brightness(1.08)}
+.auth-kicker-danger{color:#ff8fa3}.auth-kicker-danger i{background:#ff6d83;box-shadow:0 0 12px #ff6d83}
 
 /* SCAM SHIELD — verdict, chips, how-it-works, stats, extension, recent scans */
 .verdict-chip{display:inline-block;padding:6px 14px;border-radius:999px;font:700 11px var(--mono);letter-spacing:.1em;margin-bottom:10px}
@@ -267,7 +271,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     </div>
     <div class="auth-controls">
       <button class="auth-button magnetic-target" id="authButton" type="button">Sign in</button>
-      <div class="auth-user" id="authUser" hidden><strong id="authUserName"></strong><button class="auth-logout magnetic-target" id="authLogout" type="button">Log out</button></div>
+      <div class="auth-user" id="authUser" hidden><strong id="authUserName"></strong><button class="auth-logout magnetic-target" id="authLogout" type="button">Log out</button><button class="auth-logout magnetic-target auth-delete" id="authDelete" type="button">Delete</button></div>
     </div>
     <button class="menu-toggle magnetic-target" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation">
       <span></span><span></span>
@@ -295,6 +299,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
         <label id="nameField">Name<input id="authName" type="text" autocomplete="name" required minlength="2" maxlength="80" /></label>
         <label>Email<input id="authEmail" type="email" autocomplete="email" required /></label>
         <label>Password<div class="auth-password-wrap"><input id="authPassword" type="password" autocomplete="current-password" required minlength="8" /><button class="auth-password-toggle" id="authPasswordToggle" type="button" aria-label="Show password">Show</button></div></label>
+        <button class="auth-forgot" id="forgotPassword" type="button">Forgot password?</button>
         <p class="auth-error" id="authError" role="alert"></p>
         <button class="auth-submit" id="authSubmit" type="submit">Sign in</button>
       </form>
@@ -312,6 +317,20 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
         <label>New password<div class="auth-password-wrap"><input id="resetPassword" type="password" autocomplete="new-password" required minlength="8" /><button class="auth-password-toggle" id="resetPasswordToggle" type="button" aria-label="Show password">Show</button></div></label>
         <p class="auth-error" id="resetError" role="alert"></p>
         <button class="auth-submit" id="resetSubmit" type="submit">Save password</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="auth-modal" id="deleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteTitle">
+    <div class="auth-card">
+      <button class="auth-close magnetic-target" id="deleteClose" type="button" aria-label="Close delete dialog">×</button>
+      <div class="auth-kicker auth-kicker-danger"><i></i> Danger zone</div>
+      <h2 id="deleteTitle">Delete your account</h2>
+      <p id="deleteDescription">This permanently removes your account and all its data — it cannot be undone. Confirm with your password.</p>
+      <form class="auth-form" id="deleteForm">
+        <label>Password<input id="deletePassword" type="password" autocomplete="current-password" required minlength="8" /></label>
+        <p class="auth-error" id="deleteError" role="alert"></p>
+        <button class="auth-submit auth-submit-danger" id="deleteSubmit" type="submit">Delete my account permanently</button>
       </form>
     </div>
   </div>
@@ -855,6 +874,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   const authSwitch = $('#authSwitch');
   const authSwitchText = $('#authSwitchText');
   const nameField = $('#nameField');
+  const forgotPasswordButton = $('#forgotPassword');
   let authMode = 'login';
 
   const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
@@ -891,6 +911,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     authSwitch.textContent = isLogin ? 'Create an account' : 'Sign in';
     nameField.hidden = isLogin;
     authName.required = !isLogin;
+    forgotPasswordButton.hidden = !isLogin;
     authPassword.autocomplete = isLogin ? 'current-password' : 'new-password';
     authError.textContent = '';
   }
@@ -1024,6 +1045,79 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       resetError.textContent = error.message;
     } finally {
       resetSubmit.disabled = false;
+    }
+  });
+
+  forgotPasswordButton?.addEventListener('click', async () => {
+    const email = authEmail.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      authError.textContent = 'Enter your email above first, then tap Forgot password.';
+      authEmail.focus();
+      return;
+    }
+    forgotPasswordButton.disabled = true;
+    try {
+      const response = await fetch(`${API_BASE}/api/auth/forgot-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || 'Could not send the reset email.');
+      closeAuth();
+      showAppNotice('If an account exists for that email, a reset link is on its way — check your inbox.', 'success');
+    } catch (error) {
+      authError.textContent = error.message;
+    } finally {
+      forgotPasswordButton.disabled = false;
+    }
+  });
+
+  const deleteModal = $('#deleteModal');
+  const deleteForm = $('#deleteForm');
+  const deletePassword = $('#deletePassword');
+  const deleteError = $('#deleteError');
+  const deleteSubmit = $('#deleteSubmit');
+
+  function openDelete() {
+    deleteError.textContent = '';
+    deleteForm.reset();
+    deleteModal.classList.add('open');
+    deleteModal.setAttribute('aria-hidden', 'false');
+    deletePassword.focus();
+  }
+
+  function closeDelete() {
+    deleteModal.classList.remove('open');
+    deleteModal.setAttribute('aria-hidden', 'true');
+  }
+
+  $('#authDelete')?.addEventListener('click', openDelete);
+  $('#deleteClose')?.addEventListener('click', closeDelete);
+  deleteModal?.addEventListener('click', (event) => {
+    if (event.target === deleteModal) closeDelete();
+  });
+
+  deleteForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    deleteSubmit.disabled = true;
+    deleteError.textContent = '';
+    try {
+      const response = await fetch(`${API_BASE}/api/auth/delete-account`, {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ password: deletePassword.value })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || 'Could not delete the account.');
+      closeDelete();
+      setToken(null);
+      updateAuth(null);
+      showAppNotice('Your account has been permanently deleted.', 'success');
+    } catch (error) {
+      deleteError.textContent = error.message;
+    } finally {
+      deleteSubmit.disabled = false;
     }
   });
 
