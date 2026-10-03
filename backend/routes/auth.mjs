@@ -1,7 +1,7 @@
 import express from 'express';
 import { findUserByEmail, createUser, findUserById, updateUser, findVerificationToken, createVerificationToken, deleteVerificationToken, findResetToken, createResetToken, deleteResetToken } from '../config/database.mjs';
 import { hashPassword, verifyPassword, generateToken, generateRandomToken } from '../config/auth.mjs';
-import { sendVerificationEmail, sendPasswordResetEmail } from '../config/email.mjs';
+import { sendVerificationEmail, sendPasswordResetEmail, emailConfigured } from '../config/email.mjs';
 import { authenticateToken, optionalAuth } from '../middleware/auth.mjs';
 import { authLimiter, passwordResetLimiter, verificationLimiter } from '../middleware/rateLimiter.mjs';
 import { validateEmail, validatePassword, validateName, sanitizeEmail, sanitizeName } from '../middleware/validation.mjs';
@@ -76,8 +76,13 @@ router.post('/register', authLimiter, async (req, res) => {
       expiresAt
     });
     
-    // Send verification email
-    const emailSent = await sendVerificationEmail(sanitizedEmail, verificationToken, sanitizedName);
+    // Send verification email (background — never blocks the response)
+    const emailSent = emailConfigured();
+    if (emailSent) {
+      sendVerificationEmail(sanitizedEmail, verificationToken, sanitizedName).catch((err) =>
+        console.error('✗ Background verification email failed:', err.message)
+      );
+    }
     
     // Generate JWT
     const token = generateToken(user._id.toString());
@@ -204,7 +209,12 @@ router.post('/resend-verification', verificationLimiter, optionalAuth, async (re
       expiresAt
     });
 
-    const sent = await sendVerificationEmail(user.email, verificationToken, user.name);
+    const sent = emailConfigured();
+    if (sent) {
+      sendVerificationEmail(user.email, verificationToken, user.name).catch((err) =>
+        console.error('✗ Background verification email failed:', err.message)
+      );
+    }
 
     res.json({
       message: sent
@@ -245,8 +255,10 @@ router.post('/forgot-password', passwordResetLimiter, async (req, res) => {
       expiresAt
     });
     
-    // Send reset email
-    await sendPasswordResetEmail(sanitizedEmail, resetToken, user.name);
+    // Send reset email (background — never blocks the response)
+    sendPasswordResetEmail(sanitizedEmail, resetToken, user.name).catch((err) =>
+      console.error('✗ Background reset email failed:', err.message)
+    );
     
     res.json({ message: 'If an account exists, a password reset email has been sent.' });
   } catch (error) {
