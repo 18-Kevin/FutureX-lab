@@ -176,15 +176,16 @@ async function brevoCheck() {
   if (!apiKey || apiKey.includes('PASTE_') || apiKey.includes('your_brevo')) {
     return { present: false };
   }
+  const shape = { present: true, len: apiKey.length, hasPrefix: apiKey.startsWith('xkeysib-') };
   try {
     const res = await fetch('https://api.brevo.com/v3/account', {
       headers: { 'api-key': apiKey },
       signal: AbortSignal.timeout(10000)
     });
     const body = await res.text();
-    return { present: true, ok: res.ok, status: res.status, body: body.slice(0, 400) };
+    return { ...shape, ok: res.ok, status: res.status, body: body.slice(0, 400) };
   } catch (err) {
-    return { present: true, ok: false, error: err.code || err.message };
+    return { ...shape, ok: false, error: err.code || err.message };
   }
 }
 
