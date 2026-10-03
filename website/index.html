@@ -195,6 +195,47 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 
 .auth-card{overflow:hidden;background:linear-gradient(145deg,rgba(22,26,48,.98),rgba(9,13,24,.98));box-shadow:0 30px 100px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.08)}.auth-card::before{content:'';position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--violet),var(--cyan),var(--mint));}.auth-kicker{display:flex;align-items:center;gap:8px;margin-bottom:18px;font:500 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}.auth-kicker i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint)}.auth-form label{color:#aeb8ce}.auth-form input{min-height:48px;background:rgba(4,7,15,.54);border-color:rgba(255,255,255,.15);transition:border-color .2s,box-shadow .2s,background .2s}.auth-form input:hover{border-color:rgba(181,168,255,.38)}.auth-submit{min-height:48px;background:linear-gradient(110deg,#8060f4,#5da9ff);box-shadow:0 14px 28px rgba(98,135,255,.22);transition:transform .2s,filter .2s,opacity .2s}.auth-submit:hover{filter:brightness(1.1);transform:translateY(-2px)}.auth-submit:disabled{opacity:.65;cursor:wait;transform:none}.auth-password-wrap{position:relative}.auth-password-wrap input{padding-right:72px}.auth-password-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);padding:6px 7px;color:var(--dim);font:500 10px var(--mono);text-transform:uppercase}.auth-password-toggle:hover{color:#fff}.auth-error{padding:8px 10px;border-radius:8px;background:rgba(255,109,131,.08)}
 .auth-card{animation:authCardIn .35s var(--ease) both}.auth-modal.open .auth-card{transform:translateY(0)}@keyframes authCardIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}.auth-modal[aria-hidden="true"]{visibility:hidden}.auth-modal[aria-hidden="false"]{visibility:visible}.auth-form input::placeholder{color:rgba(255,255,255,.3)}.auth-submit:focus-visible,.auth-switch button:focus-visible,.auth-password-toggle:focus-visible,.auth-close:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+
+/* SCAM SHIELD — verdict, chips, how-it-works, stats, extension, recent scans */
+.verdict-chip{display:inline-block;padding:6px 14px;border-radius:999px;font:700 11px var(--mono);letter-spacing:.1em;margin-bottom:10px}
+.verdict-chip[hidden]{display:none}
+.verdict-chip[data-level="safe"]{background:rgba(101,230,193,.13);color:#65e6c1;box-shadow:0 0 22px rgba(101,230,193,.16)}
+.verdict-chip[data-level="warn"]{background:rgba(255,179,107,.13);color:#ffb36b;box-shadow:0 0 22px rgba(255,179,107,.16)}
+.verdict-chip[data-level="danger"]{background:rgba(255,109,131,.14);color:#ff6d83;box-shadow:0 0 22px rgba(255,109,131,.18)}
+.premium-input.input-error{border-color:#ff6d83!important;box-shadow:0 0 0 3px rgba(255,109,131,.18)!important}
+.scam-chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+.scam-chips span{font:500 10px var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--dim);margin-right:4px}
+.scam-chip{font:500 11px var(--mono);padding:8px 14px;border-radius:999px;border:1px solid rgba(181,168,255,.28);color:var(--violet-2);background:rgba(137,103,255,.07);transition:background .25s,border-color .25s,transform .25s}
+.scam-chip:hover{background:rgba(137,103,255,.16);border-color:rgba(181,168,255,.55);transform:translateY(-1px)}
+.recent-scans{border-top:1px solid var(--line);padding:24px 38px 8px}
+.recent-head{display:flex;justify-content:space-between;align-items:center}
+.recent-item{display:flex;align-items:center;gap:11px;padding:11px 14px;border:1px solid var(--line);border-radius:13px;margin-top:9px;background:rgba(255,255,255,.022);font-size:13px}
+.recent-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.recent-dot.safe{background:#65e6c1;box-shadow:0 0 9px rgba(101,230,193,.6)}
+.recent-dot.warn{background:#ffb36b;box-shadow:0 0 9px rgba(255,179,107,.6)}
+.recent-dot.danger{background:#ff6d83;box-shadow:0 0 9px rgba(255,109,131,.6)}
+.recent-r-label{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)}
+.recent-r-meta{font:500 11px var(--mono);color:var(--dim)}
+.recent-r-score{font:700 13px var(--mono);color:#fff}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
+.how-card{padding:26px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(137,103,255,.06),rgba(255,255,255,.015));transition:transform .4s var(--ease),border-color .4s}
+.how-card:hover{transform:translateY(-5px);border-color:rgba(181,168,255,.32)}
+.how-num{display:inline-block;font:500 10px var(--mono);letter-spacing:.14em;color:var(--violet-2);border:1px solid rgba(181,168,255,.3);border-radius:999px;padding:4px 11px;background:rgba(137,103,255,.08)}
+.how-card h4{margin:16px 0 8px;font-size:19px;letter-spacing:-.03em}
+.how-card p{font-size:13.5px;line-height:1.62;color:var(--muted)}
+.stats-strip{margin-top:16px;padding:22px 28px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(100deg,rgba(137,103,255,.11),rgba(98,216,255,.06) 55%,rgba(101,230,193,.05));text-align:center}
+.stats-strip p{font-size:clamp(14px,1.6vw,17px);color:var(--muted)}
+.stats-strip strong{color:#fff;font-weight:700}
+.extension-section{background:radial-gradient(700px 420px at 84% 8%,rgba(98,216,255,.09),transparent 60%),radial-gradient(520px 380px at 8% 88%,rgba(137,103,255,.11),transparent 62%),#080b14}
+.ext-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:54px}
+.ext-card{padding:26px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(98,216,255,.05),rgba(255,255,255,.015));transition:transform .4s var(--ease),border-color .4s}
+.ext-card:hover{transform:translateY(-6px);border-color:rgba(98,216,255,.35)}
+.ext-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:rgba(98,216,255,.1);border:1px solid rgba(98,216,255,.25);color:var(--cyan);font-size:18px;margin-bottom:16px}
+.ext-card h4{font-size:18px;letter-spacing:-.03em;margin-bottom:8px}
+.ext-card p{font-size:13.5px;line-height:1.6;color:var(--muted)}
+.ext-cta-row{display:flex;align-items:center;gap:28px;margin-top:38px;flex-wrap:wrap}
+.ext-note{font:500 11px var(--mono);color:var(--dim);letter-spacing:.06em;line-height:1.7}
+@media(max-width:800px){.how-grid,.ext-grid{grid-template-columns:1fr}.recent-scans{padding:22px 20px 6px}}
   </style>
   </head>
   <body>
@@ -218,6 +259,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     </a>
 
     <div class="nav-pill">
+      <a href="#trust" class="nav-link magnetic-target">Trust<span></span></a>
       <a href="#ai-detect" class="nav-link magnetic-target">AI<span></span></a>
       <a href="#signals" class="nav-link magnetic-target">Signals<span></span></a>
       <a href="#news" class="nav-link magnetic-target">News<span></span></a>
@@ -235,10 +277,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-inner">
       <p class="micro-label">Navigation / 00</p>
-      <a href="#ai-detect" class="mobile-link">AI <span>01</span></a>
-      <a href="#signals" class="mobile-link">Signals <span>02</span></a>
-      <a href="#news" class="mobile-link">News <span>03</span></a>
-      <a href="#about" class="mobile-link">About <span>04</span></a>
+      <a href="#trust" class="mobile-link">Trust <span>01</span></a>
+      <a href="#ai-detect" class="mobile-link">AI <span>02</span></a>
+      <a href="#signals" class="mobile-link">Signals <span>03</span></a>
+      <a href="#news" class="mobile-link">News <span>04</span></a>
+      <a href="#about" class="mobile-link">About <span>05</span></a>
     </div>
   </div>
 
@@ -256,6 +299,20 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
         <button class="auth-submit" id="authSubmit" type="submit">Sign in</button>
       </form>
       <p class="auth-switch"><span id="authSwitchText">New to FutureX?</span> <button id="authSwitch" type="button">Create an account</button></p>
+    </div>
+  </div>
+
+  <div class="auth-modal" id="resetModal" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
+    <div class="auth-card">
+      <button class="auth-close magnetic-target" id="resetClose" type="button" aria-label="Close reset dialog">×</button>
+      <div class="auth-kicker"><i></i> FutureX account recovery</div>
+      <h2 id="resetTitle">Set a new password</h2>
+      <p id="resetDescription">Choose a new password for your FutureX account.</p>
+      <form class="auth-form" id="resetForm">
+        <label>New password<div class="auth-password-wrap"><input id="resetPassword" type="password" autocomplete="new-password" required minlength="8" /><button class="auth-password-toggle" id="resetPasswordToggle" type="button" aria-label="Show password">Show</button></div></label>
+        <p class="auth-error" id="resetError" role="alert"></p>
+        <button class="auth-submit" id="resetSubmit" type="submit">Save password</button>
+      </form>
     </div>
   </div>
 
@@ -302,7 +359,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 
     <div class="split-heading reveal-on-scroll">
       <h2 class="section-title">Analyze the fine print<br><em>without the fog.</em></h2>
-      <p>One interface for privacy policies, terms, app practices, and the signals hidden inside them.</p>
+      <p>One interface for privacy policies, terms, app practices, and the signals hidden inside them — plus scam checks for messages and contracts.</p>
     </div>
 
     <div class="trust-shell reveal-on-scroll">
@@ -311,6 +368,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
         <button class="tool-tab active magnetic-target" data-target="privacy-panel">Privacy Policy <span>01</span></button>
         <button class="tool-tab magnetic-target" data-target="terms-panel">Terms & Conditions <span>02</span></button>
         <button class="tool-tab magnetic-target" data-target="platform-panel">App / Platform <span>03</span></button>
+        <button class="tool-tab magnetic-target" data-target="scam-message-panel">Scam Message <span>04</span></button>
+        <button class="tool-tab magnetic-target" data-target="scam-contract-panel">Scam Contract <span>05</span></button>
         <div class="trust-side-note"><b>Prototype engine</b><span>Frontend simulation • API-ready</span></div>
       </div>
 
@@ -374,6 +433,55 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
           </div>
         </div>
 
+        <div class="tool-panel" id="scam-message-panel">
+          <div class="tool-heading">
+            <div>
+              <p class="micro-label">Message scam checker</p>
+              <h3>Catch the scam before it catches you.</h3>
+            </div>
+            <span class="tool-number">S-04</span>
+          </div>
+
+          <div class="input-row stacked">
+            <div class="input-wrap">
+              <label for="scamMessageInput">Suspicious message, email or link</label>
+              <textarea id="scamMessageInput" class="premium-input" placeholder="Paste a suspicious message, email, or link…"></textarea>
+            </div>
+            <button class="btn-primary analyze-btn magnetic-target" data-type="scam">Check for scams <span>↗</span></button>
+          </div>
+
+          <div class="scam-chips">
+            <span>Try an example</span>
+            <button class="scam-chip magnetic-target" data-scam-fill="phishing">Phishing email</button>
+            <button class="scam-chip magnetic-target" data-scam-fill="prize">Prize scam</button>
+            <button class="scam-chip magnetic-target" data-scam-fill="suspicious">Suspicious text</button>
+          </div>
+        </div>
+
+        <div class="tool-panel" id="scam-contract-panel">
+          <div class="tool-heading">
+            <div>
+              <p class="micro-label">Contract & document review</p>
+              <h3>See what you're agreeing to — in plain English.</h3>
+            </div>
+            <span class="tool-number">S-05</span>
+          </div>
+
+          <div class="input-row stacked">
+            <div class="input-wrap">
+              <label for="scamContractInput">Contract, lease or terms of service</label>
+              <textarea id="scamContractInput" class="premium-input" placeholder="Paste a contract, lease, or terms of service…"></textarea>
+            </div>
+            <button class="btn-primary analyze-btn magnetic-target" data-type="contract">Check document <span>↗</span></button>
+          </div>
+
+          <div class="scam-chips">
+            <span>Try an example</span>
+            <button class="scam-chip magnetic-target" data-scam-fill="lease">Unfair lease</button>
+            <button class="scam-chip magnetic-target" data-scam-fill="terms">Tricky terms of service</button>
+          </div>
+        </div>
+
         <div class="analysis-loader" id="trustLoading">
           <div class="loader-orbit"><span></span></div>
           <div><b>Cross-referencing signals</b><small>Parsing language, risk patterns and user-control clauses…</small></div>
@@ -389,6 +497,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
               <strong id="resultScore">0</strong>
             </div>
             <div>
+              <span class="verdict-chip" id="resultVerdict" hidden>SUSPICIOUS</span>
               <p class="micro-label">Trust score</p>
               <h4 id="resultTitle">Analysis complete</h4>
               <p id="resultDesc">Review the signals detected by the prototype engine.</p>
@@ -396,7 +505,37 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
           </div>
           <div class="signals-grid" id="resultSignals"></div>
         </div>
+
+        <div class="recent-scans" id="recentScans" hidden>
+          <div class="recent-head">
+            <p class="micro-label">Recent scans</p>
+            <button class="hint magnetic-target" id="recentClear" type="button">Clear</button>
+          </div>
+          <div id="recentScansList"></div>
+        </div>
       </div>
+    </div>
+
+    <div class="how-grid reveal-on-scroll">
+      <article class="how-card">
+        <span class="how-num">01</span>
+        <h4>Paste or upload</h4>
+        <p>Drop in a suspicious message, URL, or email. Or paste a contract, lease, or terms of service.</p>
+      </article>
+      <article class="how-card">
+        <span class="how-num">02</span>
+        <h4>AI analysis</h4>
+        <p>The engine checks for scam patterns and red flags, or breaks down legal language into plain English.</p>
+      </article>
+      <article class="how-card">
+        <span class="how-num">03</span>
+        <h4>Get clear answers</h4>
+        <p>See a risk score, red flags, and clear next steps for scams and contracts.</p>
+      </article>
+    </div>
+
+    <div class="stats-strip reveal-on-scroll">
+      <p>AI scam losses up <strong>1,210%</strong> since 2024. <strong>$40B</strong> projected by 2027.</p>
     </div>
   </section>
 
@@ -604,6 +743,41 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     </div>
   </section>
 
+  <section class="section extension-section" id="extension">
+    <div class="section-topline reveal-on-scroll">
+      <p class="kicker">Browser extension</p>
+      <span class="section-index">NEW / 1.2</span>
+    </div>
+
+    <div class="split-heading reveal-on-scroll">
+      <h2 class="section-title">Scam checks on<br><em>the pages you read.</em></h2>
+      <p>The TrustFall Chrome extension underlines what looks off, tells you why in plain words, and stays quiet when a page is fine.</p>
+    </div>
+
+    <div class="ext-grid reveal-on-scroll">
+      <article class="ext-card">
+        <span class="ext-icon">⌁</span>
+        <h4>It underlines what's off</h4>
+        <p>Hover the underline for the reasons, like a deposit asked for before you can see the place.</p>
+      </article>
+      <article class="ext-card">
+        <span class="ext-icon">↗</span>
+        <h4>Right-click for the full story</h4>
+        <p>Select a message you're unsure about and get a verdict with the red flags spelled out.</p>
+      </article>
+      <article class="ext-card">
+        <span class="ext-icon">●</span>
+        <h4>Quiet means checked</h4>
+        <p>Most pages are fine. A small green dot shows TrustFall looked and found nothing.</p>
+      </article>
+    </div>
+
+    <div class="ext-cta-row reveal-on-scroll">
+      <a class="btn-launch magnetic-target" href="https://chromewebstore.google.com/detail/trustfall-scam-contract-c/cinohipkmiahogplhckkhkegpohaephe" target="_blank" rel="noopener">Add to Chrome, it's free <span>↗</span></a>
+      <p class="ext-note">Checks run on your computer · No account, no ads · Normal pages send nothing.</p>
+    </div>
+  </section>
+
   <footer class="footer">
     <div>
       <a class="brand footer-brand" href="#top"><span class="mark"><i></i></span><span>Future<em>X</em></span></a>
@@ -683,6 +857,28 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   const nameField = $('#nameField');
   let authMode = 'login';
 
+  const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    ? ''
+    : 'https://futurex-lab-api.onrender.com';
+
+  const TOKEN_KEY = 'futurex_token';
+
+  function getToken() {
+    try { return localStorage.getItem(TOKEN_KEY); } catch { return null; }
+  }
+
+  function setToken(token) {
+    try {
+      if (token) localStorage.setItem(TOKEN_KEY, token);
+      else localStorage.removeItem(TOKEN_KEY);
+    } catch { /* storage unavailable */ }
+  }
+
+  function authHeaders(extra = {}) {
+    const token = getToken();
+    return token ? { ...extra, Authorization: `Bearer ${token}` } : { ...extra };
+  }
+
   function setAuthMode(mode) {
     authMode = mode;
     const isLogin = mode === 'login';
@@ -716,6 +912,121 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     authPasswordToggle.setAttribute('aria-label', 'Show password');
   }
 
+  function showAppNotice(message, level = 'info', action) {
+    document.querySelectorAll('.app-notice').forEach(node => node.remove());
+    const notice = document.createElement('div');
+    notice.className = 'app-notice';
+    const text = document.createElement('span');
+    text.textContent = message;
+    notice.appendChild(text);
+    const background = level === 'error'
+      ? 'rgba(120,26,45,.96)'
+      : level === 'success'
+        ? 'rgba(14,84,68,.96)'
+        : 'rgba(22,34,62,.96)';
+    notice.style.cssText = `position:fixed;left:50%;top:84px;transform:translateX(-50%);z-index:3000;max-width:min(92vw,640px);display:flex;align-items:center;gap:4px;padding:13px 20px;border-radius:14px;font-size:14.5px;line-height:1.5;color:#eef4ff;background:${background};box-shadow:0 18px 50px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.16);text-align:center;opacity:0;transition:opacity .3s;pointer-events:none;`;
+    if (action) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = action.label;
+      button.style.cssText = 'margin-left:12px;padding:5px 14px;border-radius:9px;border:1px solid rgba(255,255,255,.32);background:rgba(255,255,255,.14);color:#fff;font-size:13px;font-weight:600;cursor:pointer;pointer-events:auto;white-space:nowrap;';
+      button.addEventListener('click', () => {
+        notice.remove();
+        action.onClick();
+      });
+      notice.appendChild(button);
+    }
+    document.body.appendChild(notice);
+    requestAnimationFrame(() => { notice.style.opacity = '1'; });
+    setTimeout(() => {
+      notice.style.opacity = '0';
+      setTimeout(() => notice.remove(), 400);
+    }, action ? 9000 : 6000);
+  }
+
+  async function resendVerification(email) {
+    try {
+      const response = await fetch(`${API_BASE}/api/auth/resend-verification`, {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ email })
+      });
+      const data = await response.json().catch(() => ({}));
+      showAppNotice(
+        response.ok ? (data.message || 'Verification email sent.') : (data.error || 'Could not send the email.'),
+        response.ok ? 'success' : 'error'
+      );
+    } catch {
+      showAppNotice('Could not reach the server. Please try again.', 'error');
+    }
+  }
+
+  const resetModal = $('#resetModal');
+  const resetForm = $('#resetForm');
+  const resetPassword = $('#resetPassword');
+  const resetError = $('#resetError');
+  const resetSubmit = $('#resetSubmit');
+  const resetPasswordToggle = $('#resetPasswordToggle');
+  let resetTokenValue = '';
+
+  function openReset(token) {
+    resetTokenValue = token;
+    resetError.textContent = '';
+    resetForm.reset();
+    resetPassword.type = 'password';
+    resetPasswordToggle.textContent = 'Show';
+    resetModal.classList.add('open');
+    resetModal.setAttribute('aria-hidden', 'false');
+    resetPassword.focus();
+  }
+
+  function closeReset() {
+    resetModal.classList.remove('open');
+    resetModal.setAttribute('aria-hidden', 'true');
+    resetTokenValue = '';
+  }
+
+  $('#resetClose')?.addEventListener('click', closeReset);
+  resetModal?.addEventListener('click', (event) => {
+    if (event.target === resetModal) closeReset();
+  });
+  resetPasswordToggle?.addEventListener('click', () => {
+    const showing = resetPassword.type === 'text';
+    resetPassword.type = showing ? 'password' : 'text';
+    resetPasswordToggle.textContent = showing ? 'Show' : 'Hide';
+    resetPasswordToggle.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+  });
+
+  resetForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!resetTokenValue) {
+      closeReset();
+      return;
+    }
+    resetSubmit.disabled = true;
+    resetError.textContent = '';
+    try {
+      const response = await fetch(`${API_BASE}/api/auth/reset-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          token: resetTokenValue,
+          password: resetPassword.value,
+          confirmPassword: resetPassword.value
+        })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || 'Could not reset the password.');
+      closeReset();
+      showAppNotice('Password updated — sign in with your new password.', 'success');
+      openAuth('login');
+    } catch (error) {
+      resetError.textContent = error.message;
+    } finally {
+      resetSubmit.disabled = false;
+    }
+  });
+
   function updateAuth(user) {
     const signedIn = Boolean(user);
     authButton.hidden = signedIn;
@@ -747,7 +1058,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
         email: authEmail.value,
         password: authPassword.value
       };
-      const response = await fetch(`/api/auth/${authMode}`, {
+      const response = await fetch(`${API_BASE}/api/auth/${authMode}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -755,8 +1066,21 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Authentication failed.');
       if (!data.user) throw new Error('The server did not return an account. Please try again.');
+      setToken(data.token || null);
       updateAuth(data.user);
       closeAuth();
+      if (authMode === 'register') {
+        if (data.emailSent === false) {
+          showAppNotice('Account created, but the verification email could not be sent. You can use the site now and resend the link later.', 'error');
+        } else {
+          showAppNotice('Account created — check your inbox for the verification link.', 'success');
+        }
+      } else if (data.user.isVerified === false) {
+        showAppNotice('Your email is not verified yet. Check your inbox for the link, or resend it.', 'info', {
+          label: 'Resend',
+          onClick: () => resendVerification(data.user.email)
+        });
+      }
     } catch (error) {
       authError.textContent = error instanceof TypeError
         ? 'Unable to reach FutureX. Make sure the server is running and try again.'
@@ -767,16 +1091,60 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   });
 
   authLogout?.addEventListener('click', async () => {
-    const response = await fetch('/api/auth/logout', { method: 'POST' });
-    if (!response.ok) return;
+    try {
+      await fetch(`${API_BASE}/api/auth/logout`, { method: 'POST', headers: authHeaders() });
+    } catch { /* offline — sign out locally anyway */ }
+    setToken(null);
     updateAuth(null);
   });
 
-  fetch('/api/auth/me')
-    .then(response => response.json())
-    .then(data => updateAuth(data.user))
-    .catch(() => updateAuth(null));
+  fetch(`${API_BASE}/api/auth/me`, { headers: authHeaders() })
+    .then(async (response) => {
+      if (!response.ok) throw new Error('unauthenticated');
+      return response.json();
+    })
+    .then(data => updateAuth(data.user || null))
+    .catch((error) => {
+      if (error?.message === 'unauthenticated') setToken(null);
+      updateAuth(null);
+    });
   setAuthMode('login');
+
+  (async () => {
+    const params = new URLSearchParams(location.search);
+    const verifyToken = params.get('verify');
+    const resetToken = params.get('reset');
+
+    if (verifyToken) {
+      history.replaceState({}, '', location.pathname);
+      try {
+        const response = await fetch(`${API_BASE}/api/auth/verify-email`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: verifyToken })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (response.ok) {
+          showAppNotice('Email verified — you are all set!', 'success');
+          if (getToken()) {
+            fetch(`${API_BASE}/api/auth/me`, { headers: authHeaders() })
+              .then(r => (r.ok ? r.json() : null))
+              .then(d => { if (d?.user) updateAuth(d.user); })
+              .catch(() => {});
+          }
+        } else {
+          showAppNotice(data.error || 'That verification link is invalid or has expired.', 'error');
+        }
+      } catch {
+        showAppNotice('Could not reach the server to verify your email. Please try again.', 'error');
+      }
+    }
+
+    if (resetToken) {
+      history.replaceState({}, '', location.pathname);
+      openReset(resetToken);
+    }
+  })();
 
   function updatePage() {
     const height = document.documentElement.scrollHeight - innerHeight;
@@ -954,8 +1322,19 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     });
   });
 
-  function displayTrustResult(type) {
-    const data = trustData[type] || trustData.privacy;
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (char) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[char]));
+  }
+
+  function verdictLevel(value) {
+    if (/SAFE|LOW RISK|FAIR/.test(value)) return 'safe';
+    if (/SUSPICIOUS|CAUTION/.test(value)) return 'warn';
+    return 'danger';
+  }
+
+  function showTrustResult(data) {
     const loader = $('#trustLoading');
     const results = $('#trustResults');
     const scoreCircle = $('#resultCircle');
@@ -968,18 +1347,29 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       loader?.classList.remove('active');
       results?.classList.add('active');
 
+      const chip = $('#resultVerdict');
+      if (chip) {
+        chip.hidden = !data.verdict;
+        if (data.verdict) {
+          chip.textContent = data.verdict;
+          chip.dataset.level = verdictLevel(data.verdict);
+        }
+      }
+
       $('#resultTitle').textContent = data.title;
       $('#resultDesc').textContent = data.description;
 
       $('#resultSignals').innerHTML = data.signals.map(([kind, title, description]) => `
         <div class="signal-card ${kind}">
           <div class="signal-icon">${kind === 'good' ? '✓' : kind === 'warn' ? '!' : '×'}</div>
-          <div><h5>${title}</h5><p>${description}</p></div>
+          <div><h5>${escapeHtml(title)}</h5><p>${escapeHtml(description)}</p></div>
         </div>
       `).join('');
 
       const circumference = 314;
-      scoreCircle.style.stroke = data.score >= 75 ? '#65e6c1' : data.score >= 55 ? '#ffb36b' : '#ff6d83';
+      scoreCircle.style.stroke = data.riskMode
+        ? (data.score >= 70 ? '#ff6d83' : data.score >= 40 ? '#ffb36b' : '#65e6c1')
+        : (data.score >= 75 ? '#65e6c1' : data.score >= 55 ? '#ffb36b' : '#ff6d83');
       scoreCircle.setAttribute('stroke-dasharray', `${(data.score / 100) * circumference} ${circumference}`);
 
       let value = 0;
@@ -994,13 +1384,353 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     }, 800);
   }
 
+  function displayTrustResult(type) {
+    showTrustResult(trustData[type] || trustData.privacy);
+  }
+
+  async function runScamAnalysis(type, button) {
+    const input = type === 'scam' ? $('#scamMessageInput') : $('#scamContractInput');
+    const text = (input?.value || '').trim();
+
+    if (!text) {
+      input?.classList.add('input-error');
+      input?.focus();
+      setTimeout(() => input?.classList.remove('input-error'), 1400);
+      return;
+    }
+
+    const loader = $('#trustLoading');
+    const results = $('#trustResults');
+    loader?.classList.add('active');
+    results?.classList.remove('active');
+    button.disabled = true;
+    const savedHTML = button.innerHTML;
+    button.innerHTML = 'Analyzing <span>…</span>';
+
+    let data = null;
+    try {
+      const response = await fetch(`${API_BASE}/api/analyze`, {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ type, content: text })
+      });
+      if (response.ok) {
+        const payload = await response.json();
+        if (typeof payload.score === 'number' && Array.isArray(payload.signals)) data = payload;
+      }
+    } catch {
+      /* Server unavailable — fall back to the local pattern engine below. */
+    }
+
+    button.disabled = false;
+    button.innerHTML = savedHTML;
+
+    if (!data) data = type === 'scam' ? localScamAnalysis(text) : localContractAnalysis(text);
+    data.riskMode = true;
+
+    showTrustResult(data);
+    saveRecentScan(type, data);
+  }
+
+  async function runPolicyAnalysis(type, button) {
+    const input = $('#policyInput');
+    const text = (input?.value || '').trim();
+
+    if (!text) {
+      input?.classList.add('input-error');
+      input?.focus();
+      setTimeout(() => input?.classList.remove('input-error'), 1400);
+      return;
+    }
+
+    const loader = $('#trustLoading');
+    const results = $('#trustResults');
+    loader?.classList.add('active');
+    results?.classList.remove('active');
+    button.disabled = true;
+    const savedHTML = button.innerHTML;
+    button.innerHTML = 'Analyzing <span>…</span>';
+
+    let data = null;
+    try {
+      const response = await fetch(`${API_BASE}/api/analyze`, {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ type, content: text })
+      });
+      if (response.ok) {
+        const payload = await response.json();
+        if (typeof payload.score === 'number' && Array.isArray(payload.signals)) data = payload;
+      }
+    } catch {
+      /* Server unavailable — show the built-in demo data below. */
+    }
+
+    button.disabled = false;
+    button.innerHTML = savedHTML;
+
+    if (!data) {
+      displayTrustResult(type);
+      return;
+    }
+
+    data.riskMode = false;
+    showTrustResult(data);
+    saveRecentScan(type, data);
+  }
+
   $$('.analyze-btn').forEach((button) => {
-    button.addEventListener('click', () => displayTrustResult(button.dataset.type));
+    button.addEventListener('click', () => {
+      const type = button.dataset.type;
+      if (type === 'scam' || type === 'contract') runScamAnalysis(type, button);
+      else runPolicyAnalysis(type, button);
+    });
   });
 
   $('.hint[data-fill="privacy"]')?.addEventListener('click', () => {
     $('#policyInput').value = 'https://example.com/privacy-policy';
   });
+
+  /* Scam-shield examples */
+  const scamExamples = {
+    phishing: "You've won a $500 Amazon gift card! Click here to claim your prize now: amzn-verify.com — verify your identity within 24 hours or your account will be suspended.",
+    prize: "Congratulations! Your email won $2,500,000 in the Microsoft international lottery. Send your bank details and a $100 processing fee immediately to claim your prize.",
+    suspicious: "Hi, I lost my phone. Can you send $200 to this number? I'll pay you back tomorrow, please it's urgent — I'm stuck and need help right away.",
+    lease: "Tenant shall forfeit the entire security deposit upon early termination. Landlord may increase rent at any time without notice. Tenant waives all rights to participate in class action lawsuits and agrees to binding arbitration at tenant's sole expense. This agreement renews automatically in perpetuity.",
+    terms: "We reserve the right to change pricing at any time without notice. Your subscription renews automatically and you waive any right to refunds. We are not liable for any damages arising from use of this service. All disputes shall be resolved by binding arbitration in our sole discretion."
+  };
+
+  $$('[data-scam-fill]').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const key = chip.dataset.scamFill;
+      const target = (key === 'lease' || key === 'terms') ? $('#scamContractInput') : $('#scamMessageInput');
+      if (target) {
+        target.value = scamExamples[key] || '';
+        target.focus();
+      }
+    });
+  });
+
+  /* Local pattern engine (used when the analysis API is unavailable) */
+  const SCAM_SIGNATURES = [
+    { type: 'Credential Phishing', keywords: ['click here', 'verify your account', 'verify your identity', 'account has been locked', 'account locked', 'suspended', 'sign in to confirm', 'update your payment', 'payment failed', 'confirm your information', 'login'], flags: ['Urges you to click a link to verify or unlock an account', 'Mimics a familiar brand to steal credentials', 'Creates account-closure pressure'], tactics: ['Credential harvesting', 'Brand impersonation', 'False urgency'], steps: ['Do not click the link or enter any login', 'Check your account by typing the official address yourself', 'Report the message and delete it'] },
+    { type: 'Prize / Lottery Scam', keywords: ['won', 'winner', 'gift card', 'prize', 'lottery', 'claim your', 'congratulations', 'sweepstakes', 'jackpot'], flags: ['Claims you won a prize you never entered', 'Asks you to claim via a link', 'Too-good-to-be-true reward'], tactics: ['Prize bait', 'Fake reward lure'], steps: ['Never pay a fee to claim a prize', 'Do not enter personal details on the claim page', 'Delete and report as spam'] },
+    { type: 'Romance Scam', keywords: ['send money', 'soldier overseas', 'lost my phone', 'get to know you', 'inheritance', 'trusted person', 'bank account', 'wire', 'pay you back'], flags: ['Builds emotional trust before asking for money', 'Uses hardship stories (lost phone, stranded abroad)', 'Requests wire transfers or gift cards'], tactics: ['Emotional manipulation', 'Fabricated emergency'], steps: ['Stop all money transfers immediately', 'Do not share banking or ID documents', 'Block the sender and report to the platform'] },
+    { type: 'Government Impersonation', keywords: ['irs', 'social security', 'arrest', 'warrant', 'fine', 'government', 'tax', 'marshal', 'deportation', 'sue you'], flags: ['Poses as a government agency', 'Threatens arrest or fines', 'Demands immediate payment'], tactics: ['Authority impersonation', 'Fear and threats'], steps: ['Real agencies never demand payment by gift card or wire', 'Contact the agency through its official site', 'Report the message'] },
+    { type: 'Crypto / Investment Scam', keywords: ['bitcoin', 'crypto', 'investment', 'guaranteed returns', 'double your', 'roi', 'token', 'blockchain', 'mining'], flags: ['Promises guaranteed or doubled returns', 'Pressure to invest quickly', 'Vague investment strategy'], tactics: ['Get-rich-quick lure', 'Artificial scarcity'], steps: ['Treat guaranteed returns as a red flag', 'Never invest from a DM or unsolicited link', 'Verify the platform with a regulator first'] },
+    { type: 'Tech Support Scam', keywords: ['tech support', 'computer', 'virus', 'malware', 'microsoft', 'apple support', 'refund', 'your device'], flags: ['Claims your device is infected', 'Asks for remote access or payment for fixes', 'Unsolicited support contact'], tactics: ['Fake support popup', 'Remote-access bait'], steps: ['Never grant remote access to an unsolicited caller', 'Close the page or popup', 'Run a scan with your real security software'] },
+    { type: 'Package Delivery Scam', keywords: ['package', 'delivery', 'tracking', 'ups', 'fedex', 'dhl', 'usps', 'parcel', 'shipment', 'redeliver'], flags: ['Fake delivery or redelivery notice', 'Link to update address or pay a fee', 'Generic greeting, no order details'], tactics: ['Delivery impersonation', 'Fee phishing'], steps: ['Track packages only on the carrier official site', 'Do not pay redelivery fees via links', 'Delete the message'] },
+    { type: 'Rental / Housing Scam', keywords: ['apartment', 'rent', 'lease', 'deposit', 'viewing', 'landlord', 'rental', 'unit available', 'tenant'], flags: ['Asks for a deposit before viewing the place', 'Pressure to pay before seeing the property', 'Price or urgency that seems too good'], tactics: ['Advance-fee bait', 'Fake listing'], steps: ['Never pay before seeing the property', 'Verify the listing and landlord independently', 'Report the listing on the platform'] },
+    { type: 'Charity Scam', keywords: ['donation', 'charity', 'relief fund', 'help the', 'victims', 'give to'], flags: ['Emotional appeal for donations', 'No verifiable charity name', 'Pressure to give immediately'], tactics: ['Compassion exploit', 'Fake charity'], steps: ['Donate only through the charity official site', 'Check the charity registration before giving', 'Ignore pressure tactics'] },
+    { type: 'Job / Employment Scam', keywords: ['job', 'interview', 'hiring', 'work from home', 'salary', 'offer', 'onboarding', 'recruiter'], flags: ['Unsolicited job offer', 'Asks for documents or payment for onboarding', 'Vague company details'], tactics: ['Fake offer lure', 'Identity harvesting'], steps: ['Never pay for onboarding or equipment', 'Verify the company independently', 'Do not send ID documents to unverified contacts'] }
+  ];
+
+  const URGENCY_WORDS = ['immediately', 'urgent', 'act now', 'right away', 'limited time', 'expires', '24 hours', 'within 24', 'as soon as possible', 'asap', 'final notice', 'today only', "don't wait", 'last chance'];
+  const LINK_RED_FLAGS = ['bit.ly', 'tinyurl', 'tiny.cc', 'http://', 'amzn-', 'netfl1x', 'amaz0n', 'paypa1', 'g00gle', 'micr0soft', '-update.com', '-verify.com', '-secure.com', '-account.com'];
+  const MONEY_REQ = /send \$|wire |gift card|paypal|cashapp|venmo|bitcoin|pay now/i;
+  const SENSITIVE_REQ = /password|social security|card number|cvv|bank account|id number|passport/i;
+
+  const CONTRACT_SIGNATURES = [
+    { keywords: ['forfeit', 'forfeiture', 'lose the entire', 'entire security deposit'], flags: ['Full forfeiture of deposit on early termination', 'Penalty disproportionate to actual damages'], tips: ["Negotiate: cap forfeiture at one month's rent or actual re-renting costs", 'Ask for a written list of allowable deductions'] },
+    { keywords: ['change pricing', 'increase rent', 'increase the price', 'modify the price', 'change fees', 'at any time without notice', 'without prior notice', 'without notice'], flags: ['Unilateral price changes without notice', 'No limit on how much or how often prices can rise'], tips: ['Ask for a cap (e.g. max 5% per year) and 30-60 days written notice', 'Get any increase tied to a published index'] },
+    { keywords: ['automatically renew', 'automatic renewal', 'renews automatically', 'renew automatically', 'perpetuity', 'perpetual'], flags: ['Automatic renewal built in', 'Perpetual or auto-extending term', 'Cancellation is hard or impossible'], tips: ['Set a calendar reminder before each renewal date', 'Ask for a simple cancellation window in writing'] },
+    { keywords: ['waive', 'waiver', 'waiving', 'give up', 'class action', 'class actions'], flags: ['You waive rights to sue or join class actions', 'Broad release of claims before you know the product'], tips: ['Ask whether individual claims are still allowed', 'Have a lawyer review any full waiver'] },
+    { keywords: ['arbitration', 'arbitrate', 'binding arbitration', 'mediation'], flags: ['Mandatory binding arbitration', 'Venue or arbitrator chosen by the other side', 'You may bear all arbitration costs'], tips: ['Negotiate a neutral venue and split costs', 'Check if small-claims court is still allowed'] },
+    { keywords: ['not liable', 'not responsible', 'no liability', 'liable for', 'indemnify', 'indemnification', 'damages arising', 'consequential damages'], flags: ['Broad liability disclaimer', 'Indemnification only runs one way', 'Excludes consequential damages'], tips: ['Ask for mutual indemnification', 'Keep carve-outs for gross negligence or willful harm'] },
+    { keywords: ['sole discretion', 'our discretion', 'at our option', 'we may, in our'], flags: ["All decisions reserved to one party's sole discretion", 'No objective standard or appeal'], tips: ["Ask for 'reasonable discretion' or written reasons", 'Add a defined review process'] },
+    { keywords: ['collect', 'personal data', 'personal information', 'third parties', 'sell your data', 'share your information', 'cookies'], flags: ['Broad data collection or sharing', 'Data sold or shared with third parties', 'Unclear retention period'], tips: ['Check what data is collected and for how long', 'Look for an opt-out and deletion right', 'Ask who the third-party recipients are'] }
+  ];
+
+  function extractUrls(text) {
+    const full = text.match(/https?:\/\/[^\s)]+|www\.[^\s)]+/gi) || [];
+    const bare = text.match(/\b[a-z0-9-]+\.(?:com|net|org|io|xyz|co|us|info|top|site|online|click|app|shop)\b/gi) || [];
+    return [...new Set([...full, ...bare])];
+  }
+
+  function localScamAnalysis(text) {
+    const lower = ' ' + text.toLowerCase() + ' ';
+    const hits = [];
+    const redFlags = [];
+    const tactics = [];
+
+    SCAM_SIGNATURES.forEach((sig) => {
+      const matched = sig.keywords.filter((keyword) => lower.includes(keyword));
+      if (matched.length) {
+        hits.push(sig.type);
+        sig.flags.forEach((flag) => redFlags.push(flag));
+        sig.tactics.forEach((tactic) => tactics.push(tactic));
+      }
+    });
+
+    const urgencyHits = URGENCY_WORDS.filter((word) => lower.includes(word));
+    if (urgencyHits.length) {
+      redFlags.push(`Manufactured urgency (${urgencyHits.slice(0, 3).join(', ')})`);
+      tactics.push('False urgency');
+    }
+
+    const urls = extractUrls(text);
+    const badUrls = urls.filter((url) => LINK_RED_FLAGS.some((flag) => url.toLowerCase().includes(flag)));
+    if (badUrls.length) {
+      redFlags.push(`Suspicious link${badUrls.length > 1 ? 's' : ''}: ${badUrls.slice(0, 2).join(', ')}`);
+    }
+
+    const moneyReq = MONEY_REQ.test(text);
+    const sensitiveReq = SENSITIVE_REQ.test(text);
+    if (moneyReq) redFlags.push('Direct request for money, gift card, or crypto payment');
+    if (sensitiveReq) {
+      redFlags.push('Requests sensitive personal or financial information');
+      tactics.push('Identity harvesting');
+    }
+
+    let score = 8;
+    score += Math.min(5, hits.length) * 13;
+    score += Math.min(3, urgencyHits.length) * 6;
+    score += Math.min(2, badUrls.length) * 10;
+    if (moneyReq) score += 8;
+    if (sensitiveReq) score += 8;
+    score = Math.max(4, Math.min(98, score + Math.floor(Math.random() * 5)));
+
+    const verdict = score < 20 ? 'SAFE' : score < 40 ? 'LOW RISK' : score < 60 ? 'SUSPICIOUS' : score < 80 ? 'DANGEROUS' : 'LIKELY MALICIOUS';
+    const typeLabel = hits.length ? hits.join(' + ') : 'No known scam pattern';
+
+    const summary = score >= 60
+      ? `This message shows ${redFlags.length} red flags consistent with ${typeLabel}. Do not interact with any links or send money or information.`
+      : score >= 40
+      ? `This message contains some warning signs (${redFlags.length} red flags). Verify the sender through an official channel before acting.`
+      : score >= 20
+      ? 'A few weak indicators were found, but nothing conclusive. Stay alert, especially to links and unexpected requests.'
+      : 'No scam patterns detected. This message looks consistent with normal communication — stay alert to unexpected requests.';
+
+    let steps = ['Never click links from unknown senders', 'Verify unexpected requests through a separate channel'];
+    if (hits.length) {
+      const sig = SCAM_SIGNATURES.find((entry) => entry.type === hits[0]);
+      if (sig) steps = sig.steps;
+    }
+
+    if (!redFlags.length) redFlags.push('No strong red flags detected in this message');
+    if (!tactics.length) tactics.push('No manipulation tactics detected');
+
+    return {
+      score,
+      verdict,
+      riskMode: true,
+      title: hits.length ? `Likely ${typeLabel} detected` : 'No scam patterns detected',
+      description: summary,
+      signals: [
+        ...redFlags.slice(0, 4).map((flag) => ['bad', flag, 'Red flag detected by the pattern engine']),
+        ...tactics.slice(0, 2).map((tactic) => ['warn', tactic, 'Manipulation tactic observed']),
+        ...steps.slice(0, 3).map((step) => ['good', step, 'Recommended next step'])
+      ]
+    };
+  }
+
+  function localContractAnalysis(text) {
+    const lower = ' ' + text.toLowerCase() + ' ';
+    const redFlags = [];
+    const tips = [];
+
+    CONTRACT_SIGNATURES.forEach((sig) => {
+      const matched = sig.keywords.filter((keyword) => lower.includes(keyword));
+      if (matched.length) {
+        sig.flags.forEach((flag) => redFlags.push(flag));
+        sig.tips.forEach((tip) => tips.push(tip));
+      }
+    });
+
+    const longWords = (text.match(/\b[a-z]{14,}\b/gi) || []).length;
+    if (longWords > 3) redFlags.push(`Dense legal wording (${longWords} unusually long terms) — low readability`);
+
+    let score = 6;
+    score += Math.min(6, redFlags.length) * 12;
+    score += Math.min(3, Math.floor(text.trim().length / 400)) * 4;
+    score = Math.max(3, Math.min(97, score + Math.floor(Math.random() * 5)));
+
+    const verdict = score < 25 ? 'FAIR' : score < 50 ? 'CAUTION' : score < 75 ? 'UNFAVORABLE' : 'PREDATORY';
+    const docType = /lease|tenant|landlord|rent/i.test(text)
+      ? 'Residential Lease'
+      : /employ|job|work/i.test(text)
+      ? 'Employment Contract'
+      : /nda|confidential|disclosure/i.test(text)
+      ? 'Non-Disclosure Agreement'
+      : 'Terms of Service';
+
+    const summary = score >= 50
+      ? `This ${docType.toLowerCase()} contains ${redFlags.length} problematic clause patterns. Review them before agreeing — especially unilateral changes, waivers and arbitration.`
+      : score >= 25
+      ? `Some clauses need attention (${redFlags.length} flagged). Mostly standard, but negotiate the items under red flags.`
+      : 'This document reads as fairly standard. No predatory clauses detected — still read before signing.';
+
+    if (!redFlags.length) redFlags.push('No unfair clause patterns detected');
+    if (!tips.length) tips.push('Read the full document before signing', 'Keep a copy of the signed version');
+
+    return {
+      score,
+      verdict,
+      riskMode: true,
+      title: `${docType} review`,
+      description: summary,
+      signals: [
+        ...redFlags.slice(0, 4).map((flag) => ['bad', flag, 'Flagged clause pattern']),
+        ...tips.slice(0, 3).map((tip) => ['good', tip, 'Negotiation tip'])
+      ]
+    };
+  }
+
+  /* Recent scans (local only) */
+  const RECENT_KEY = 'fx_recent_scans';
+
+  function loadRecent() {
+    try {
+      return JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
+    } catch {
+      return [];
+    }
+  }
+
+  function renderRecent() {
+    const wrap = $('#recentScans');
+    const list = $('#recentScansList');
+    if (!wrap || !list) return;
+
+    const items = loadRecent();
+    if (!items.length) {
+      wrap.hidden = true;
+      list.innerHTML = '';
+      return;
+    }
+
+    wrap.hidden = false;
+    list.innerHTML = items.map((item) => `
+      <div class="recent-item">
+        <span class="recent-dot ${item.level}"></span>
+        <span class="recent-r-label">${escapeHtml(item.label)}</span>
+        <span class="recent-r-meta">${escapeHtml(item.verdict || '')}</span>
+        <span class="recent-r-score">${Number(item.score) || 0}</span>
+      </div>
+    `).join('');
+  }
+
+  function saveRecentScan(type, data) {
+    const items = loadRecent();
+    items.unshift({
+      label: `${type === 'scam' ? 'Msg · ' : 'Doc · '}${data.title}`.slice(0, 90),
+      verdict: data.verdict || '',
+      score: data.score,
+      level: data.verdict ? verdictLevel(data.verdict) : (data.riskMode ? (data.score >= 60 ? 'danger' : data.score >= 40 ? 'warn' : 'safe') : (data.score >= 75 ? 'safe' : data.score >= 55 ? 'warn' : 'danger')),
+      when: Date.now()
+    });
+    try {
+      localStorage.setItem(RECENT_KEY, JSON.stringify(items.slice(0, 5)));
+    } catch { /* storage unavailable */ }
+    renderRecent();
+  }
+
+  $('#recentClear')?.addEventListener('click', () => {
+    try { localStorage.removeItem(RECENT_KEY); } catch { /* storage unavailable */ }
+    renderRecent();
+  });
+
+  renderRecent();
 
   /* Media-analysis prototype */
   const detectionData = {
@@ -1019,21 +1749,54 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   });
 
   $$('.detection-btn').forEach((button) => {
-    button.addEventListener('click', () => {
-      const [score, confidence, title, description] = detectionData[button.dataset.type] || detectionData.text;
+    button.addEventListener('click', async () => {
+      const mode = button.dataset.type;
+      const fallback = detectionData[mode] || detectionData.text;
       button.disabled = true;
       const savedHTML = button.innerHTML;
       button.innerHTML = 'Analyzing <span>…</span>';
 
-      setTimeout(() => {
-        button.disabled = false;
-        button.innerHTML = savedHTML;
-        $('#detectMeter').style.width = `${score}%`;
-        $('#detectScore').textContent = `${score}%`;
-        $('#detectConfidence').textContent = confidence;
-        $('#detectTitle').textContent = title;
-        $('#detectDesc').textContent = description;
-      }, 900);
+      let result = null;
+
+      if (mode === 'text') {
+        const input = $('#detectText');
+        const text = (input?.value || '').trim();
+        if (!text) {
+          button.disabled = false;
+          button.innerHTML = savedHTML;
+          input?.classList.add('input-error');
+          input?.focus();
+          setTimeout(() => input?.classList.remove('input-error'), 1400);
+          return;
+        }
+        try {
+          const response = await fetch(`${API_BASE}/api/analyze`, {
+            method: 'POST',
+            headers: authHeaders({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify({ type: 'text', content: text })
+          });
+          if (response.ok) {
+            const payload = await response.json();
+            if (typeof payload.score === 'number') result = payload;
+          }
+        } catch {
+          /* Server unavailable — show the demo read-out below. */
+        }
+      }
+
+      if (!result) await new Promise(resolve => setTimeout(resolve, 900));
+
+      const [score, confidence, title, description] = result
+        ? [Math.round(result.score), result.confidence || 'Model confidence', result.title, result.description]
+        : fallback;
+
+      button.disabled = false;
+      button.innerHTML = savedHTML;
+      $('#detectMeter').style.width = `${score}%`;
+      $('#detectScore').textContent = `${score}%`;
+      $('#detectConfidence').textContent = confidence;
+      $('#detectTitle').textContent = title;
+      $('#detectDesc').textContent = description;
     });
   });
 
@@ -1110,16 +1873,23 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       This endpoint must run on your own server.
       The server stores your real API key safely and calls the AI provider.
     */
-    const response = await fetch('/api/chat', {
+    const response = await fetch(`${API_BASE}/api/chat`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({
         message,
         system: 'You are the FutureX Lab assistant. Respond concisely and helpfully about AI, technology, trust, and privacy.'
       })
     });
 
-    if (!response.ok) throw new Error('AI service unavailable');
+    if (!response.ok) {
+      let message = 'AI service unavailable';
+      try {
+        const errorData = await response.json();
+        message = errorData.reply || errorData.error || message;
+      } catch { /* response was not JSON */ }
+      throw new Error(message);
+    }
 
     const data = await response.json();
     return data.reply || 'I could not generate a response right now.';
@@ -1144,8 +1914,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     try {
       const response = await getAIResponse(text);
       addMessage(response, 'bot');
-    } catch {
-      addMessage('The AI service is not connected yet. Please try again after configuring your server.', 'bot');
+    } catch (error) {
+      addMessage(error?.message || 'The AI service is not connected right now. Please try again in a moment.', 'bot');
     } finally {
       chatTyping?.classList.remove('active');
     }
