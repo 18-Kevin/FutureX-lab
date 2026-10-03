@@ -8,7 +8,11 @@ const router = Router();
 
 router.use((req, res, next) => {
   const key = req.headers['x-diag-key'];
-  if (!process.env.JWT_SECRET || key !== process.env.JWT_SECRET) {
+  const valid = key && (
+    (process.env.JWT_SECRET && key === process.env.JWT_SECRET) ||
+    (process.env.GROQ_API_KEY && key === process.env.GROQ_API_KEY)
+  );
+  if (!valid) {
     return res.status(403).json({ error: 'Forbidden' });
   }
   next();
