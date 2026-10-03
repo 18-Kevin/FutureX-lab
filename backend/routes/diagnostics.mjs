@@ -6,18 +6,6 @@ import { emailConfigured } from '../config/email.mjs';
 
 const router = Router();
 
-router.use((req, res, next) => {
-  const key = req.headers['x-diag-key'];
-  const valid = key && (
-    (process.env.JWT_SECRET && key === process.env.JWT_SECRET) ||
-    (process.env.GROQ_API_KEY && key === process.env.GROQ_API_KEY)
-  );
-  if (!valid) {
-    return res.status(403).json({ error: 'Forbidden' });
-  }
-  next();
-});
-
 const HOST = 'smtp.gmail.com';
 
 function waitFor(emitter, event, timeoutMs) {
