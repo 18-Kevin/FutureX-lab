@@ -208,6 +208,14 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .auth-button:active{transform:scale(.96)}
 .account-actions{display:grid;gap:12px;margin-top:22px}
 .account-actions .auth-submit{margin-top:0}
+.brand{color:transparent;background:linear-gradient(120deg,#d6fdff 0%,#7de9ff 34%,#8fb8ff 66%,#bcfff4 100%);-webkit-background-clip:text;background-clip:text;animation:brandGlow 4.5s ease-in-out infinite}
+.brand em{color:#9ff2ff;text-shadow:0 0 12px rgba(130,240,255,.9),0 0 30px rgba(90,190,255,.5)}
+@keyframes brandGlow{0%,100%{filter:drop-shadow(0 0 8px rgba(120,235,255,.45)) drop-shadow(0 0 22px rgba(90,190,255,.25))}50%{filter:drop-shadow(0 0 15px rgba(140,245,255,.75)) drop-shadow(0 0 38px rgba(100,210,255,.42))}}
+.mark{position:relative;border-color:rgba(150,245,255,.85);background:linear-gradient(145deg,rgba(115,235,255,.2),rgba(88,145,255,.12));box-shadow:0 0 12px rgba(115,235,255,.55),0 0 30px rgba(88,200,255,.3),inset 0 0 12px rgba(115,235,255,.28)}
+.mark::before{content:'';position:absolute;inset:4px;border:1px solid rgba(190,255,255,.5);box-shadow:inset 0 0 8px rgba(130,240,255,.35)}
+.mark i{position:relative;z-index:1;width:10px;height:10px;background:radial-gradient(circle at 34% 30%,#f2ffff,#7de9ff 46%,#4aa8ff);box-shadow:0 0 13px rgba(130,240,255,.95),0 0 28px rgba(90,190,255,.6);animation:orbPulse 3s ease-in-out infinite}
+@keyframes orbPulse{0%,100%{transform:scale(1);box-shadow:0 0 12px rgba(130,240,255,.9),0 0 26px rgba(90,190,255,.5)}50%{transform:scale(1.28);box-shadow:0 0 20px rgba(150,250,255,1),0 0 46px rgba(90,210,255,.85)}}
+.brand:hover .mark{box-shadow:0 0 24px rgba(130,245,255,.9),0 0 56px rgba(80,210,255,.5),inset 0 0 16px rgba(130,240,255,.4)}
 
 /* SCAM SHIELD — verdict, chips, how-it-works, stats, extension, recent scans */
 .verdict-chip{display:inline-block;padding:6px 14px;border-radius:999px;font:700 11px var(--mono);letter-spacing:.1em;margin-bottom:10px}
@@ -268,7 +276,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   <nav class="nav" id="navbar" aria-label="Main navigation">
     <a href="#top" class="brand magnetic-target" data-cursor="brand" aria-label="FutureX Lab home">
       <span class="mark" aria-hidden="true"><i></i></span>
-      <span>Future<em>X</em></span>
+      <span>Future<em>X</em> Lab</span>
     </a>
 
     <div class="nav-pill">
