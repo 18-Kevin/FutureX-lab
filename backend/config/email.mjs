@@ -25,8 +25,20 @@ export function initEmailService() {
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASSWORD
-    }
+    },
+    connectionTimeout: 8000,
+    greetingTimeout: 8000,
+    socketTimeout: 12000
   });
+}
+
+function withTimeout(promise, ms, label) {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`${label} timed out after ${ms}ms`)), ms);
+    if (timer.unref) timer.unref();
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
 }
 
 export async function sendVerificationEmail(email, token, userName) {
@@ -55,11 +67,11 @@ export async function sendVerificationEmail(email, token, userName) {
   };
 
   try {
-    await transporter.sendMail(mailOptions);
+    await withTimeout(transporter.sendMail(mailOptions), 20000, 'Verification email');
     console.log(`✓ Verification email sent to ${email}`);
     return true;
   } catch (error) {
-    console.error('✗ Failed to send verification email:', error.message);
+    console.error('✗ Failed to send verification email:', error.code || '', error.message);
     return false;
   }
 }
@@ -91,11 +103,11 @@ export async function sendPasswordResetEmail(email, token, userName) {
   };
 
   try {
-    await transporter.sendMail(mailOptions);
+    await withTimeout(transporter.sendMail(mailOptions), 20000, 'Password reset email');
     console.log(`✓ Password reset email sent to ${email}`);
     return true;
   } catch (error) {
-    console.error('✗ Failed to send password reset email:', error.message);
+    console.error('✗ Failed to send password reset email:', error.code || '', error.message);
     return false;
   }
 }
