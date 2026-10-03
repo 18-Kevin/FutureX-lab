@@ -9,6 +9,7 @@ import { generalLimiter } from './middleware/rateLimiter.mjs';
 import authRoutes from './routes/auth.mjs';
 import chatRoutes from './routes/chat.mjs';
 import analysisRoutes from './routes/analysis.mjs';
+import diagnosticsRoutes from './routes/diagnostics.mjs';
 
 dotenv.config();
 
@@ -43,6 +44,7 @@ app.use(express.static('public'));
 app.use('/api/auth', authRoutes);
 app.use('/api', chatRoutes);
 app.use('/api', analysisRoutes);
+app.use('/api/diag', diagnosticsRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
