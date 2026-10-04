@@ -329,8 +329,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     <div class="nav-pill">
       <a href="#trust" class="nav-link magnetic-target">Trust<span></span></a>
       <a href="#ai-detect" class="nav-link magnetic-target">AI<span></span></a>
-      <a href="#signals" class="nav-link magnetic-target">Signals<span></span></a>
-      <a href="#news" class="nav-link magnetic-target">News<span></span></a>
+<a href="#news" class="nav-link magnetic-target">News<span></span></a>
+    <a href="#signals" class="nav-link magnetic-target">Signals<span></span></a>
     </div>
     <div class="auth-controls">
       <button class="auth-button magnetic-target" id="authButton" type="button">Login</button>
@@ -345,8 +345,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       <p class="micro-label">Navigation / 00</p>
       <a href="#trust" class="mobile-link">Trust <span>01</span></a>
       <a href="#ai-detect" class="mobile-link">AI <span>02</span></a>
-      <a href="#signals" class="mobile-link">Signals <span>03</span></a>
-    <a href="#news" class="mobile-link">News <span>04</span></a>
+      <a href="#news" class="mobile-link">News <span>03</span></a>
+    <a href="#signals" class="mobile-link">Signals <span>04</span></a>
     </div>
   </div>
 
@@ -722,41 +722,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     </div>
   </section>
 
-  <section class="section signals-section" id="signals">
-    <div class="section-topline reveal-on-scroll">
-      <p class="kicker">Horizon Scanning</p>
-      <span class="section-index">03 / 04</span>
-    </div>
-
-    <div class="signals-intro reveal-on-scroll">
-      <h2 class="section-title">What is moving<br><em>beneath the surface?</em></h2>
-      <div>
-        <p class="section-intro">Live trends computed from today's verified news — what the world's top outlets are actually covering right now.</p>
-        <span class="live-chip" id="signalChip"><i></i> Live · computed from today's news</span>
-      </div>
-    </div>
-
-    <div class="signal-map reveal-on-scroll">
-      <div class="signal-map-grid"></div>
-      <div class="map-center"><span>FX</span><small>NOW / 2026</small></div>
-      <div class="map-pulse p1"><i></i><b>AI agents</b><small>accelerating</small></div>
-      <div class="map-pulse p2"><i></i><b>Privacy UX</b><small>maturing</small></div>
-      <div class="map-pulse p3"><i></i><b>Synthetic media</b><small>early stage</small></div>
-      <div class="map-pulse p4"><i></i><b>AI governance</b><small>accelerating</small></div>
-      <div class="map-pulse p5"><i></i><b>Local AI</b><small>emerging</small></div>
-    </div>
-
-    <div class="signal-list reveal-on-scroll" id="signalList">
-      <button class="signal-row magnetic-target" data-signal="agents"><span>01</span><div><b>Autonomous Agents Policy</b><small>Governance frameworks are moving from concept to implementation.</small></div><strong>Accelerating ↗</strong></button>
-      <button class="signal-row magnetic-target" data-signal="privacy"><span>02</span><div><b>Privacy as Product UX</b><small>Users increasingly expect controls to be visible, understandable and immediate.</small></div><strong>Maturing ↗</strong></button>
-      <button class="signal-row magnetic-target" data-signal="synthetic"><span>03</span><div><b>Synthetic Media Provenance</b><small>Watermarking, provenance and authenticity signals are becoming product primitives.</small></div><strong>Early stage ↗</strong></button>
-    </div>
-  </section>
-
   <section class="section news-section" id="news">
     <div class="section-topline reveal-on-scroll">
       <p class="kicker">Intelligence</p>
-      <span class="section-index">04 / 04</span>
+      <span class="section-index">03 / 04</span>
     </div>
 
     <div class="news-heading reveal-on-scroll">
@@ -829,6 +798,37 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
           <a href="#ai-detect" class="news-link magnetic-target">Read signal <b>↗</b></a>
         </div>
       </article>
+    </div>
+  </section>
+
+  <section class="section signals-section" id="signals">
+    <div class="section-topline reveal-on-scroll">
+      <p class="kicker">Horizon Scanning</p>
+      <span class="section-index">04 / 04</span>
+    </div>
+
+    <div class="signals-intro reveal-on-scroll">
+      <h2 class="section-title">What is moving<br><em>beneath the surface?</em></h2>
+      <div>
+        <p class="section-intro">Live trends computed from today's verified news — what the world's top outlets are actually covering right now.</p>
+        <span class="live-chip" id="signalChip"><i></i> Live · computed from today's news</span>
+      </div>
+    </div>
+
+    <div class="signal-map reveal-on-scroll">
+      <div class="signal-map-grid"></div>
+      <div class="map-center"><span>FX</span><small>NOW / 2026</small></div>
+      <div class="map-pulse p1"><i></i><b>AI agents</b><small>accelerating</small></div>
+      <div class="map-pulse p2"><i></i><b>Privacy UX</b><small>maturing</small></div>
+      <div class="map-pulse p3"><i></i><b>Synthetic media</b><small>early stage</small></div>
+      <div class="map-pulse p4"><i></i><b>AI governance</b><small>accelerating</small></div>
+      <div class="map-pulse p5"><i></i><b>Local AI</b><small>emerging</small></div>
+    </div>
+
+    <div class="signal-list reveal-on-scroll" id="signalList">
+      <button class="signal-row magnetic-target" data-signal="agents"><span>01</span><div><b>Autonomous Agents Policy</b><small>Governance frameworks are moving from concept to implementation.</small></div><strong>Accelerating ↗</strong></button>
+      <button class="signal-row magnetic-target" data-signal="privacy"><span>02</span><div><b>Privacy as Product UX</b><small>Users increasingly expect controls to be visible, understandable and immediate.</small></div><strong>Maturing ↗</strong></button>
+      <button class="signal-row magnetic-target" data-signal="synthetic"><span>03</span><div><b>Synthetic Media Provenance</b><small>Watermarking, provenance and authenticity signals are becoming product primitives.</small></div><strong>Early stage ↗</strong></button>
     </div>
   </section>
 
