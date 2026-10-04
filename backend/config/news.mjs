@@ -25,7 +25,21 @@ const CATEGORY_RULES = [
 const PER_CATEGORY_LIMIT = 5;
 const TOTAL_LIMIT = 16;
 
+const TOPIC_RULES = [
+  { id: 'privacy', label: 'Privacy & data', pattern: /privacy|data protection|GDPR|consent|surveillance|cookies?|tracking/i },
+  { id: 'security', label: 'Cybersecurity', pattern: /cyber|hack|breach|malware|ransomware|scam|phishing|vulnerab|security/i },
+  { id: 'ai', label: 'AI & models', pattern: /\bAI\b|artificial intelligence|openai|chatgpt|anthropic|deepmind|\bLLM\b|chatbot|machine learning|generative|neural|gemini|claude|grok|copilot/i },
+  { id: 'regulation', label: 'Regulation & policy', pattern: /regulat|\blaws?\b|antitrust|complian|govern|senate|parliament|commission|\bact\b|court|ruling|sanction/i },
+  { id: 'markets', label: 'Markets & business', pattern: /market|stock|earnings|revenue|econom|inflation|\bbank\b|trade\b|invest|startup|IPO|merger|acquisition/i },
+  { id: 'social', label: 'Social platforms', pattern: /tiktok|instagram|facebook|youtube|twitter|social media|influencer|creator/i },
+  { id: 'ecommerce', label: 'E-commerce', pattern: /e-?commerce|retail|amazon|walmart|shopify|flipkart|online shopping|checkout/i },
+  { id: 'chips', label: 'Chips & hardware', pattern: /semiconductor|nvidia|tsmc|\bGPU\b|\bchips?\b|processor/i },
+  { id: 'world', label: 'World & geopolitics', pattern: /war\b|israel|gaza|ukraine|russia|china|election|protest|migrat|government|military|diplomat|border|trump|netanyahu|ceasefire/i },
+  { id: 'tech', label: 'Tech & internet', pattern: /\bapp\b|platform|software|digital|online|internet|google|microsoft|apple|browser|streaming|smartphone/i }
+];
+
 let cache = { updated: null, items: [] };
+let previousItems = [];
 let refreshing = null;
 
 function decodeEntities(text) {
@@ -181,6 +195,7 @@ export async function refreshNews() {
         .slice(0, TOTAL_LIMIT);
 
       if (items.length) {
+        previousItems = cache.items;
         cache = { updated: new Date().toISOString(), items };
       }
       return cache;
@@ -202,6 +217,37 @@ export async function getNews() {
   }
 
   return cache;
+}
+
+export async function getSignals() {
+  await getNews();
+
+  const current = cache.items || [];
+  const previous = previousItems || [];
+  const byNewest = (a, b) => Date.parse(b.published) - Date.parse(a.published);
+
+  const topics = TOPIC_RULES.map((rule) => {
+    const match = (item) => rule.pattern.test(`${item.title} ${item.summary}`);
+    const matched = current.filter(match).sort(byNewest);
+    const prevCount = previous.filter(match).length;
+    const top = matched[0];
+
+    return {
+      id: rule.id,
+      label: rule.label,
+      count: matched.length,
+      delta: previous.length ? matched.length - prevCount : null,
+      headline: top ? top.title : '',
+      source: top ? top.source : '',
+      url: top ? top.url : '',
+      published: top ? top.published : '',
+      summary: top ? top.summary : ''
+    };
+  })
+    .filter((topic) => topic.count > 0)
+    .sort((a, b) => b.count - a.count || Date.parse(b.published || 0) - Date.parse(a.published || 0));
+
+  return { updated: cache.updated, total: current.length, topics };
 }
 
 function scheduleISTMidnightRefresh() {

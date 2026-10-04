@@ -1,7 +1,7 @@
 import express from 'express';
 import { aiEnabled, groqChat } from '../config/ai.mjs';
 import { analysisLimiter } from '../middleware/rateLimiter.mjs';
-import { getNews } from '../config/news.mjs';
+import { getNews, getSignals } from '../config/news.mjs';
 
 const router = express.Router();
 
@@ -55,6 +55,16 @@ router.get('/', async (req, res) => {
   } catch (error) {
     console.error('News route error:', error.message);
     res.status(500).json({ error: 'News feed unavailable.' });
+  }
+});
+
+router.get('/signals', async (req, res) => {
+  try {
+    const signals = await getSignals();
+    res.json(signals);
+  } catch (error) {
+    console.error('Signals route error:', error.message);
+    res.status(500).json({ error: 'Signals unavailable.' });
   }
 });
 
