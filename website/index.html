@@ -252,6 +252,17 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .meter-caption{font:500 9px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:9px}
 .detect-copy .verdict-chip{margin-bottom:9px}
 .news-tools .live-chip{margin-top:0;white-space:nowrap}
+.news-modal-card{width:min(660px,94vw);max-height:86vh;overflow:auto}
+.news-modal-card h2{font-size:clamp(1.4rem,2.6vw,2.05rem);letter-spacing:-.03em;line-height:1.12}
+.news-modal-meta{font:500 10px var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin:12px 0 20px}
+.news-modal-body{border-top:1px solid var(--line);padding-top:18px}
+.news-modal-loading{font-size:14.5px;color:var(--muted);animation:briefingPulse 1.3s ease-in-out infinite}
+@keyframes briefingPulse{0%,100%{opacity:.45}50%{opacity:1}}
+.news-modal-text p{font-size:14.5px;line-height:1.8;color:#cfd6e4;margin-bottom:15px}
+.news-modal-text p:first-child{color:#fff;font-size:15.5px}
+.news-modal-error{font-size:14px;line-height:1.6;color:#ffb36b}
+.news-modal-original{display:block;text-align:center;text-decoration:none;margin-top:18px}
+.news-modal-original[hidden],.news-modal-text[hidden],.news-modal-error[hidden],.news-modal-loading[hidden]{display:none}
 
 /* SCAM SHIELD — verdict, chips, how-it-works, stats, extension, recent scans */
 .verdict-chip{display:inline-block;padding:6px 14px;border-radius:999px;font:700 11px var(--mono);letter-spacing:.1em;margin-bottom:10px}
@@ -336,6 +347,21 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       <a href="#ai-detect" class="mobile-link">AI <span>02</span></a>
       <a href="#signals" class="mobile-link">Signals <span>03</span></a>
     <a href="#news" class="mobile-link">News <span>04</span></a>
+    </div>
+  </div>
+
+  <div class="auth-modal" id="newsModal" role="dialog" aria-modal="true" aria-labelledby="newsModalTitle" aria-hidden="true">
+    <div class="auth-card news-modal-card">
+      <button class="auth-close magnetic-target" id="newsModalClose" type="button" aria-label="Close news briefing">×</button>
+      <div class="auth-kicker"><i></i> News briefing</div>
+      <h2 id="newsModalTitle">—</h2>
+      <p class="news-modal-meta" id="newsModalMeta"></p>
+      <div class="news-modal-body">
+        <p class="news-modal-loading" id="newsModalLoading">Writing a detailed briefing…</p>
+        <div class="news-modal-text" id="newsModalText" hidden></div>
+        <p class="news-modal-error" id="newsModalError" hidden></p>
+      </div>
+      <a class="auth-submit news-modal-original" id="newsModalOriginal" href="#" target="_blank" rel="noopener noreferrer" hidden>Open original article ↗</a>
     </div>
   </div>
 
@@ -2236,10 +2262,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       <article class="news-card${featuredClass} reveal-on-scroll is-visible magnetic-card" data-category="${category}" data-impact="${NEWS_CATEGORY_IMPACT[category]}" data-date="${dateValue}">
         <div class="${imageClass}"${imageStyle}></div>
         <div class="news-content">
-          <div class="news-meta"><span>${label}</span><time>${formatNewsDate(item.published)}</time></div>
+          <div class="news-meta"><span>${label} · ${escapeHtml(item.source || 'News')}</span><time>${formatNewsDate(item.published)}</time></div>
           <h3>${escapeHtml(item.title)}</h3>
           ${summary}
-          <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" class="news-link magnetic-target">Read at ${source} <b>↗</b></a>
+          <a href="${escapeHtml(item.url)}" data-url="${escapeHtml(item.url)}" data-source="${escapeHtml(item.source || 'News')}" target="_blank" rel="noopener noreferrer" class="news-link magnetic-target">Read more <b>→</b></a>
         </div>
       </article>`;
     }).join('');
@@ -2261,19 +2287,110 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     return true;
   }
 
-  async function loadLiveNews() {
+  async function loadLiveNews(retriesLeft = 2) {
     try {
       const response = await fetch(`${API_BASE}/api/news`);
       if (!response.ok) throw new Error('feed unavailable');
       const payload = await response.json();
-      renderLiveNews(payload);
+      if (!renderLiveNews(payload) && retriesLeft > 0) throw new Error('empty feed');
     } catch {
+      if (retriesLeft > 0) {
+        setTimeout(() => loadLiveNews(retriesLeft - 1), 5000);
+        return;
+      }
       const updated = $('#newsUpdated');
       if (updated) updated.innerHTML = '<i></i> Live feed unavailable · showing archive';
     }
   }
 
   loadLiveNews();
+
+  /* News detail modal — detailed AI briefing on Read more */
+  const newsModal = $('#newsModal');
+  let newsExplainController = null;
+
+  function closeNewsModal() {
+    newsModal?.classList.remove('open');
+    newsModal?.setAttribute('aria-hidden', 'true');
+  }
+
+  async function openNewsModal(data) {
+    if (!newsModal) return;
+    $('#newsModalTitle').textContent = data.title;
+    $('#newsModalMeta').textContent = [data.source, data.date].filter(Boolean).join(' · ');
+    const original = $('#newsModalOriginal');
+    if (data.url) {
+      original.href = data.url;
+      original.hidden = false;
+    } else {
+      original.hidden = true;
+    }
+    $('#newsModalLoading').hidden = false;
+    $('#newsModalText').hidden = true;
+    $('#newsModalError').hidden = true;
+    newsModal.classList.add('open');
+    newsModal.setAttribute('aria-hidden', 'false');
+    $('#newsModalClose')?.focus();
+
+    if (newsExplainController) newsExplainController.abort();
+    newsExplainController = new AbortController();
+
+    try {
+      const response = await fetch(`${API_BASE}/api/news/explain`, {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({
+          title: data.title,
+          source: data.source,
+          date: data.date,
+          summary: data.summary,
+          url: data.url
+        }),
+        signal: newsExplainController.signal
+      });
+      const payload = await response.json().catch(() => null);
+      if (!response.ok || !payload?.explanation) throw new Error(payload?.error || 'briefing failed');
+
+      $('#newsModalLoading').hidden = true;
+      $('#newsModalText').innerHTML = String(payload.explanation)
+        .split(/\n+/)
+        .map((paragraph) => paragraph.trim())
+        .filter(Boolean)
+        .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+        .join('');
+      $('#newsModalText').hidden = false;
+    } catch (error) {
+      if (error?.name === 'AbortError') return;
+      $('#newsModalLoading').hidden = true;
+      $('#newsModalError').textContent = 'Could not load the detailed briefing right now — you can still open the original article.';
+      $('#newsModalError').hidden = false;
+    }
+  }
+
+  $('#newsGrid')?.addEventListener('click', (event) => {
+    const link = event.target.closest('.news-link');
+    if (!link) return;
+    event.preventDefault();
+    const card = link.closest('.news-card');
+    if (!card) return;
+
+    const href = link.getAttribute('href') || '';
+    openNewsModal({
+      title: (card.querySelector('h3')?.textContent || '').trim(),
+      source: (link.dataset.source || card.querySelector('.news-meta span')?.textContent || '').trim(),
+      date: (card.querySelector('time')?.textContent || '').trim(),
+      summary: (card.querySelector('.news-content p')?.textContent || '').trim(),
+      url: link.dataset.url || (/^https?:\/\//i.test(href) ? href : '')
+    });
+  });
+
+  $('#newsModalClose')?.addEventListener('click', closeNewsModal);
+  newsModal?.addEventListener('click', (event) => {
+    if (event.target === newsModal) closeNewsModal();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeNewsModal();
+  });
 
   /* AI chat */
   const aiToggle = $('#aiToggle');
