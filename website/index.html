@@ -426,19 +426,34 @@ html[data-theme="light"] .signals-section .section-title em{
   background:linear-gradient(100deg,#0b8f6e 4%,#0e7f9e 96%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:none}
 
-/* --- hero: photo treatment stays cinematic in both modes --- */
-html[data-theme="light"] .hero{background:#070a12}
-html[data-theme="light"] .eyebrow{color:#b5a8ff}
-html[data-theme="light"] .hero-note{color:rgba(255,255,255,.85)}
-html[data-theme="light"] .hero-scroll-cue{color:rgba(255,255,255,.56)}
-html[data-theme="light"] .headline .accent{color:#fff}
-html[data-theme="light"] .btn-launch{background:linear-gradient(135deg,#0b8f6e,#12a87f 45%,#16b689);color:#f2fffb;box-shadow:0 16px 40px rgba(11,143,110,.32)}
-html[data-theme="light"] .btn-launch:hover{background:linear-gradient(135deg,#0d9c78,#15b78c 45%,#1ac797);color:#f2fffb;box-shadow:0 20px 48px rgba(11,143,110,.42)}
+/* --- light first screen (Nexa/editorial): paper hero, oversized type, twin brand moments --- */
+@keyframes fx-light-wordmark{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+html[data-theme="light"] .nav-pill{background:rgba(255,255,255,.6);border-color:rgba(23,24,28,.1);box-shadow:0 10px 34px rgba(23,24,28,.06)}
+html[data-theme="light"] .nav-link{color:rgba(23,24,28,.7)}
+html[data-theme="light"] .nav-link:hover{color:#17181c!important;background:rgba(23,24,28,.06)}
+html[data-theme="light"] .nav-link.active{color:#17181c!important;background:rgba(23,24,28,.055)!important;box-shadow:none}
+html[data-theme="light"] .nav-link.active span{background:var(--accent)!important}
+html[data-theme="light"] .nav:not(.scrolled) .theme-toggle{color:#17181c;background:rgba(255,255,255,.75);border-color:rgba(23,24,28,.16);box-shadow:0 4px 16px rgba(23,24,28,.08)}
+html[data-theme="light"] .menu-toggle span{background:#17181c}
+html[data-theme="light"] .hero{background:radial-gradient(900px 520px at 86% 4%,rgba(61,52,179,.06),transparent 62%),radial-gradient(760px 520px at 4% 94%,rgba(11,143,110,.05),transparent 60%),linear-gradient(180deg,#fbfaf6 0%,#f8f6ef 70%,#f7f5ee 100%)}
+html[data-theme="light"] .hero-img,html[data-theme="light"] .hero-vignette{display:none}
+html[data-theme="light"] .grain{opacity:.05}
+html[data-theme="light"] .hero-content{padding:0 9vw 0}
+html[data-theme="light"] .headline{margin-top:15vh;text-align:left}
+html[data-theme="light"] .eyebrow{font:700 clamp(30px,3.7vw,56px)/1.02 var(--sans);letter-spacing:-.05em;color:#17181c;text-transform:none;margin-bottom:26px}
+html[data-theme="light"] .headline .accent{color:#1b1c21}
+html[data-theme="light"] .hero-bottom{margin-top:auto}
+html[data-theme="light"] .hero-note{color:#4e525a}
+html[data-theme="light"] .hero-content::after{content:"FutureX Lab";display:block;margin-top:34px;margin-bottom:-.05em;border-top:1px solid rgba(23,24,28,.16);padding-top:.06em;font:700 clamp(56px,14vw,260px)/.92 var(--sans);letter-spacing:-.055em;color:#17181c;white-space:nowrap;pointer-events:none;animation:fx-light-wordmark 1.1s .4s var(--ease) both}
+html[data-theme="light"] .hero-scroll-cue{top:50%;right:34px;bottom:auto;transform:translateY(-50%);color:rgba(23,24,28,.5)}
+html[data-theme="light"] .hero-scroll-cue span{background:linear-gradient(180deg,transparent,rgba(23,24,28,.45))}
+html[data-theme="light"] .btn-launch{background:#17181c;color:#faf8f3;box-shadow:0 14px 34px rgba(23,24,28,.2)}
+html[data-theme="light"] .btn-launch:hover{background:var(--accent);color:#fff;transform:translateY(-3px);box-shadow:0 18px 42px rgba(61,52,179,.3)}
 html[data-theme="light"] .btn-primary{background:var(--violet);color:#fff;box-shadow:0 16px 40px rgba(82,64,196,.28)}
 html[data-theme="light"] .btn-primary:hover{background:#4433ab;box-shadow:0 20px 48px rgba(82,64,196,.4)}
 
 /* --- brand / mark: deep jade for paper, luminous jade for the dark hero --- */
-html[data-theme="light"] .brand{background:linear-gradient(120deg,#0a7458 0%,#0f9273 38%,#0c8468 70%,#0a7458 100%);animation:none;filter:none}
+html[data-theme="light"] .brand{background:linear-gradient(120deg,#0a7458 0%,#0f9273 38%,#0c8468 70%,#0a7458 100%);-webkit-background-clip:text;background-clip:text;animation:none;filter:none}
 html[data-theme="light"] .brand em{color:#0e8f70;text-shadow:none}
 html[data-theme="light"] .mark{border-color:rgba(10,116,88,.75);background:linear-gradient(145deg,rgba(11,143,110,.14),rgba(11,143,110,.05));box-shadow:none}
 html[data-theme="light"] .mark::before{border-color:rgba(10,116,88,.4);box-shadow:none}
@@ -641,6 +656,7 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
   html[data-theme="light"] .reveal-on-scroll{transition:opacity .9s var(--ease),transform .9s var(--ease)}
 }
 @media(prefers-reduced-motion:reduce){
+  html[data-theme="light"] .hero-content::after{animation:none}
   html[data-theme="light"] .trust-section:before,html[data-theme="light"] .detection-section:before,
   html[data-theme="light"] .news-section:before,html[data-theme="light"] .signals-section:before{animation:none}
 }
@@ -668,6 +684,11 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
   html[data-theme="light"] .news-card:nth-child(4n+3){background:linear-gradient(165deg,rgba(221,214,254,.4),#ffffff 58%)}
   html[data-theme="light"] .news-card:nth-child(4n+4){background:linear-gradient(165deg,rgba(254,215,187,.42),#ffffff 58%)}
   html[data-theme="light"] .trust-section .section-topline{margin-bottom:34px}
+  html[data-theme="light"] .hero-content{padding:0 22px 0}
+  html[data-theme="light"] .headline{margin-top:16vh}
+  html[data-theme="light"] .eyebrow{font-size:clamp(26px,7.6vw,38px);margin-bottom:18px}
+  html[data-theme="light"] .hero-content::after{margin-top:26px;margin-bottom:70px;font-size:clamp(44px,15vw,110px)}
+  html[data-theme="light"] .hero-scroll-cue{display:none}
 }
 
 /* nav fitting for the extra toggle button — both modes */
