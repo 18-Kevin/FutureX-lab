@@ -306,13 +306,14 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .ext-note{font:500 11px var(--mono);color:var(--dim);letter-spacing:.06em;line-height:1.7}
 @media(max-width:800px){.how-grid,.ext-grid{grid-template-columns:1fr}.recent-scans{padding:22px 20px 6px}}
   /* ===== THEME SYSTEM ===== */
-/* Dark is the default (:root above). Light is a separate, intentionally
-   designed paper-and-ink system — warm neutrals, deepened accents,
-   soft physical shadows, no neon on white. */
+/* Dark is the default (:root above). Light is its own paper system:
+   page 1 quiet editorial (whitespace, hairlines, typography), pages 2-4
+   each carry a restrained color identity mixed in soft layered fields.
+   Shared components (nav/modal/chat/cursor) keep one consistent look. */
 
 :root{color-scheme:dark}
 html[data-theme="light"]{color-scheme:light;
-  --bg:#f6f5f2; --surface:#ffffff; --surface-2:#fafaf7; --surface-3:#efede8;
+  --bg:#faf9f6; --surface:#ffffff; --surface-2:#fafaf7; --surface-3:#efede8;
   --ink:#17191e; --muted:#4d525c; --dim:#797e89;
   --violet:#5240c4; --violet-2:#5546c8;
   --cyan:#0e7f9e; --mint:#0b8f6e; --warm:#b15c14; --red:#cf3250; --gold:#8a6d10;
@@ -355,20 +356,55 @@ html[data-theme="light"] .ambient-divider{background:#efeee9}
 html[data-theme="light"] .section{border-top-color:rgba(23,25,30,.08)}
 html[data-theme="light"] .page-progress span{background:linear-gradient(90deg,var(--violet),var(--cyan));box-shadow:none}
 
-html[data-theme="light"] .work-section{background:radial-gradient(circle at 90% 20%,rgba(82,64,196,.055),transparent 30%),linear-gradient(180deg,#f7f6f3,#f4f3ef)}
-html[data-theme="light"] .trust-section{background:radial-gradient(700px 420px at 82% 6%,rgba(14,127,158,.06),transparent 62%),radial-gradient(520px 360px at 8% 80%,rgba(82,64,196,.05),transparent 65%),#faf9f7!important}
-html[data-theme="light"] .detection-section{background:radial-gradient(680px 420px at 86% 16%,rgba(201,90,56,.05),transparent 60%),radial-gradient(520px 420px at 12% 78%,rgba(11,143,110,.05),transparent 64%),#f8f7f4!important}
-html[data-theme="light"] .signals-section{background:radial-gradient(640px 460px at 15% 20%,rgba(138,109,16,.05),transparent 60%),radial-gradient(700px 500px at 84% 85%,rgba(82,64,196,.05),transparent 62%),#f5f4f1!important}
-html[data-theme="light"] .news-section{background:radial-gradient(720px 500px at 20% 0%,rgba(14,127,158,.05),transparent 60%),radial-gradient(640px 520px at 100% 100%,rgba(201,90,56,.045),transparent 62%),#f7f6f2!important}
-html[data-theme="light"] .extension-section{background:radial-gradient(700px 420px at 84% 8%,rgba(14,127,158,.06),transparent 60%),radial-gradient(520px 380px at 8% 88%,rgba(82,64,196,.07),transparent 62%),#f6f5f2}
-html[data-theme="light"] .about-section{background:radial-gradient(760px 460px at 50% 20%,rgba(82,64,196,.06),transparent 62%),#f7f6f3!important}
+/* --- page 1 (hero + trust): quiet editorial — near-white paper, hairlines --- */
+html[data-theme="light"] .trust-section{background:#fbfaf8!important}
+html[data-theme="light"] .trust-section:before{background:radial-gradient(circle at 88% 22%,rgba(82,64,196,.05),transparent 24%),radial-gradient(circle at 18% 82%,rgba(14,127,158,.04),transparent 26%)}
+
+/* --- page 2 (AI detect): layered violet / cyan / rose fields --- */
+html[data-theme="light"] .detection-section{background:
+  radial-gradient(760px 520px at 84% 10%,rgba(107,88,219,.14),transparent 62%),
+  radial-gradient(680px 500px at 6% 74%,rgba(62,202,220,.13),transparent 60%),
+  radial-gradient(560px 430px at 52% 106%,rgba(228,129,200,.09),transparent 58%),
+  #faf9f7!important}
+html[data-theme="light"] .detection-section:before{background:radial-gradient(circle at 82% 20%,rgba(107,88,219,.07),transparent 24%),radial-gradient(circle at 15% 78%,rgba(62,202,220,.07),transparent 26%)}
+
+/* --- page 3 (news): rose / cyan / sand mix, the exploratory page --- */
+html[data-theme="light"] .news-section{background:
+  radial-gradient(720px 520px at 14% 4%,rgba(228,129,200,.13),transparent 60%),
+  radial-gradient(640px 500px at 98% 24%,rgba(62,202,220,.11),transparent 58%),
+  radial-gradient(700px 470px at 58% 108%,rgba(254,215,170,.15),transparent 60%),
+  #fbfaf7!important}
+html[data-theme="light"] .news-section:before{background:radial-gradient(circle at 85% 12%,rgba(228,129,200,.07),transparent 22%),radial-gradient(circle at 15% 85%,rgba(254,215,170,.06),transparent 23%)}
+
+/* --- page 4 (signals): jade / teal — same family as 2-3, calmer --- */
+html[data-theme="light"] .signals-section{background:
+  radial-gradient(700px 500px at 82% 12%,rgba(14,127,158,.12),transparent 60%),
+  radial-gradient(620px 470px at 8% 84%,rgba(11,143,110,.1),transparent 60%),
+  radial-gradient(560px 430px at 50% 48%,rgba(82,64,196,.05),transparent 62%),
+  #f8f9f7!important}
+html[data-theme="light"] .signals-section:before{background:radial-gradient(circle at 50% 50%,rgba(11,143,110,.05),transparent 28%),linear-gradient(90deg,transparent,rgba(14,127,158,.04),transparent)}
+
+html[data-theme="light"] .extension-section{background:radial-gradient(700px 420px at 84% 8%,rgba(14,127,158,.07),transparent 60%),radial-gradient(520px 380px at 8% 88%,rgba(82,64,196,.05),transparent 62%),#f7f7f4}
 
 html[data-theme="light"] .section-title em{color:#4134b0}
 html[data-theme="light"] .kicker{color:#5546c8;text-shadow:none}
 html[data-theme="light"] .split-heading>p,html[data-theme="light"] .signals-intro>p{color:#4d525c}
 html[data-theme="light"] .mini-stamp span{color:var(--violet-2)}
 html[data-theme="light"] .hint{border-bottom-color:rgba(85,70,200,.45)}
-html[data-theme="light"] .live-chip{background:rgba(255,255,255,.6)}
+html[data-theme="light"] .live-chip{background:rgba(255,255,255,.65)}
+
+/* --- per-page heading identity: solid ink on page 1, clipped gradient on 2-4 --- */
+html[data-theme="light"] .trust-section .kicker{color:#4f43b8}
+html[data-theme="light"] .trust-section .section-title em{color:#3d2fae}
+html[data-theme="light"] .detection-section .kicker,html[data-theme="light"] .detection-section .section-title em{
+  background:linear-gradient(100deg,#5240c4 4%,#0e7f9e 94%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:none}
+html[data-theme="light"] .news-section .kicker,html[data-theme="light"] .news-section .section-title em{
+  background:linear-gradient(100deg,#cf3250 2%,#c95a38 58%,#b15c14 98%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:none}
+html[data-theme="light"] .signals-section .kicker,html[data-theme="light"] .signals-section .section-title em{
+  background:linear-gradient(100deg,#0b8f6e 4%,#0e7f9e 96%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:none}
 
 /* --- hero: photo treatment stays cinematic in both modes --- */
 html[data-theme="light"] .hero{background:#070a12}
@@ -424,7 +460,7 @@ html[data-theme="light"] .visual-grid span{border-color:rgba(14,127,158,.45);bac
 
 html[data-theme="light"] .feature-card::after,html[data-theme="light"] .news-card::after,
 html[data-theme="light"] .trust-shell::after,html[data-theme="light"] .detection-stage::after{background:linear-gradient(115deg,transparent 10%,rgba(23,25,30,.05) 48%,transparent 72%)}
-html[data-theme="light"] .feature-card:after,html[data-theme="light"] .news-card:after{background:linear-gradient(135deg,rgba(23,25,30,.14),transparent 28%,transparent 72%,rgba(82,64,196,.2))}
+html[data-theme="light"] .feature-card:after,html[data-theme="light"] .news-card:after{background:linear-gradient(135deg,rgba(23,25,30,.14),transparent 28%,transparent 72%,rgba(201,90,56,.24))}
 
 /* --- trust tool --- */
 html[data-theme="light"] .trust-shell{background:#ffffff}
@@ -440,13 +476,13 @@ html[data-theme="light"] .score-ring .ring-progress{filter:drop-shadow(0 0 8px r
 html[data-theme="light"] .signal-card{background:rgba(23,25,30,.028)}
 html[data-theme="light"] .loader-orbit{border-color:rgba(82,64,196,.3);border-top-color:var(--violet)}
 
-/* --- detection --- */
+/* --- page 2: detection — mixed violet/cyan surfaces --- */
 html[data-theme="light"] .detection-stage{background:#ffffff}
-html[data-theme="light"] .detection-rail{background:linear-gradient(180deg,rgba(23,25,30,.03),transparent)}
-html[data-theme="light"] .detect-tab:hover,html[data-theme="light"] .detect-tab.active{color:#17191e;background:rgba(82,64,196,.09);box-shadow:inset 2px 0 var(--violet)}
-html[data-theme="light"] .upload-zone{border-color:rgba(23,25,30,.25);background:linear-gradient(145deg,rgba(82,64,196,.045),transparent)}
-html[data-theme="light"] .upload-zone:hover{border-color:rgba(82,64,196,.6);background:rgba(82,64,196,.07)}
-html[data-theme="light"] .detection-result{background:linear-gradient(145deg,rgba(14,127,158,.055),rgba(82,64,196,.05));border-color:rgba(23,25,30,.13)}
+html[data-theme="light"] .detection-rail{background:linear-gradient(180deg,rgba(107,88,219,.07),transparent)}
+html[data-theme="light"] .detect-tab:hover,html[data-theme="light"] .detect-tab.active{color:#17191e;background:rgba(107,88,219,.1);box-shadow:inset 2px 0 var(--violet)}
+html[data-theme="light"] .upload-zone{border-color:rgba(82,64,196,.35);background:linear-gradient(145deg,rgba(107,88,219,.07),rgba(62,202,220,.07))}
+html[data-theme="light"] .upload-zone:hover{border-color:rgba(82,64,196,.6);background:linear-gradient(145deg,rgba(107,88,219,.12),rgba(62,202,220,.12))}
+html[data-theme="light"] .detection-result{background:linear-gradient(145deg,rgba(62,202,220,.1),rgba(107,88,219,.08)),#ffffff;border-color:rgba(23,25,30,.13)}
 html[data-theme="light"] .meter-track{background:rgba(23,25,30,.09)}
 html[data-theme="light"] .finding-row{background:rgba(23,25,30,.025);border-color:rgba(23,25,30,.12)}
 html[data-theme="light"] .finding-row:hover{border-color:rgba(82,64,196,.4)}
@@ -465,35 +501,41 @@ html[data-theme="light"] .recent-item{background:rgba(23,25,30,.025)}
 html[data-theme="light"] .recent-r-score{color:#17191e}
 html[data-theme="light"] .detect-detail b{color:var(--dim)}
 
-/* --- signals --- */
-html[data-theme="light"] .signal-map{background:radial-gradient(circle at 50% 50%,rgba(82,64,196,.09),transparent 34%),#ffffff}
+/* --- page 4: signals — jade / teal, clean and calm --- */
+html[data-theme="light"] .signal-map{background:radial-gradient(circle at 50% 50%,rgba(11,143,110,.1),transparent 36%),#ffffff}
 html[data-theme="light"] .signal-map-grid{background-image:linear-gradient(rgba(23,25,30,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(23,25,30,.07) 1px,transparent 1px);opacity:.8}
-html[data-theme="light"] .map-center{border-color:rgba(82,64,196,.4);background:radial-gradient(circle,#e9e5fb,rgba(255,255,255,.75));box-shadow:0 0 70px rgba(82,64,196,.16)}
-html[data-theme="light"] .signal-row:hover{background:linear-gradient(90deg,rgba(82,64,196,.07),transparent 70%)}
+html[data-theme="light"] .map-center{border-color:rgba(11,143,110,.4);background:radial-gradient(circle,#e4f6ef,rgba(255,255,255,.75));box-shadow:0 0 70px rgba(11,143,110,.16)}
+html[data-theme="light"] .signal-row:hover{background:linear-gradient(90deg,rgba(11,143,110,.08),transparent 70%)}
 html[data-theme="light"] .signal-row span,html[data-theme="light"] .signal-row>span{color:var(--dim)}
-html[data-theme="light"] .signal-row strong{color:var(--violet-2)}
-html[data-theme="light"] .map-pulse i{box-shadow:0 0 0 0 rgba(82,64,196,.4)}
+html[data-theme="light"] .signal-row strong{color:#0b8f6e}
+html[data-theme="light"] .map-pulse i{box-shadow:0 0 0 0 rgba(11,143,110,.4)}
 html[data-theme="light"] .map-pulse small{color:var(--dim)}
 
-/* --- news --- */
-html[data-theme="light"] .news-search{background:rgba(23,25,30,.035)}
+/* --- page 3: news — warm controls, pastel-tinted cards (Aladdin-style mix) --- */
+html[data-theme="light"] .news-search{background:rgba(201,90,56,.06)}
 html[data-theme="light"] .news-search input{color:#17191e}
 html[data-theme="light"] .news-search input::placeholder{color:rgba(23,25,30,.45)}
 html[data-theme="light"] .news-tools select{background:#ffffff;color:#17191e}
-html[data-theme="light"] .filter-pill:hover,html[data-theme="light"] .filter-pill.active{background:#17191e;color:#f6f5f2;border-color:#17191e}
+html[data-theme="light"] .filter-pill:hover,html[data-theme="light"] .filter-pill.active{background:#17191e;color:#faf9f6;border-color:#17191e}
 html[data-theme="light"] .news-card{background:#ffffff;border-color:rgba(23,25,30,.13)}
-html[data-theme="light"] .news-card:hover{border-color:rgba(82,64,196,.45)}
+html[data-theme="light"] .news-card:nth-child(4n+1){background:linear-gradient(165deg,rgba(191,219,254,.45),#ffffff 58%)}
+html[data-theme="light"] .news-card:nth-child(4n+2){background:linear-gradient(165deg,rgba(254,205,211,.45),#ffffff 58%)}
+html[data-theme="light"] .news-card:nth-child(4n+3){background:linear-gradient(165deg,rgba(254,215,170,.5),#ffffff 58%)}
+html[data-theme="light"] .news-card:nth-child(4n+4){background:linear-gradient(165deg,rgba(187,247,208,.4),#ffffff 58%)}
+html[data-theme="light"] .news-card:hover{border-color:rgba(201,90,56,.5)}
 html[data-theme="light"] .news-link{color:#17191e}
-html[data-theme="light"] .news-link b{color:var(--violet-2)}
+html[data-theme="light"] .news-link b{color:var(--coral)}
 html[data-theme="light"] .news-meta time{color:var(--dim)}
 html[data-theme="light"] .news-card p{color:var(--muted)}
 html[data-theme="light"] .news-image:before,html[data-theme="light"] .news-image:after{opacity:.9}
 
-/* --- extension / how / stats --- */
-html[data-theme="light"] .how-card{background:linear-gradient(145deg,rgba(82,64,196,.055),rgba(23,25,30,.015));border-color:rgba(23,25,30,.13)}
-html[data-theme="light"] .how-card:hover{border-color:rgba(82,64,196,.4)}
-html[data-theme="light"] .stats-strip{background:linear-gradient(100deg,rgba(82,64,196,.09),rgba(14,127,158,.06) 55%,rgba(11,143,110,.06));border-color:rgba(23,25,30,.13)}
-html[data-theme="light"] .stats-strip strong{color:#17191e}
+/* --- page 1 cards + ink stats block / extension band --- */
+html[data-theme="light"] .how-card{background:#ffffff;border-color:rgba(23,25,30,.1);box-shadow:0 10px 34px rgba(23,25,30,.05)}
+html[data-theme="light"] .how-card:hover{border-color:rgba(82,64,196,.45);box-shadow:0 18px 46px rgba(23,25,30,.09)}
+html[data-theme="light"] .how-num{color:#4b4f5a;border-color:rgba(23,25,30,.2);background:rgba(23,25,30,.05)}
+html[data-theme="light"] .stats-strip{background:linear-gradient(120deg,#17191e,#262a33);border-color:#17191e}
+html[data-theme="light"] .stats-strip strong{color:#ffffff}
+html[data-theme="light"] .stats-strip p{color:rgba(255,255,255,.72)}
 html[data-theme="light"] .ext-card{background:linear-gradient(145deg,rgba(14,127,158,.055),rgba(23,25,30,.015));border-color:rgba(23,25,30,.13)}
 html[data-theme="light"] .ext-card:hover{border-color:rgba(14,127,158,.45)}
 html[data-theme="light"] .ext-icon{background:rgba(14,127,158,.1);border-color:rgba(14,127,158,.35);color:var(--cyan)}
