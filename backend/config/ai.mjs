@@ -14,7 +14,7 @@ export function aiModel() {
   return (process.env.GROQ_MODEL || '').trim() || DEFAULT_MODEL;
 }
 
-export async function groqChat(messages, { temperature = 0.6 } = {}) {
+export async function groqChat(messages, { temperature = 0.6, model = '' } = {}) {
   if (!aiEnabled()) throw new Error('AI_DISABLED');
 
   let lastError = null;
@@ -28,7 +28,7 @@ export async function groqChat(messages, { temperature = 0.6 } = {}) {
           Authorization: `Bearer ${process.env.GROQ_API_KEY.trim()}`
         },
         body: JSON.stringify({
-          model: aiModel(),
+          model: (model || aiModel()).trim(),
           messages,
           temperature
         })

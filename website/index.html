@@ -223,6 +223,34 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .ai-fab>i{color:var(--mint)}
 .ai-core{background:radial-gradient(circle at 35% 30%,#b9ffe9,#3fd9a8);box-shadow:0 0 28px rgba(101,230,193,.45)}
 .ai-core:after{border-color:rgba(101,230,193,.5)}
+.detail-block{margin-top:28px}.detail-block .micro-label{margin-bottom:12px}
+.findings-list{display:grid;gap:12px}
+.finding-row{border:1px solid var(--line);border-radius:16px;padding:16px 18px;background:rgba(255,255,255,.02);transition:border-color .3s}
+.finding-row:hover{border-color:rgba(181,168,255,.3)}
+.finding-head{display:flex;gap:10px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.finding-head h5{font-size:14.5px;letter-spacing:-.01em}
+.finding-sev{font:700 9px var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:4px 9px;border-radius:999px}
+.finding-sev.critical,.finding-sev.high{background:rgba(255,109,131,.14);color:#ff6d83}
+.finding-sev.medium{background:rgba(255,179,107,.14);color:#ffb36b}
+.finding-sev.low{background:rgba(101,230,193,.13);color:#65e6c1}
+.finding-clause{font:italic 13px/1.6 var(--serif);color:#cfd6e4;border-left:2px solid rgba(137,103,255,.55);padding-left:12px;margin-top:9px}
+.finding-meta{display:grid;gap:5px;margin-top:10px}
+.finding-meta span{font-size:13px;color:var(--muted);line-height:1.6}
+.finding-meta b{color:#fff;font-weight:600}
+.rec-list{display:grid;gap:9px;padding:0;margin:0;list-style:none}
+.rec-list li{font-size:13.5px;color:var(--muted);line-height:1.6;padding-left:24px;position:relative}
+.rec-list li::before{content:'→';position:absolute;left:0;color:var(--mint)}
+.detect-detail{margin-top:15px;border-top:1px solid var(--line);padding-top:13px}
+.detect-detail b{display:block;font:700 10px var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.detect-detail>span{font-size:13.5px;color:var(--muted);line-height:1.65}
+.detect-detail ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.detect-detail li{font-size:13px;color:var(--muted);line-height:1.6}
+.wm-status{display:inline-block;font:700 9px var(--mono);letter-spacing:.1em;padding:4px 9px;border-radius:999px;margin-right:9px;vertical-align:1px}
+.wm-status.detected{background:rgba(255,109,131,.14);color:#ff6d83}
+.wm-status.possible{background:rgba(255,179,107,.14);color:#ffb36b}
+.wm-status.none{background:rgba(101,230,193,.13);color:#65e6c1}
+.meter-caption{font:500 9px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:9px}
+.detect-copy .verdict-chip{margin-bottom:9px}
 
 /* SCAM SHIELD — verdict, chips, how-it-works, stats, extension, recent scans */
 .verdict-chip{display:inline-block;padding:6px 14px;border-radius:999px;font:700 11px var(--mono);letter-spacing:.1em;margin-bottom:10px}
@@ -557,6 +585,14 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
             </div>
           </div>
           <div class="signals-grid" id="resultSignals"></div>
+          <div class="detail-block" id="resultFindings" hidden>
+            <p class="micro-label">Detailed findings</p>
+            <div class="findings-list" id="resultFindingsList"></div>
+          </div>
+          <div class="detail-block" id="resultRecs" hidden>
+            <p class="micro-label">What you should do</p>
+            <ul class="rec-list" id="resultRecList"></ul>
+          </div>
         </div>
 
         <div class="recent-scans" id="recentScans" hidden>
@@ -609,7 +645,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
         <button class="detect-tab active magnetic-target" data-mode="text">Text</button>
         <button class="detect-tab magnetic-target" data-mode="image">Image</button>
         <button class="detect-tab magnetic-target" data-mode="video">Video</button>
-        <div class="rail-foot">Prototype<br>analysis</div>
+        <div class="rail-foot">AI analysis<br>evidence based</div>
       </div>
 
       <div class="detection-main">
@@ -625,7 +661,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
             <input id="imageUpload" type="file" accept="image/*"/>
             <span class="upload-icon">⌁</span>
             <b>Drop an image or browse</b>
-            <small>PNG, JPG, WEBP • Demo interface</small>
+            <small>PNG, JPG, WEBP • AI inspection</small>
           </label>
           <button class="btn-primary detection-btn magnetic-target" data-type="image">Inspect image <span>→</span></button>
         </div>
@@ -636,7 +672,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
             <input id="videoUpload" type="file" accept="video/*"/>
             <span class="upload-icon">◌</span>
             <b>Drop a video or browse</b>
-            <small>MP4, MOV, WEBM • Demo interface</small>
+            <small>MP4, MOV, WEBM • AI inspection</small>
           </label>
           <button class="btn-primary detection-btn magnetic-target" data-type="video">Inspect video <span>→</span></button>
         </div>
@@ -645,11 +681,16 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
           <div class="detect-meter">
             <div class="meter-track"><span id="detectMeter"></span></div>
             <div class="meter-meta"><strong id="detectScore">—</strong><span id="detectConfidence">Waiting for analysis</span></div>
+            <p class="meter-caption">AI likelihood</p>
           </div>
           <div class="detect-copy">
-            <p class="micro-label">Prototype result</p>
+            <span class="verdict-chip" id="detectVerdict" hidden>—</span>
+            <p class="micro-label">Evidence-based result</p>
             <h4 id="detectTitle">No media inspected yet</h4>
-            <p id="detectDesc">Connect a detection model/API in production. This interface intentionally uses simulated results.</p>
+            <p id="detectDesc">Inspect text, an image or a video to get an AI vs human verdict with watermark checks, likely origin and evidence.</p>
+            <div class="detect-detail" id="detectWatermarkBlock" hidden><b>Watermark check</b><span id="detectWatermark"></span></div>
+            <div class="detect-detail" id="detectProvenanceBlock" hidden><b>Likely origin</b><span id="detectProvenance"></span></div>
+            <div class="detect-detail" id="detectEvidenceBlock" hidden><b>Evidence</b><ul id="detectEvidenceList"></ul></div>
           </div>
         </div>
       </div>
@@ -1525,6 +1566,34 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
         </div>
       `).join('');
 
+      const findings = (Array.isArray(data.findings) ? data.findings : []).slice(0, 12);
+      const findingsBlock = $('#resultFindings');
+      if (findingsBlock) {
+        findingsBlock.hidden = findings.length === 0;
+        $('#resultFindingsList').innerHTML = findings.map((finding) => {
+          const severity = ['critical', 'high', 'medium', 'low'].includes(finding.severity) ? finding.severity : 'medium';
+          return `
+        <div class="finding-row">
+          <div class="finding-head"><span class="finding-sev ${severity}">${severity}</span><h5>${escapeHtml(finding.title || 'Finding')}</h5></div>
+          ${finding.clause ? `<div class="finding-clause">“${escapeHtml(finding.clause)}”</div>` : ''}
+          <div class="finding-meta">
+            ${finding.why ? `<span><b>Why it matters:</b> ${escapeHtml(finding.why)}</span>` : ''}
+            ${finding.impact ? `<span><b>Impact on you:</b> ${escapeHtml(finding.impact)}</span>` : ''}
+            ${finding.action ? `<span><b>What to do:</b> ${escapeHtml(finding.action)}</span>` : ''}
+          </div>
+        </div>`;
+        }).join('');
+      }
+
+      const recs = (Array.isArray(data.recommendations) ? data.recommendations : [])
+        .filter((item) => typeof item === 'string' && item.trim())
+        .slice(0, 6);
+      const recsBlock = $('#resultRecs');
+      if (recsBlock) {
+        recsBlock.hidden = recs.length === 0;
+        $('#resultRecList').innerHTML = recs.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+      }
+
       const circumference = 314;
       scoreCircle.style.stroke = data.riskMode
         ? (data.score >= 70 ? '#ff6d83' : data.score >= 40 ? '#ffb36b' : '#65e6c1')
@@ -1891,13 +1960,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 
   renderRecent();
 
-  /* Media-analysis prototype */
-  const detectionData = {
-    text: [73, 'Moderate confidence', 'AI-generation signal detected', 'This prototype detected a pattern worth reviewing. Production results should come from a validated detection model and present uncertainty clearly.'],
-    image: [81, 'Moderate-high confidence', 'Synthetic-media signal detected', 'The interface is ready for metadata, provenance, and model-based image analysis.'],
-    video: [68, 'Moderate confidence', 'Mixed provenance signal', 'Production analysis could combine frames, audio, metadata, and provenance signals.']
-  };
-
+  /* Media analysis (live AI backend) */
   $$('.detect-tab').forEach((tab) => {
     tab.addEventListener('click', () => {
       $$('.detect-tab').forEach((item) => item.classList.toggle('active', item === tab));
@@ -1907,55 +1970,225 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     });
   });
 
+  function detectErrorState(message) {
+    $('#detectMeter').style.width = '0%';
+    $('#detectScore').textContent = '—';
+    $('#detectConfidence').textContent = 'Unavailable';
+    $('#detectVerdict').hidden = true;
+    $('#detectTitle').textContent = 'Analysis unavailable';
+    $('#detectDesc').textContent = message;
+    $('#detectWatermarkBlock').hidden = true;
+    $('#detectProvenanceBlock').hidden = true;
+    $('#detectEvidenceBlock').hidden = true;
+  }
+
+  function renderDetectResult(data) {
+    const score = typeof data.score === 'number' ? Math.max(0, Math.min(100, Math.round(data.score))) : 0;
+    $('#detectMeter').style.width = `${score}%`;
+    $('#detectScore').textContent = `${score}%`;
+    $('#detectConfidence').textContent = data.confidence || 'Confidence not stated';
+
+    const chip = $('#detectVerdict');
+    const verdict = String(data.verdict || '').toUpperCase();
+    chip.hidden = !verdict;
+    if (verdict) {
+      chip.textContent = verdict;
+      chip.dataset.level = verdict.startsWith('HUMAN') ? 'safe' : verdict.startsWith('AI') ? 'danger' : 'warn';
+    }
+
+    $('#detectTitle').textContent = data.title || 'Analysis complete';
+    $('#detectDesc').textContent = data.description || '';
+
+    const watermark = data.watermark && typeof data.watermark === 'object' ? data.watermark : null;
+    const watermarkBlock = $('#detectWatermarkBlock');
+    if (watermark) {
+      const status = ['DETECTED', 'POSSIBLE', 'NONE'].includes(String(watermark.status).toUpperCase())
+        ? String(watermark.status).toUpperCase()
+        : 'NONE';
+      const details = Array.isArray(watermark.details)
+        ? watermark.details.filter((item) => typeof item === 'string' && item.trim())
+        : [];
+      const statusClass = status === 'DETECTED' ? 'detected' : status === 'POSSIBLE' ? 'possible' : 'none';
+      watermarkBlock.hidden = false;
+      $('#detectWatermark').innerHTML = `<span class="wm-status ${statusClass}">${status}</span>${escapeHtml(details.join(' ') || 'No watermark indicators found.')}`;
+    } else {
+      watermarkBlock.hidden = true;
+    }
+
+    const provenance = typeof data.provenance === 'string' ? data.provenance.trim() : '';
+    $('#detectProvenanceBlock').hidden = !provenance;
+    if (provenance) $('#detectProvenance').textContent = provenance;
+
+    const evidence = Array.isArray(data.evidence)
+      ? data.evidence.filter((item) => typeof item === 'string' && item.trim()).slice(0, 8)
+      : [];
+    $('#detectEvidenceBlock').hidden = evidence.length === 0;
+    $('#detectEvidenceList').innerHTML = evidence.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+  }
+
+  function readImageForAnalysis(file) {
+    return new Promise((resolve, reject) => {
+      const objectUrl = URL.createObjectURL(file);
+      const image = new Image();
+      const fail = (message) => {
+        URL.revokeObjectURL(objectUrl);
+        reject(new Error(message));
+      };
+      const timer = setTimeout(() => fail('Image took too long to load'), 8000);
+      image.onload = () => {
+        clearTimeout(timer);
+        try {
+          const scale = Math.min(1, 640 / Math.max(image.naturalWidth, image.naturalHeight));
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+          canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+          canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
+          URL.revokeObjectURL(objectUrl);
+          resolve({
+            dataUrl: canvas.toDataURL('image/jpeg', 0.75),
+            meta: `${file.name}, ${image.naturalWidth}x${image.naturalHeight}, ${Math.round(file.size / 1024)} KB, ${file.type || 'image'}`
+          });
+        } catch (error) {
+          fail(error.message || 'Could not process image');
+        }
+      };
+      image.onerror = () => {
+        clearTimeout(timer);
+        fail('Could not read image');
+      };
+      image.src = objectUrl;
+    });
+  }
+
+  function readVideoForAnalysis(file) {
+    return new Promise((resolve, reject) => {
+      const objectUrl = URL.createObjectURL(file);
+      const video = document.createElement('video');
+      video.muted = true;
+      video.preload = 'auto';
+      const fail = (message) => {
+        URL.revokeObjectURL(objectUrl);
+        reject(new Error(message));
+      };
+      const timer = setTimeout(() => fail('Video took too long to load'), 12000);
+      video.onerror = () => {
+        clearTimeout(timer);
+        fail('Could not read video');
+      };
+      video.onloadeddata = async () => {
+        try {
+          const duration = Number.isFinite(video.duration) ? video.duration : 0;
+          const width = video.videoWidth || 640;
+          const height = video.videoHeight || 360;
+          const meta = `${file.name}, ${width}x${height}, ${duration ? `${duration.toFixed(1)}s ` : ''}${Math.round(file.size / 1024)} KB, ${file.type || 'video'}`;
+          const targets = duration > 0.4
+            ? [duration * 0.25, duration * 0.6]
+            : [0];
+          const frames = [];
+          for (const target of targets) {
+            await new Promise((seekResolve) => {
+              const done = () => {
+                video.removeEventListener('seeked', done);
+                seekResolve();
+              };
+              video.addEventListener('seeked', done);
+              setTimeout(() => {
+                video.removeEventListener('seeked', done);
+                seekResolve();
+              }, 3500);
+              video.currentTime = target;
+            });
+            try {
+              const scale = Math.min(1, 640 / Math.max(width, height));
+              const canvas = document.createElement('canvas');
+              canvas.width = Math.max(1, Math.round(width * scale));
+              canvas.height = Math.max(1, Math.round(height * scale));
+              canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+              frames.push(canvas.toDataURL('image/jpeg', 0.7));
+            } catch {
+              /* frame could not be captured — skipped */
+            }
+          }
+          clearTimeout(timer);
+          URL.revokeObjectURL(objectUrl);
+          resolve({ frames, meta });
+        } catch (error) {
+          clearTimeout(timer);
+          URL.revokeObjectURL(objectUrl);
+          reject(error);
+        }
+      };
+      video.src = objectUrl;
+    });
+  }
+
   $$('.detection-btn').forEach((button) => {
     button.addEventListener('click', async () => {
       const mode = button.dataset.type;
-      const fallback = detectionData[mode] || detectionData.text;
-      button.disabled = true;
-      const savedHTML = button.innerHTML;
-      button.innerHTML = 'Analyzing <span>…</span>';
-
-      let result = null;
+      let content = '';
+      let images = [];
 
       if (mode === 'text') {
         const input = $('#detectText');
-        const text = (input?.value || '').trim();
-        if (!text) {
-          button.disabled = false;
-          button.innerHTML = savedHTML;
+        content = (input?.value || '').trim();
+        if (!content) {
           input?.classList.add('input-error');
           input?.focus();
           setTimeout(() => input?.classList.remove('input-error'), 1400);
           return;
         }
+      } else {
+        const fileInput = mode === 'image' ? $('#imageUpload') : $('#videoUpload');
+        const file = fileInput?.files?.[0];
+        if (!file) {
+          detectErrorState('Choose a file first, then press Inspect.');
+          return;
+        }
+        button.disabled = true;
+        const readLabel = button.innerHTML;
+        button.innerHTML = 'Reading file <span>…</span>';
         try {
-          const response = await fetch(`${API_BASE}/api/analyze`, {
-            method: 'POST',
-            headers: authHeaders({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify({ type: 'text', content: text })
-          });
-          if (response.ok) {
-            const payload = await response.json();
-            if (typeof payload.score === 'number') result = payload;
+          if (mode === 'image') {
+            const parsed = await readImageForAnalysis(file);
+            content = parsed.meta;
+            images = [parsed.dataUrl];
+          } else {
+            const parsed = await readVideoForAnalysis(file);
+            content = parsed.meta;
+            images = parsed.frames;
           }
         } catch {
-          /* Server unavailable — show the demo read-out below. */
+          content = `${file.name}, ${Math.round(file.size / 1024)} KB, ${file.type || 'file'}`;
+          images = [];
         }
+        button.disabled = false;
+        button.innerHTML = readLabel;
       }
 
-      if (!result) await new Promise(resolve => setTimeout(resolve, 900));
+      button.disabled = true;
+      const savedHTML = button.innerHTML;
+      button.innerHTML = 'Analyzing <span>…</span>';
 
-      const [score, confidence, title, description] = result
-        ? [Math.round(result.score), result.confidence || 'Model confidence', result.title, result.description]
-        : fallback;
+      let payload = null;
+      try {
+        const response = await fetch(`${API_BASE}/api/analyze`, {
+          method: 'POST',
+          headers: authHeaders({ 'Content-Type': 'application/json' }),
+          body: JSON.stringify({ type: mode, content, images })
+        });
+        if (response.ok) {
+          payload = await response.json();
+        } else {
+          const errorPayload = await response.json().catch(() => null);
+          detectErrorState(errorPayload?.error || 'The analysis service rejected this request.');
+        }
+      } catch {
+        detectErrorState('Could not reach the analysis service. Check your connection and try again.');
+      }
 
       button.disabled = false;
       button.innerHTML = savedHTML;
-      $('#detectMeter').style.width = `${score}%`;
-      $('#detectScore').textContent = `${score}%`;
-      $('#detectConfidence').textContent = confidence;
-      $('#detectTitle').textContent = title;
-      $('#detectDesc').textContent = description;
+      if (payload) renderDetectResult(payload);
     });
   });
 
