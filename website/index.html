@@ -35,7 +35,7 @@ a,button,input,textarea,select{font:inherit;color:inherit}a{text-decoration:none
 .lens-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-49%);font:500 12px var(--mono);color:#ddd7ff}
 .cursor-orbit{position:fixed;width:6px;height:6px;border:1px solid rgba(181,168,255,.55);border-radius:50%;transform:translate3d(-50%,-50%,0);opacity:.9}.cursor-orbit-a{width:56px;height:56px;border-style:dashed;border-color:rgba(137,103,255,.18)}.cursor-orbit-b{width:66px;height:66px;border-color:rgba(98,216,255,.08);border-style:dotted}
 .cursor-lens.is-hover{width:58px;height:58px;background:rgba(137,103,255,.1);border-color:#c7bcff}.cursor-lens.is-ai{width:70px;height:70px;border-style:dashed;border-color:var(--cyan);background:rgba(98,216,255,.08);box-shadow:0 0 45px rgba(98,216,255,.14)}.cursor-lens.is-ai .lens-center{font-size:19px;color:var(--cyan)}
-.cursor-lens.is-launch{width:64px;height:64px;border-color:#fff}.cursor-lens.is-brand{width:52px;height:52px}
+.cursor-lens.is-launch{width:64px;height:64px;border-color:#fff}.cursor-lens.is-brand{width:52px;height:52px}.cursor-lens.is-hover .lens-center{font-size:19px}
 @media(pointer:coarse){.cursor-system{display:none}body{cursor:auto!important}.magnetic-target{cursor:pointer!important}}
 
 /* GLOBAL */
@@ -112,7 +112,7 @@ a,button,input,textarea,select{font:inherit;color:inherit}a{text-decoration:none
 .cursor-lens{background:
 radial-gradient(circle at 32% 28%,rgba(255,255,255,.22),rgba(98,216,255,.055) 24%,rgba(137,103,255,.055) 46%,rgba(7,10,18,.02) 72%);
 box-shadow:0 0 0 1px rgba(255,255,255,.035),0 0 34px rgba(137,103,255,.18),inset 0 0 20px rgba(255,255,255,.035)}
-.cursor-lens::before{content:'🔍';position:absolute;right:-6px;bottom:-7px;font-size:12px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.5))}
+.cursor-lens::before{content:'';position:absolute;right:-6px;bottom:-7px;font-size:12px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.5))}
 .cursor-lens.is-ai{border-color:var(--cyan)!important;box-shadow:0 0 0 1px rgba(98,216,255,.1),0 0 44px rgba(98,216,255,.24),inset 0 0 22px rgba(98,216,255,.06)!important}
 .cursor-lens.is-ai::before{content:'🤖';right:-9px;bottom:-9px}
 
@@ -274,7 +274,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       <span class="lens-glint"></span>
       <span class="lens-crosshair lens-crosshair-h"></span>
       <span class="lens-crosshair lens-crosshair-v"></span>
-      <span class="lens-center" id="cursorCenter" aria-hidden="true">🔍</span>
+      <span class="lens-center" id="cursorCenter" aria-hidden="true">🤖</span>
     </div>
   </div>
 
@@ -1302,7 +1302,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   const orbitB = $('.cursor-orbit-b');
   const heroReveal = $('#heroReveal');
   const hoverTargets = $$('a, button, input, textarea, select');
-  const PROXIMITY_RADIUS = 90;
+  const PROXIMITY_RADIUS = 150;
   let proximityCheck = 0;
 
   const pointer = { x: innerWidth / 2, y: innerHeight / 2 };
@@ -1366,11 +1366,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 
     if (nearest && nearestDistance <= PROXIMITY_RADIUS) {
       if (!cursor.classList.contains('is-hover')) cursor.classList.add('is-hover');
-      const icon = nearest.id === 'aiToggle' ? '🤖' : '⌕';
-      if (cursorCenter.textContent !== icon) cursorCenter.textContent = icon;
+      if (cursorCenter.textContent !== '🤖') cursorCenter.textContent = '🤖';
     } else {
       if (cursor.classList.contains('is-hover')) cursor.classList.remove('is-hover', 'is-ai', 'is-launch', 'is-brand');
-      if (cursorCenter.textContent !== '⌕') cursorCenter.textContent = '⌕';
+      if (cursorCenter.textContent !== '🤖') cursorCenter.textContent = '🤖';
     }
   }
 
