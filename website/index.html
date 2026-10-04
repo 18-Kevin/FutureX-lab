@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+  <script>try{var _t=localStorage.getItem('fx-theme');document.documentElement.setAttribute('data-theme',_t==='light'?'light':'dark')}catch(e){document.documentElement.setAttribute('data-theme','dark')}</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#070a12" />
@@ -304,7 +305,274 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .ext-cta-row{display:flex;align-items:center;gap:28px;margin-top:38px;flex-wrap:wrap}
 .ext-note{font:500 11px var(--mono);color:var(--dim);letter-spacing:.06em;line-height:1.7}
 @media(max-width:800px){.how-grid,.ext-grid{grid-template-columns:1fr}.recent-scans{padding:22px 20px 6px}}
-  </style>
+  /* ===== THEME SYSTEM ===== */
+/* Dark is the default (:root above). Light is a separate, intentionally
+   designed paper-and-ink system — warm neutrals, deepened accents,
+   soft physical shadows, no neon on white. */
+
+:root{color-scheme:dark}
+html[data-theme="light"]{color-scheme:light;
+  --bg:#f6f5f2; --surface:#ffffff; --surface-2:#fafaf7; --surface-3:#efede8;
+  --ink:#17191e; --muted:#4d525c; --dim:#797e89;
+  --violet:#5240c4; --violet-2:#5546c8;
+  --cyan:#0e7f9e; --mint:#0b8f6e; --warm:#b15c14; --red:#cf3250; --gold:#8a6d10;
+  --lilac:#5a48c0; --coral:#c95a38;
+  --line:rgba(23,25,30,.12); --line-strong:rgba(23,25,30,.2);
+  --shadow:0 24px 70px rgba(23,25,30,.12);
+}
+
+/* transition only while switching — never on load */
+html.theme-transition,html.theme-transition *,html.theme-transition *::before,html.theme-transition *::after{
+  transition:background-color .5s ease,border-color .5s ease,color .5s ease,box-shadow .5s ease,fill .5s ease !important}
+
+html[data-theme="light"] ::selection{background:rgba(82,64,196,.2);color:#17191e}
+html[data-theme="light"] ::-webkit-scrollbar-track{background:#eceae5}
+html[data-theme="light"] ::-webkit-scrollbar-thumb{background:rgba(23,25,30,.22)}
+
+/* --- nav: only the scrolled state sits on paper; top state stays over the dark hero --- */
+html[data-theme="light"] .nav.scrolled{background:rgba(246,245,242,.86)}
+html[data-theme="light"] .nav.scrolled .nav-pill{background:rgba(255,255,255,.6);box-shadow:0 10px 40px rgba(23,25,30,.08)}
+html[data-theme="light"] .nav.scrolled .nav-link{color:rgba(23,25,30,.7)}
+html[data-theme="light"] .nav.scrolled .nav-link:hover{color:#17191e!important;background:rgba(23,25,30,.06)}
+html[data-theme="light"] .nav.scrolled .nav-link.active{color:#17191e!important;background:linear-gradient(180deg,rgba(82,64,196,.13),rgba(82,64,196,.05))!important;box-shadow:none}
+html[data-theme="light"] .nav.scrolled .nav-link.active span{background:linear-gradient(90deg,var(--violet),var(--cyan))!important}
+html[data-theme="light"] .nav.scrolled .menu-toggle{background:rgba(255,255,255,.6)}
+html[data-theme="light"] .nav.scrolled .menu-toggle span{background:#17191e}
+html[data-theme="light"] .nav.scrolled .theme-toggle{color:#17191e;background:rgba(255,255,255,.7);box-shadow:0 4px 16px rgba(23,25,30,.1)}
+html[data-theme="light"] .nav.scrolled .theme-toggle:hover{background:#fff;box-shadow:0 6px 20px rgba(23,25,30,.16)}
+
+/* theme toggle (dark default lives in base styles below) */
+.theme-toggle{width:42px;height:42px;border:1px solid var(--line-strong);border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.05);color:#fff;transition:background .3s,box-shadow .3s,transform .5s var(--ease),border-color .3s}
+.theme-toggle svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:transform .55s var(--ease)}
+.theme-toggle:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
+.theme-toggle:hover svg{transform:rotate(35deg)}
+html[data-theme="light"] .theme-toggle{color:#fff}
+html[data-theme="light"] .nav.scrolled .theme-toggle{color:#17191e}
+
+/* --- ambient / sections --- */
+html[data-theme="light"] body::before{background:radial-gradient(circle at 14% 18%,rgba(82,64,196,.05),transparent 22%),radial-gradient(circle at 84% 38%,rgba(11,143,110,.045),transparent 20%),radial-gradient(circle at 48% 92%,rgba(201,90,56,.04),transparent 22%)}
+html[data-theme="light"] .ambient-divider{background:#efeee9}
+html[data-theme="light"] .section{border-top-color:rgba(23,25,30,.08)}
+html[data-theme="light"] .page-progress span{background:linear-gradient(90deg,var(--violet),var(--cyan));box-shadow:none}
+
+html[data-theme="light"] .work-section{background:radial-gradient(circle at 90% 20%,rgba(82,64,196,.055),transparent 30%),linear-gradient(180deg,#f7f6f3,#f4f3ef)}
+html[data-theme="light"] .trust-section{background:radial-gradient(700px 420px at 82% 6%,rgba(14,127,158,.06),transparent 62%),radial-gradient(520px 360px at 8% 80%,rgba(82,64,196,.05),transparent 65%),#faf9f7!important}
+html[data-theme="light"] .detection-section{background:radial-gradient(680px 420px at 86% 16%,rgba(201,90,56,.05),transparent 60%),radial-gradient(520px 420px at 12% 78%,rgba(11,143,110,.05),transparent 64%),#f8f7f4!important}
+html[data-theme="light"] .signals-section{background:radial-gradient(640px 460px at 15% 20%,rgba(138,109,16,.05),transparent 60%),radial-gradient(700px 500px at 84% 85%,rgba(82,64,196,.05),transparent 62%),#f5f4f1!important}
+html[data-theme="light"] .news-section{background:radial-gradient(720px 500px at 20% 0%,rgba(14,127,158,.05),transparent 60%),radial-gradient(640px 520px at 100% 100%,rgba(201,90,56,.045),transparent 62%),#f7f6f2!important}
+html[data-theme="light"] .extension-section{background:radial-gradient(700px 420px at 84% 8%,rgba(14,127,158,.06),transparent 60%),radial-gradient(520px 380px at 8% 88%,rgba(82,64,196,.07),transparent 62%),#f6f5f2}
+html[data-theme="light"] .about-section{background:radial-gradient(760px 460px at 50% 20%,rgba(82,64,196,.06),transparent 62%),#f7f6f3!important}
+
+html[data-theme="light"] .section-title em{color:#4134b0}
+html[data-theme="light"] .kicker{color:#5546c8;text-shadow:none}
+html[data-theme="light"] .split-heading>p,html[data-theme="light"] .signals-intro>p{color:#4d525c}
+html[data-theme="light"] .mini-stamp span{color:var(--violet-2)}
+html[data-theme="light"] .hint{border-bottom-color:rgba(85,70,200,.45)}
+html[data-theme="light"] .live-chip{background:rgba(255,255,255,.6)}
+
+/* --- hero: photo treatment stays cinematic in both modes --- */
+html[data-theme="light"] .hero{background:#070a12}
+html[data-theme="light"] .eyebrow{color:#b5a8ff}
+html[data-theme="light"] .hero-note{color:rgba(255,255,255,.85)}
+html[data-theme="light"] .hero-scroll-cue{color:rgba(255,255,255,.56)}
+html[data-theme="light"] .headline .accent{color:#fff}
+html[data-theme="light"] .btn-launch{background:linear-gradient(135deg,#0b8f6e,#12a87f 45%,#16b689);color:#f2fffb;box-shadow:0 16px 40px rgba(11,143,110,.32)}
+html[data-theme="light"] .btn-launch:hover{background:linear-gradient(135deg,#0d9c78,#15b78c 45%,#1ac797);color:#f2fffb;box-shadow:0 20px 48px rgba(11,143,110,.42)}
+html[data-theme="light"] .btn-primary{background:var(--violet);color:#fff;box-shadow:0 16px 40px rgba(82,64,196,.28)}
+html[data-theme="light"] .btn-primary:hover{background:#4433ab;box-shadow:0 20px 48px rgba(82,64,196,.4)}
+
+/* --- brand / mark: deep jade for paper, luminous jade for the dark hero --- */
+html[data-theme="light"] .brand{background:linear-gradient(120deg,#0a7458 0%,#0f9273 38%,#0c8468 70%,#0a7458 100%);animation:none;filter:none}
+html[data-theme="light"] .brand em{color:#0e8f70;text-shadow:none}
+html[data-theme="light"] .mark{border-color:rgba(10,116,88,.75);background:linear-gradient(145deg,rgba(11,143,110,.14),rgba(11,143,110,.05));box-shadow:none}
+html[data-theme="light"] .mark::before{border-color:rgba(10,116,88,.4);box-shadow:none}
+html[data-theme="light"] .mark i{background:radial-gradient(circle at 34% 30%,#e8fff7,#13a883 46%,#0b7a5e);box-shadow:0 0 8px rgba(11,143,110,.55)}
+html[data-theme="light"] .brand:hover .mark{box-shadow:0 6px 18px rgba(11,143,110,.3)}
+html[data-theme="light"] .brand:hover em,html[data-theme="light"] .brand:hover{filter:none}
+
+/* login button — solid jade */
+html[data-theme="light"] .auth-button{color:#fff;border-color:rgba(8,110,84,.65);
+  background:linear-gradient(135deg,#0a7458,#10997a 52%,#0d8a6d);
+  box-shadow:0 10px 26px rgba(11,143,110,.3),inset 0 1px 0 rgba(255,255,255,.3);text-shadow:none;backdrop-filter:none}
+html[data-theme="light"] .auth-button:hover{color:#fff;border-color:rgba(8,110,84,.85);
+  background:linear-gradient(135deg,#0b8061,#12a884 52%,#0f9676);
+  box-shadow:0 14px 34px rgba(11,143,110,.42),inset 0 1px 0 rgba(255,255,255,.35);transform:translateY(-2px) scale(1.05)}
+html[data-theme="light"] .auth-button::after{opacity:.5}
+
+/* --- cards / surfaces --- */
+html[data-theme="light"] .feature-card,html[data-theme="light"] .trust-shell,html[data-theme="light"] .detection-stage,
+html[data-theme="light"] .news-card,html[data-theme="light"] .about-image-wrap,html[data-theme="light"] .signal-map,
+html[data-theme="light"] .feature-card-large,html[data-theme="light"] .tool-panel,html[data-theme="light"] .detection-panel,
+html[data-theme="light"] .signal-map-wrap{box-shadow:0 18px 55px rgba(23,25,30,.08),inset 0 1px 0 rgba(255,255,255,.9)}
+
+html[data-theme="light"] .feature-card{background:linear-gradient(145deg,rgba(82,64,196,.055),rgba(23,25,30,.015));border-color:rgba(23,25,30,.13)}
+html[data-theme="light"] .feature-card:hover{border-color:rgba(82,64,196,.4);background:linear-gradient(145deg,rgba(82,64,196,.1),rgba(23,25,30,.025))}
+html[data-theme="light"] .feature-card-large{background:linear-gradient(145deg,rgba(82,64,196,.07),rgba(23,25,30,.02) 62%),#ffffff}
+html[data-theme="light"] .feature-card:nth-child(2){background:linear-gradient(145deg,rgba(14,127,158,.07),rgba(23,25,30,.02) 66%),#ffffff}
+html[data-theme="light"] .feature-card:nth-child(3){background:linear-gradient(145deg,rgba(177,92,20,.06),rgba(23,25,30,.02) 66%),#ffffff}
+html[data-theme="light"] .feature-card:nth-child(2):hover{background:linear-gradient(145deg,rgba(14,127,158,.11),rgba(23,25,30,.03) 66%),#ffffff}
+html[data-theme="light"] .feature-card:nth-child(3):hover{background:linear-gradient(145deg,rgba(177,92,20,.1),rgba(23,25,30,.03) 66%),#ffffff}
+html[data-theme="light"] .feature-top i{color:#17191e;opacity:.7}
+html[data-theme="light"] .feature-card:hover .feature-top i{color:var(--violet-2)}
+html[data-theme="light"] .card-glow{opacity:.55}
+html[data-theme="light"] .visual-type span{color:rgba(23,25,30,.12)}
+html[data-theme="light"] .feature-card:hover .visual-type span{color:rgba(23,25,30,.55)}
+html[data-theme="light"] .orbit-ring{border-color:rgba(82,64,196,.3)}
+html[data-theme="light"] .orbit-ring.two{border-color:rgba(14,127,158,.22)}
+html[data-theme="light"] .orbit-core{box-shadow:0 0 44px rgba(82,64,196,.3)}
+html[data-theme="light"] .visual-grid span{border-color:rgba(14,127,158,.45);background:linear-gradient(145deg,rgba(14,127,158,.18),transparent)}
+
+html[data-theme="light"] .feature-card::after,html[data-theme="light"] .news-card::after,
+html[data-theme="light"] .trust-shell::after,html[data-theme="light"] .detection-stage::after{background:linear-gradient(115deg,transparent 10%,rgba(23,25,30,.05) 48%,transparent 72%)}
+html[data-theme="light"] .feature-card:after,html[data-theme="light"] .news-card:after{background:linear-gradient(135deg,rgba(23,25,30,.14),transparent 28%,transparent 72%,rgba(82,64,196,.2))}
+
+/* --- trust tool --- */
+html[data-theme="light"] .trust-shell{background:#ffffff}
+html[data-theme="light"] .trust-sidebar{background:rgba(23,25,30,.03)}
+html[data-theme="light"] .tool-tab:hover,html[data-theme="light"] .tool-tab.active{color:#17191e;background:linear-gradient(90deg,rgba(82,64,196,.1),transparent);border-bottom-color:rgba(82,64,196,.35)}
+html[data-theme="light"] .trust-side-note{background:rgba(23,25,30,.05)}
+html[data-theme="light"] .premium-input{background:#fbfbfa;border-color:rgba(23,25,30,.18);color:#17191e;box-shadow:inset 0 1px 0 rgba(255,255,255,0),0 1px 2px rgba(23,25,30,.05)}
+html[data-theme="light"] .premium-input:hover{border-color:rgba(82,64,196,.45)}
+html[data-theme="light"] .premium-input:focus{border-color:rgba(82,64,196,.7);background:#fff;box-shadow:0 0 0 4px rgba(82,64,196,.12)}
+html[data-theme="light"] .premium-input::placeholder{color:rgba(23,25,30,.38)}
+html[data-theme="light"] .ring-bg{stroke:rgba(23,25,30,.1)}
+html[data-theme="light"] .score-ring .ring-progress{filter:drop-shadow(0 0 8px rgba(82,64,196,.3))}
+html[data-theme="light"] .signal-card{background:rgba(23,25,30,.028)}
+html[data-theme="light"] .loader-orbit{border-color:rgba(82,64,196,.3);border-top-color:var(--violet)}
+
+/* --- detection --- */
+html[data-theme="light"] .detection-stage{background:#ffffff}
+html[data-theme="light"] .detection-rail{background:linear-gradient(180deg,rgba(23,25,30,.03),transparent)}
+html[data-theme="light"] .detect-tab:hover,html[data-theme="light"] .detect-tab.active{color:#17191e;background:rgba(82,64,196,.09);box-shadow:inset 2px 0 var(--violet)}
+html[data-theme="light"] .upload-zone{border-color:rgba(23,25,30,.25);background:linear-gradient(145deg,rgba(82,64,196,.045),transparent)}
+html[data-theme="light"] .upload-zone:hover{border-color:rgba(82,64,196,.6);background:rgba(82,64,196,.07)}
+html[data-theme="light"] .detection-result{background:linear-gradient(145deg,rgba(14,127,158,.055),rgba(82,64,196,.05));border-color:rgba(23,25,30,.13)}
+html[data-theme="light"] .meter-track{background:rgba(23,25,30,.09)}
+html[data-theme="light"] .finding-row{background:rgba(23,25,30,.025);border-color:rgba(23,25,30,.12)}
+html[data-theme="light"] .finding-row:hover{border-color:rgba(82,64,196,.4)}
+html[data-theme="light"] .finding-clause{color:#3c414c;border-left-color:rgba(82,64,196,.6)}
+html[data-theme="light"] .finding-meta b{color:#17191e}
+html[data-theme="light"] .finding-sev.critical,html[data-theme="light"] .finding-sev.high{background:rgba(207,50,80,.12);color:#b8243e}
+html[data-theme="light"] .finding-sev.medium{background:rgba(177,92,20,.12);color:#96500f}
+html[data-theme="light"] .finding-sev.low{background:rgba(11,143,110,.12);color:#097a5e}
+html[data-theme="light"] .wm-status.detected{background:rgba(207,50,80,.12);color:#b8243e}
+html[data-theme="light"] .wm-status.possible{background:rgba(177,92,20,.12);color:#96500f}
+html[data-theme="light"] .wm-status.none{background:rgba(11,143,110,.12);color:#097a5e}
+html[data-theme="light"] .verdict-chip[data-level="safe"]{background:rgba(11,143,110,.12);color:#097a5e;box-shadow:0 0 18px rgba(11,143,110,.12)}
+html[data-theme="light"] .verdict-chip[data-level="warn"]{background:rgba(177,92,20,.12);color:#96500f;box-shadow:0 0 18px rgba(177,92,20,.12)}
+html[data-theme="light"] .verdict-chip[data-level="danger"]{background:rgba(207,50,80,.12);color:#b8243e;box-shadow:0 0 18px rgba(207,50,80,.14)}
+html[data-theme="light"] .recent-item{background:rgba(23,25,30,.025)}
+html[data-theme="light"] .recent-r-score{color:#17191e}
+html[data-theme="light"] .detect-detail b{color:var(--dim)}
+
+/* --- signals --- */
+html[data-theme="light"] .signal-map{background:radial-gradient(circle at 50% 50%,rgba(82,64,196,.09),transparent 34%),#ffffff}
+html[data-theme="light"] .signal-map-grid{background-image:linear-gradient(rgba(23,25,30,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(23,25,30,.07) 1px,transparent 1px);opacity:.8}
+html[data-theme="light"] .map-center{border-color:rgba(82,64,196,.4);background:radial-gradient(circle,#e9e5fb,rgba(255,255,255,.75));box-shadow:0 0 70px rgba(82,64,196,.16)}
+html[data-theme="light"] .signal-row:hover{background:linear-gradient(90deg,rgba(82,64,196,.07),transparent 70%)}
+html[data-theme="light"] .signal-row span,html[data-theme="light"] .signal-row>span{color:var(--dim)}
+html[data-theme="light"] .signal-row strong{color:var(--violet-2)}
+html[data-theme="light"] .map-pulse i{box-shadow:0 0 0 0 rgba(82,64,196,.4)}
+html[data-theme="light"] .map-pulse small{color:var(--dim)}
+
+/* --- news --- */
+html[data-theme="light"] .news-search{background:rgba(23,25,30,.035)}
+html[data-theme="light"] .news-search input{color:#17191e}
+html[data-theme="light"] .news-search input::placeholder{color:rgba(23,25,30,.45)}
+html[data-theme="light"] .news-tools select{background:#ffffff;color:#17191e}
+html[data-theme="light"] .filter-pill:hover,html[data-theme="light"] .filter-pill.active{background:#17191e;color:#f6f5f2;border-color:#17191e}
+html[data-theme="light"] .news-card{background:#ffffff;border-color:rgba(23,25,30,.13)}
+html[data-theme="light"] .news-card:hover{border-color:rgba(82,64,196,.45)}
+html[data-theme="light"] .news-link{color:#17191e}
+html[data-theme="light"] .news-link b{color:var(--violet-2)}
+html[data-theme="light"] .news-meta time{color:var(--dim)}
+html[data-theme="light"] .news-card p{color:var(--muted)}
+html[data-theme="light"] .news-image:before,html[data-theme="light"] .news-image:after{opacity:.9}
+
+/* --- extension / how / stats --- */
+html[data-theme="light"] .how-card{background:linear-gradient(145deg,rgba(82,64,196,.055),rgba(23,25,30,.015));border-color:rgba(23,25,30,.13)}
+html[data-theme="light"] .how-card:hover{border-color:rgba(82,64,196,.4)}
+html[data-theme="light"] .stats-strip{background:linear-gradient(100deg,rgba(82,64,196,.09),rgba(14,127,158,.06) 55%,rgba(11,143,110,.06));border-color:rgba(23,25,30,.13)}
+html[data-theme="light"] .stats-strip strong{color:#17191e}
+html[data-theme="light"] .ext-card{background:linear-gradient(145deg,rgba(14,127,158,.055),rgba(23,25,30,.015));border-color:rgba(23,25,30,.13)}
+html[data-theme="light"] .ext-card:hover{border-color:rgba(14,127,158,.45)}
+html[data-theme="light"] .ext-icon{background:rgba(14,127,158,.1);border-color:rgba(14,127,158,.35);color:var(--cyan)}
+html[data-theme="light"] .scam-chip{background:rgba(82,64,196,.06);border-color:rgba(82,64,196,.35);color:var(--violet-2)}
+html[data-theme="light"] .scam-chip:hover{background:rgba(82,64,196,.12);border-color:rgba(82,64,196,.6)}
+
+/* --- footer --- */
+html[data-theme="light"] .footer{background:#efeee9;border-top-color:rgba(23,25,30,.14)}
+html[data-theme="light"] .footer p,html[data-theme="light"] .footer-center,html[data-theme="light"] .footer-right{color:var(--dim)}
+html[data-theme="light"] .footer-right a{color:var(--violet-2)}
+
+/* --- mobile menu / modal --- */
+html[data-theme="light"] .mobile-menu{background:rgba(250,249,247,.97)}
+html[data-theme="light"] .mobile-menu .micro-label{color:var(--violet-2)}
+html[data-theme="light"] .auth-modal{background:rgba(23,25,30,.44)}
+html[data-theme="light"] .auth-card{background:linear-gradient(165deg,#ffffff,#faf9f7);border-color:rgba(23,25,30,.16);box-shadow:0 30px 90px rgba(23,25,30,.2),inset 0 1px 0 rgba(255,255,255,.9)}
+html[data-theme="light"] .auth-card>p{color:#5a606b}
+html[data-theme="light"] .auth-form label{color:#696f7a}
+html[data-theme="light"] .auth-form input{background:#f7f6f3;border-color:rgba(23,25,30,.18);color:#17191e}
+html[data-theme="light"] .auth-form input:hover{border-color:rgba(82,64,196,.5)}
+html[data-theme="light"] .auth-form input:focus{border-color:rgba(82,64,196,.75);box-shadow:0 0 0 3px rgba(82,64,196,.14)}
+html[data-theme="light"] .auth-form input::placeholder{color:rgba(23,25,30,.35)}
+html[data-theme="light"] .auth-submit{background:#4a3abb;box-shadow:0 12px 26px rgba(74,58,187,.28)}
+html[data-theme="light"] .auth-submit:hover{background:#3f31a3}
+html[data-theme="light"] .auth-submit-danger{background:linear-gradient(110deg,#c22c4e,#e4536f);box-shadow:0 12px 26px rgba(207,50,80,.25)}
+html[data-theme="light"] .auth-error{color:#c02f4f;background:rgba(207,50,80,.09)}
+html[data-theme="light"] .auth-close{color:#6b7079}
+html[data-theme="light"] .auth-close:hover{color:#17191e}
+html[data-theme="light"] .auth-forgot{color:var(--dim)}
+html[data-theme="light"] .auth-forgot:hover{color:#17191e}
+html[data-theme="light"] .auth-password-toggle{color:var(--dim)}
+html[data-theme="light"] .auth-password-toggle:hover{color:#17191e}
+html[data-theme="light"] .auth-switch{color:#5a606b!important}
+html[data-theme="light"] .auth-switch button{color:var(--violet-2)}
+html[data-theme="light"] .auth-kicker{color:var(--cyan)}
+html[data-theme="light"] .news-modal-text p{color:#3c414c}
+html[data-theme="light"] .news-modal-text p:first-child{color:#17191e}
+html[data-theme="light"] .news-modal-error{color:#96500f}
+html[data-theme="light"] .news-modal-loading{color:var(--muted)}
+
+/* --- chat / fab --- */
+html[data-theme="light"] .ai-fab{border-color:rgba(11,143,110,.45);background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(240,249,246,.92));color:#17191e;box-shadow:0 14px 40px rgba(23,25,30,.14),0 0 0 1px rgba(11,143,110,.12);backdrop-filter:blur(18px)}
+html[data-theme="light"] .ai-fab:hover{border-color:rgba(11,143,110,.75);background:#ffffff;box-shadow:0 18px 46px rgba(23,25,30,.2)}
+html[data-theme="light"] .ai-fab>i{color:var(--mint)}
+html[data-theme="light"] .ai-core{background:radial-gradient(circle at 35% 30%,#b9ffe9,#14a37b);box-shadow:0 0 22px rgba(11,143,110,.4)}
+html[data-theme="light"] .chat-window{background:rgba(255,255,255,.97);border-color:rgba(23,25,30,.16);box-shadow:0 35px 100px rgba(23,25,30,.22)}
+html[data-theme="light"] .chat-close{color:var(--dim)}
+html[data-theme="light"] .chat-close:hover{color:#17191e}
+html[data-theme="light"] .msg.bot{background:#f0efec;color:#26292f}
+html[data-theme="light"] .typing-indicator{background:#f0efec}
+html[data-theme="light"] .typing-indicator span{background:#9aa0ab}
+html[data-theme="light"] .chat-footer{background:rgba(23,25,30,.035)}
+html[data-theme="light"] .chat-suggest:hover{color:#17191e;background:rgba(23,25,30,.07)}
+html[data-theme="light"] .chat-input-area input{background:#fbfbfa;color:#17191e;border-color:rgba(23,25,30,.18)}
+html[data-theme="light"] .chat-input-area input::placeholder{color:rgba(23,25,30,.4)}
+html[data-theme="light"] .chat-input-area input:focus{border-color:rgba(82,64,196,.6)}
+
+/* --- cursor (hybrid: floats over both paper and the dark hero) --- */
+html[data-theme="light"] .cursor-lens{border-color:rgba(82,64,196,.75);background:radial-gradient(circle at 32% 25%,rgba(255,255,255,.85),rgba(82,64,196,.1) 46%,rgba(14,127,158,.07) 75%,rgba(23,25,30,.04) 100%);box-shadow:0 0 0 1px rgba(82,64,196,.14),0 0 26px rgba(82,64,196,.18),inset 0 0 16px rgba(255,255,255,.65)}
+html[data-theme="light"] .cursor-lens.is-hover{background:radial-gradient(circle at 32% 25%,rgba(255,255,255,.9),rgba(82,64,196,.18) 44%,rgba(14,127,158,.08) 78%);box-shadow:0 0 0 1px rgba(82,64,196,.2),0 0 36px rgba(82,64,196,.22),inset 0 0 18px rgba(255,255,255,.7)}
+html[data-theme="light"] .cursor-lens.is-ai{background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.9),rgba(14,127,158,.16) 44%,rgba(14,127,158,.05) 75%)}
+html[data-theme="light"] .lens-center{color:#3d34b3}
+html[data-theme="light"] .lens-glint{background:rgba(23,25,30,.4)}
+html[data-theme="light"] .lens-crosshair{background:rgba(61,52,179,.7)}
+html[data-theme="light"] .cursor-orbit{border-color:rgba(82,64,196,.6)}
+html[data-theme="light"] .cursor-orbit-a{border-color:rgba(82,64,196,.3)}
+html[data-theme="light"] .cursor-orbit-b{border-color:rgba(14,127,158,.3)}
+html[data-theme="light"] button:focus-visible,html[data-theme="light"] a:focus-visible,
+html[data-theme="light"] input:focus-visible,html[data-theme="light"] textarea:focus-visible,
+html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(82,64,196,.18),0 0 0 1px var(--violet)}
+
+/* nav fitting for the extra toggle button — both modes */
+@media(max-width:800px){
+  .auth-controls{gap:7px}
+  .theme-toggle{width:38px;height:38px}
+  .brand{font-size:18px}
+  .auth-button{padding:10px 17px;font-size:12px;letter-spacing:.06em}
+}
+</style>
   </head>
   <body>
   <div class="cursor-system" aria-hidden="true">
@@ -334,6 +602,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     </div>
     <div class="auth-controls">
       <button class="auth-button magnetic-target" id="authButton" type="button">Login</button>
+      <button class="theme-toggle magnetic-target" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></button>
     </div>
     <button class="menu-toggle magnetic-target" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation">
       <span></span><span></span>
@@ -2543,6 +2812,39 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
     if (chatWindow?.classList.contains('open') && !chatWindow.contains(event.target) && !aiToggle.contains(event.target)) {
       closeChat();
     }
+  });
+
+  /* Theme toggle — light / dark */
+  const THEME_KEY = 'fx-theme';
+  const THEME_SUN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>';
+  const THEME_MOON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>';
+
+  function currentTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  }
+
+  function paintThemeButton(theme) {
+    const button = $('#themeToggle');
+    if (!button) return;
+    button.innerHTML = theme === 'light' ? THEME_MOON : THEME_SUN;
+    button.setAttribute('aria-label', theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+    button.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+  }
+
+  function setTheme(theme, animate) {
+    const root = document.documentElement;
+    if (animate && theme !== currentTheme()) {
+      root.classList.add('theme-transition');
+      setTimeout(() => root.classList.remove('theme-transition'), 650);
+    }
+    root.setAttribute('data-theme', theme);
+    try { localStorage.setItem(THEME_KEY, theme); } catch { /* storage unavailable */ }
+    paintThemeButton(theme);
+  }
+
+  paintThemeButton(currentTheme());
+  $('#themeToggle')?.addEventListener('click', () => {
+    setTheme(currentTheme() === 'light' ? 'dark' : 'light', true);
   });
 
   addEventListener('keydown', (event) => {
