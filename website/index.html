@@ -251,6 +251,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .wm-status.none{background:rgba(101,230,193,.13);color:#65e6c1}
 .meter-caption{font:500 9px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:9px}
 .detect-copy .verdict-chip{margin-bottom:9px}
+.news-tools .live-chip{margin-top:0;white-space:nowrap}
 
 /* SCAM SHIELD — verdict, chips, how-it-works, stats, extension, recent scans */
 .verdict-chip{display:inline-block;padding:6px 14px;border-radius:999px;font:700 11px var(--mono);letter-spacing:.1em;margin-bottom:10px}
@@ -319,7 +320,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       <a href="#ai-detect" class="nav-link magnetic-target">AI<span></span></a>
       <a href="#signals" class="nav-link magnetic-target">Signals<span></span></a>
       <a href="#news" class="nav-link magnetic-target">News<span></span></a>
-      <a href="#about" class="nav-link magnetic-target">About<span></span></a>
     </div>
     <div class="auth-controls">
       <button class="auth-button magnetic-target" id="authButton" type="button">Login</button>
@@ -335,8 +335,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       <a href="#trust" class="mobile-link">Trust <span>01</span></a>
       <a href="#ai-detect" class="mobile-link">AI <span>02</span></a>
       <a href="#signals" class="mobile-link">Signals <span>03</span></a>
-      <a href="#news" class="mobile-link">News <span>04</span></a>
-      <a href="#about" class="mobile-link">About <span>05</span></a>
+    <a href="#news" class="mobile-link">News <span>04</span></a>
     </div>
   </div>
 
@@ -742,30 +741,30 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
           <option value="newest">Newest</option>
           <option value="impact">Impact</option>
         </select>
+        <span class="live-chip news-live-chip" id="newsUpdated"><i></i> Updated daily · 12:00 AM IST</span>
       </div>
     </div>
 
     <div class="news-filters reveal-on-scroll">
       <button class="filter-pill active magnetic-target" data-filter="all">All updates</button>
       <button class="filter-pill magnetic-target" data-filter="ai">AI</button>
-      <button class="filter-pill magnetic-target" data-filter="privacy">Privacy</button>
-      <button class="filter-pill magnetic-target" data-filter="security">Security</button>
       <button class="filter-pill magnetic-target" data-filter="business">Business</button>
-      <button class="filter-pill magnetic-target" data-filter="regulation">Regulation</button>
+      <button class="filter-pill magnetic-target" data-filter="ecommerce">E-commerce</button>
+      <button class="filter-pill magnetic-target" data-filter="internet">Internet &amp; Social</button>
     </div>
 
     <div class="news-grid" id="newsGrid">
-      <article class="news-card featured reveal-on-scroll magnetic-card" data-category="regulation" data-impact="98" data-date="20260802">
+      <article class="news-card featured reveal-on-scroll magnetic-card" data-category="ai" data-impact="98" data-date="20260802">
         <div class="news-image image-ai"></div>
         <div class="news-content">
           <div class="news-meta"><span>REGULATION</span><time>02 AUG 2026</time></div>
           <h3>AI transparency rules enter a new phase across major markets.</h3>
           <p>Regulators are pushing disclosure, traceability and user-facing transparency into the product layer.</p>
-          <a href="#about" class="news-link magnetic-target">Open briefing <b>↗</b></a>
+          <a href="#news" class="news-link magnetic-target">Open briefing <b>↗</b></a>
         </div>
       </article>
 
-      <article class="news-card reveal-on-scroll magnetic-card" data-category="privacy" data-impact="88" data-date="20260801">
+      <article class="news-card reveal-on-scroll magnetic-card" data-category="internet" data-impact="88" data-date="20260801">
         <div class="news-image image-data"></div>
         <div class="news-content">
           <div class="news-meta"><span>PRIVACY</span><time>01 AUG 2026</time></div>
@@ -775,7 +774,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
         </div>
       </article>
 
-      <article class="news-card reveal-on-scroll magnetic-card" data-category="security" data-impact="91" data-date="20260730">
+      <article class="news-card reveal-on-scroll magnetic-card" data-category="internet" data-impact="91" data-date="20260730">
         <div class="news-image image-cyber"></div>
         <div class="news-content">
           <div class="news-meta"><span>SECURITY</span><time>30 JUL 2026</time></div>
@@ -791,7 +790,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
           <div class="news-meta"><span>BUSINESS</span><time>27 JUL 2026</time></div>
           <h3>Data governance moves closer to the boardroom.</h3>
           <p>Data practices are increasingly treated as product, legal and strategic risk—not just infrastructure.</p>
-          <a href="#about" class="news-link magnetic-target">Read signal <b>↗</b></a>
+          <a href="#news" class="news-link magnetic-target">Read signal <b>↗</b></a>
         </div>
       </article>
 
@@ -804,36 +803,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
           <a href="#ai-detect" class="news-link magnetic-target">Read signal <b>↗</b></a>
         </div>
       </article>
-    </div>
-  </section>
-
-  <section class="section about-section" id="about">
-    <div class="section-topline reveal-on-scroll">
-      <p class="kicker">About the lab</p>
-      <span class="section-index">05 / 05</span>
-    </div>
-
-    <div class="about-hero reveal-on-scroll">
-      <h2 class="section-title">Designing for trust<br><em>in complex systems.</em></h2>
-      <p class="section-intro">
-        We believe good innovation is optimistic but grounded. We help teams navigate uncertainty by researching, prototyping and stress-testing human impact, privacy safeguards and technological limits together.
-      </p>
-    </div>
-
-    <div class="about-image-wrap reveal-on-scroll">
-      <div class="about-image"></div>
-      <div class="about-overlay">
-        <span class="micro-label">FutureX Lab / Field notes</span>
-        <p>Build with curiosity.<br>Ship with evidence.</p>
-        <span class="about-line"></span>
-      </div>
-    </div>
-
-    <div class="about-metrics reveal-on-scroll">
-      <div><strong>04</strong><span>Years mapping AI</span></div>
-      <div><strong>120+</strong><span>Prototype concepts</span></div>
-      <div><strong>15</strong><span>Global collaborators</span></div>
-      <div><strong>∞</strong><span>Questions worth asking</span></div>
     </div>
   </section>
 
@@ -2231,6 +2200,80 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
       .sort((a, b) => Number(b.dataset[key]) - Number(a.dataset[key]))
       .forEach((card) => grid.appendChild(card));
   });
+
+  /* Live news feed (refreshed daily at 12:00 AM IST by the backend) */
+  const NEWS_CATEGORY_LABELS = {
+    ai: 'AI',
+    business: 'BUSINESS',
+    ecommerce: 'E-COMMERCE',
+    internet: 'INTERNET & SOCIAL'
+  };
+  const NEWS_CATEGORY_IMPACT = { ai: 95, business: 85, ecommerce: 82, internet: 88 };
+  const NEWS_FALLBACK_IMAGES = ['image-ai', 'image-data', 'image-cyber', 'image-network', 'image-agent'];
+
+  function formatNewsDate(value) {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '';
+    return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
+  }
+
+  function renderLiveNews(payload) {
+    const grid = $('#newsGrid');
+    const items = Array.isArray(payload?.items) ? payload.items : [];
+    if (!grid || !items.length) return false;
+
+    grid.innerHTML = items.map((item, index) => {
+      const category = NEWS_CATEGORY_LABELS[item.category] ? item.category : 'business';
+      const label = NEWS_CATEGORY_LABELS[category];
+      const dateValue = String(item.published || '').slice(0, 10).replace(/-/g, '');
+      const hasImage = typeof item.image === 'string' && /^https?:\/\//i.test(item.image);
+      const imageClass = hasImage ? 'news-image' : `news-image ${NEWS_FALLBACK_IMAGES[index % NEWS_FALLBACK_IMAGES.length]}`;
+      const imageStyle = hasImage ? ` style="background:url('${escapeHtml(item.image)}') center/cover no-repeat"` : '';
+      const featuredClass = index === 0 && hasImage ? ' featured' : '';
+      const summary = item.summary ? `<p>${escapeHtml(item.summary)}</p>` : '';
+      const source = escapeHtml(item.source || 'Source');
+      return `
+      <article class="news-card${featuredClass} reveal-on-scroll is-visible magnetic-card" data-category="${category}" data-impact="${NEWS_CATEGORY_IMPACT[category]}" data-date="${dateValue}">
+        <div class="${imageClass}"${imageStyle}></div>
+        <div class="news-content">
+          <div class="news-meta"><span>${label}</span><time>${formatNewsDate(item.published)}</time></div>
+          <h3>${escapeHtml(item.title)}</h3>
+          ${summary}
+          <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" class="news-link magnetic-target">Read at ${source} <b>↗</b></a>
+        </div>
+      </article>`;
+    }).join('');
+
+    const updated = $('#newsUpdated');
+    if (updated && payload.updated) {
+      const stamp = new Date(payload.updated).toLocaleString('en-GB', {
+        timeZone: 'Asia/Kolkata',
+        day: '2-digit',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      }).toUpperCase();
+      updated.innerHTML = `<i></i> Updated ${stamp} IST`;
+    }
+
+    filterNews();
+    return true;
+  }
+
+  async function loadLiveNews() {
+    try {
+      const response = await fetch(`${API_BASE}/api/news`);
+      if (!response.ok) throw new Error('feed unavailable');
+      const payload = await response.json();
+      renderLiveNews(payload);
+    } catch {
+      const updated = $('#newsUpdated');
+      if (updated) updated.innerHTML = '<i></i> Live feed unavailable · showing archive';
+    }
+  }
+
+  loadLiveNews();
 
   /* AI chat */
   const aiToggle = $('#aiToggle');

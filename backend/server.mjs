@@ -10,6 +10,8 @@ import authRoutes from './routes/auth.mjs';
 import chatRoutes from './routes/chat.mjs';
 import analysisRoutes from './routes/analysis.mjs';
 import diagnosticsRoutes from './routes/diagnostics.mjs';
+import newsRoutes from './routes/news.mjs';
+import { startNewsScheduler } from './config/news.mjs';
 
 dotenv.config();
 
@@ -45,6 +47,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api', chatRoutes);
 app.use('/api', analysisRoutes);
 app.use('/api/diag', diagnosticsRoutes);
+app.use('/api/news', newsRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -79,7 +82,10 @@ async function start() {
       console.log(`🗄  Database: ${usingMongo() ? 'MongoDB Atlas' : 'JSON file (local)'}`);
       console.log(`🤖 AI: ${aiEnabled() ? `Groq (${process.env.GROQ_MODEL || 'default model'})` : 'offline — add GROQ_API_KEY to .env'}`);
       console.log(`📧 Email: ${emailConfigured() ? 'configured' : 'not configured — add EMAIL_USER and EMAIL_PASSWORD to .env'}`);
+      console.log(`📰 News: refreshing daily at 12:00 AM IST`);
       console.log(`🔐 Security middleware enabled\n`);
+
+      startNewsScheduler();
     });
   } catch (error) {
     console.error('Failed to start server:', error);
