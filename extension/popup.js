@@ -95,10 +95,12 @@
       if (!/^https?:\/\//i.test(url) && !/^[\w-]+(\.[\w-]+)+/.test(url)) {
         throw new Error('That does not look like a valid URL.');
       }
+      if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
       return {
         type,
         mode: 'url',
         content: `URL: ${url}`,
+        url,
         target: { url, title: '', snippet: url.slice(0, 80) }
       };
     }

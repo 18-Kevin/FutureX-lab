@@ -18,8 +18,26 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Security middleware
-app.use(helmet());
+// Security middleware. The website is a single-file page with two inline
+// <script> blocks, so script-src must allow inline (matching the Vercel host,
+// which serves the same page with no CSP). Inline event handlers stay blocked.
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      baseUri: ["'self'"],
+      fontSrc: ["'self'", 'https:', 'data:'],
+      formAction: ["'self'"],
+      frameAncestors: ["'self'"],
+      imgSrc: ["'self'", 'data:'],
+      objectSrc: ["'none'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrcAttr: ["'none'"],
+      styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
+      upgradeInsecureRequests: []
+    }
+  }
+}));
 
 // Approved origins: the production site, local dev, and the pinned FutureX Lab
 // extension (extension ID is fixed via the manifest "key" field).

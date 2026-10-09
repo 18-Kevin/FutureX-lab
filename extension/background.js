@@ -50,6 +50,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         type: 'scam',
         mode: 'url',
         content: `URL: ${link}${source ? `\nFound on: ${source}` : ''}`,
+        url: link,
         target: { url: link, title: '', snippet: link.slice(0, 80) }
       });
       return;

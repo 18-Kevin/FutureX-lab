@@ -871,7 +871,7 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
         <button class="tool-tab magnetic-target" data-target="platform-panel">App / Platform <span>03</span></button>
         <button class="tool-tab magnetic-target" data-target="scam-message-panel">Scam Message <span>04</span></button>
         <button class="tool-tab magnetic-target" data-target="scam-contract-panel">Scam Contract <span>05</span></button>
-        <div class="trust-side-note"><b>Prototype engine</b><span>Frontend simulation • API-ready</span></div>
+        <div class="trust-side-note"><b>AI analysis engine</b><span>Live API • clause-by-clause</span></div>
       </div>
 
       <div class="tool-viewport">
@@ -894,7 +894,7 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
 
           <div class="demo-hints">
             <button class="hint magnetic-target" data-fill="privacy">Try a demo policy</button>
-            <span>Demo mode until backend/API integration</span>
+            <span>Live AI analysis — URLs are fetched and scanned; paste text for best results</span>
           </div>
         </div>
 
@@ -1001,7 +1001,7 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
               <span class="verdict-chip" id="resultVerdict" hidden>SUSPICIOUS</span>
               <p class="micro-label">Trust score</p>
               <h4 id="resultTitle">Analysis complete</h4>
-              <p id="resultDesc">Review the signals detected by the prototype engine.</p>
+              <p id="resultDesc">Review the signals detected in your submission.</p>
             </div>
           </div>
           <div class="signals-grid" id="resultSignals"></div>
@@ -1012,6 +1012,10 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
           <div class="detail-block" id="resultRecs" hidden>
             <p class="micro-label">What you should do</p>
             <ul class="rec-list" id="resultRecList"></ul>
+          </div>
+          <div class="detail-block" id="resultLimits" hidden>
+            <p class="micro-label">Limitations</p>
+            <ul class="rec-list" id="resultLimitList"></ul>
           </div>
         </div>
 
@@ -1111,6 +1115,7 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
             <div class="detect-detail" id="detectWatermarkBlock" hidden><b>Watermark check</b><span id="detectWatermark"></span></div>
             <div class="detect-detail" id="detectProvenanceBlock" hidden><b>Likely origin</b><span id="detectProvenance"></span></div>
             <div class="detect-detail" id="detectEvidenceBlock" hidden><b>Evidence</b><ul id="detectEvidenceList"></ul></div>
+            <div class="detect-detail" id="detectLimitsBlock" hidden><b>Limitations</b><ul id="detectLimitsList"></ul></div>
           </div>
         </div>
       </div>
@@ -1826,7 +1831,7 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
   const navLinks = $$('.nav-link');
 
   if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
+    const navObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
 
@@ -1836,12 +1841,19 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
             link.getAttribute('href') === `#${entry.target.id}`
           );
         });
-
-        entry.target.classList.add('is-visible');
       });
-    }, { rootMargin: '-25% 0px -50% 0px', threshold: 0.1 });
+    }, { rootMargin: '-25% 0px -50% 0px', threshold: 0 });
 
-    $$('main[id], section[id], .reveal-on-scroll').forEach((item) => observer.observe(item));
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
+
+    $$('main[id], section[id]').forEach((item) => navObserver.observe(item));
+    $$('.reveal-on-scroll').forEach((item) => revealObserver.observe(item));
   } else {
     $$('.reveal-on-scroll').forEach((item) => item.classList.add('is-visible'));
   }
@@ -1865,39 +1877,6 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
   });
 
   /* Trust intelligence */
-  const trustData = {
-    privacy: {
-      score: 78,
-      title: 'Privacy policy assessment',
-      description: 'Several safeguards are present, but user control and third-party sharing deserve a closer read.',
-      signals: [
-        ['warn', 'Third-party sharing', 'Partner and analytics sharing language should be checked for scope.'],
-        ['good', 'Retention language', 'A defined deletion and retention policy appears in this demo analysis.'],
-        ['bad', 'Opt-out path', 'The user-control flow may require a manual request rather than a direct toggle.']
-      ]
-    },
-    terms: {
-      score: 62,
-      title: 'Terms & conditions scan',
-      description: 'Several clauses may materially affect users and should be explained before acceptance.',
-      signals: [
-        ['bad', 'Arbitration', 'The demo flags a potentially restrictive dispute-resolution clause.'],
-        ['warn', 'Auto-renewal', 'Subscription renewal language deserves explicit attention.'],
-        ['good', 'Content ownership', 'The demo indicates comparatively clear user content rights.']
-      ]
-    },
-    platform: {
-      score: 84,
-      title: 'Platform policy evaluation',
-      description: 'The demo shows generally clear controls with one notable tracking-related concern.',
-      signals: [
-        ['good', 'Security', 'Strong security language is surfaced in the simulated result.'],
-        ['warn', 'Location access', 'Precise background location may deserve user scrutiny.'],
-        ['good', 'User controls', 'Account-level controls are represented as relatively clear.']
-      ]
-    }
-  };
-
   $$('.tool-tab').forEach((tab) => {
     tab.addEventListener('click', () => {
       const target = tab.dataset.target;
@@ -1947,7 +1926,7 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
       }
 
       $('#resultTitle').textContent = data.title;
-      $('#resultDesc').textContent = data.description;
+      $('#resultDesc').textContent = (data.offline ? 'Offline pattern check (the AI API was unreachable) — keyword matching only. ' : '') + (data.description || '');
 
       $('#resultSignals').innerHTML = data.signals.map(([kind, title, description]) => `
         <div class="signal-card ${kind}">
@@ -1984,6 +1963,14 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
         $('#resultRecList').innerHTML = recs.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
       }
 
+      const limitsBlock = $('#resultLimits');
+      if (limitsBlock) {
+        const limits = trustLimitations(data);
+        limitsBlock.hidden = limits.length === 0;
+        const limitList = $('#resultLimitList');
+        if (limitList) limitList.innerHTML = limits.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+      }
+
       const circumference = 314;
       scoreCircle.style.stroke = data.riskMode
         ? (data.score >= 70 ? '#ff6d83' : data.score >= 40 ? '#ffb36b' : '#65e6c1')
@@ -2002,8 +1989,58 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
     }, 800);
   }
 
-  function displayTrustResult(type) {
-    showTrustResult(trustData[type] || trustData.privacy);
+  function looksLikeUrl(text) {
+    return /^https?:\/\/\S+$/i.test(text) || /^[\w-]+(\.[\w-]{2,})+(\/\S*)?$/.test(text);
+  }
+
+  function normalizeUrl(text) {
+    return /^https?:\/\//i.test(text) ? text : `https://${text}`;
+  }
+
+  function trustLimitations(data) {
+    const list = [];
+    const src = data.source && data.source.url ? data.source : null;
+    if (src && src.fetched) {
+      list.push(`Live page text was fetched from ${src.url} at analysis time — a snapshot, not a guarantee of the current page.`);
+    } else if (src) {
+      list.push(`The page at ${src.url} could not be fetched (${src.note || 'reason not stated'}) — only the text you submitted was analyzed.`);
+    }
+    if (data.offline) {
+      list.push('Offline keyword pattern check only — no AI model examined this content, so novel scams can be missed.');
+    } else {
+      list.push('Automated AI assessment of the content you submitted — not legal or security advice.');
+      list.push('No links were opened and no outside sources were independently verified.');
+    }
+    if (Array.isArray(data.limitations)) {
+      data.limitations.filter((item) => typeof item === 'string' && item.trim()).slice(0, 4)
+        .forEach((item) => list.push(item.trim()));
+    }
+    return list;
+  }
+
+  function showTrustError(message) {
+    const loader = $('#trustLoading');
+    const results = $('#trustResults');
+    loader?.classList.remove('active');
+    const chip = $('#resultVerdict');
+    if (chip) chip.hidden = true;
+    $('#resultTitle').textContent = 'Analysis unavailable';
+    $('#resultDesc').textContent = message;
+    $('#resultSignals').innerHTML = '';
+    const findingsBlock = $('#resultFindings');
+    if (findingsBlock) findingsBlock.hidden = true;
+    const recsBlock = $('#resultRecs');
+    if (recsBlock) recsBlock.hidden = true;
+    const limitsBlock = $('#resultLimits');
+    if (limitsBlock) limitsBlock.hidden = true;
+    const circle = $('#resultCircle');
+    if (circle) {
+      circle.style.stroke = '#8a86c8';
+      circle.setAttribute('stroke-dasharray', '0 314');
+    }
+    const scoreText = $('#resultScore');
+    if (scoreText) scoreText.textContent = '—';
+    results?.classList.add('active');
   }
 
   async function runScamAnalysis(type, button) {
@@ -2030,7 +2067,7 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
       const response = await fetch(`${API_BASE}/api/analyze`, {
         method: 'POST',
         headers: authHeaders({ 'Content-Type': 'application/json' }),
-        body: JSON.stringify({ type, content: text })
+        body: JSON.stringify({ type, content: text, ...(looksLikeUrl(text) ? { url: normalizeUrl(text) } : {}) })
       });
       if (response.ok) {
         const payload = await response.json();
@@ -2043,15 +2080,19 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
     button.disabled = false;
     button.innerHTML = savedHTML;
 
-    if (!data) data = type === 'scam' ? localScamAnalysis(text) : localContractAnalysis(text);
+    if (!data) {
+      data = type === 'scam' ? localScamAnalysis(text) : localContractAnalysis(text);
+      data.offline = true;
+    }
     data.riskMode = true;
+    data.__type = type;
 
     showTrustResult(data);
     saveRecentScan(type, data);
   }
 
   async function runPolicyAnalysis(type, button) {
-    const input = $('#policyInput');
+    const input = type === 'terms' ? $('#termsInput') : type === 'platform' ? $('#platformInput') : $('#policyInput');
     const text = (input?.value || '').trim();
 
     if (!text) {
@@ -2070,29 +2111,36 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
     button.innerHTML = 'Analyzing <span>…</span>';
 
     let data = null;
+    let failMessage = 'Could not reach the FutureX Lab API. Check your connection and try again.';
     try {
       const response = await fetch(`${API_BASE}/api/analyze`, {
         method: 'POST',
         headers: authHeaders({ 'Content-Type': 'application/json' }),
-        body: JSON.stringify({ type, content: text })
+        body: JSON.stringify({ type, content: text, ...(looksLikeUrl(text) ? { url: normalizeUrl(text) } : {}) })
       });
       if (response.ok) {
         const payload = await response.json();
         if (typeof payload.score === 'number' && Array.isArray(payload.signals)) data = payload;
+      } else if (response.status === 429) {
+        failMessage = 'Rate limit reached (15 analyses per minute). Wait a moment and try again.';
+      } else {
+        const payload = await response.json().catch(() => null);
+        failMessage = (payload && payload.error) || `Analysis failed (HTTP ${response.status}). Try again shortly.`;
       }
     } catch {
-      /* Server unavailable — show the built-in demo data below. */
+      /* Network error — failMessage already describes it. */
     }
 
     button.disabled = false;
     button.innerHTML = savedHTML;
 
     if (!data) {
-      displayTrustResult(type);
+      showTrustError(failMessage);
       return;
     }
 
     data.riskMode = false;
+    data.__type = type;
     showTrustResult(data);
     saveRecentScan(type, data);
   }
@@ -2106,7 +2154,8 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
   });
 
   $('.hint[data-fill="privacy"]')?.addEventListener('click', () => {
-    $('#policyInput').value = 'https://example.com/privacy-policy';
+    $('#policyInput').value = 'We collect your name, email, precise location and full device contacts to personalize ads. Data may be shared with unnamed third-party partners and advertisers, and some data is retained indefinitely. You can request deletion only by posting a written letter to our offices. We may modify this policy at any time without notice.';
+    $('#policyInput').focus();
   });
 
   /* Scam-shield examples */
@@ -2322,23 +2371,25 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
       <div class="recent-item">
         <span class="recent-dot ${item.level}"></span>
         <span class="recent-r-label">${escapeHtml(item.label)}</span>
-        <span class="recent-r-meta">${escapeHtml(item.verdict || '')}</span>
+        <span class="recent-r-meta">${escapeHtml([item.verdict || '', item.when ? new Date(item.when).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' }) : ''].filter(Boolean).join(' · '))}</span>
         <span class="recent-r-score">${Number(item.score) || 0}</span>
       </div>
     `).join('');
   }
 
+  const SCAN_LABELS = { privacy: 'Privacy · ', terms: 'Terms · ', platform: 'App · ', scam: 'Msg · ', contract: 'Doc · ' };
+
   function saveRecentScan(type, data) {
     const items = loadRecent();
     items.unshift({
-      label: `${type === 'scam' ? 'Msg · ' : 'Doc · '}${data.title}`.slice(0, 90),
+      label: `${data.offline ? 'Offline · ' : ''}${SCAN_LABELS[type] || 'Scan · '}${data.title}`.slice(0, 90),
       verdict: data.verdict || '',
       score: data.score,
       level: data.verdict ? verdictLevel(data.verdict) : (data.riskMode ? (data.score >= 60 ? 'danger' : data.score >= 40 ? 'warn' : 'safe') : (data.score >= 75 ? 'safe' : data.score >= 55 ? 'warn' : 'danger')),
       when: Date.now()
     });
     try {
-      localStorage.setItem(RECENT_KEY, JSON.stringify(items.slice(0, 5)));
+      localStorage.setItem(RECENT_KEY, JSON.stringify(items.slice(0, 10)));
     } catch { /* storage unavailable */ }
     renderRecent();
   }
@@ -2370,9 +2421,10 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
     $('#detectWatermarkBlock').hidden = true;
     $('#detectProvenanceBlock').hidden = true;
     $('#detectEvidenceBlock').hidden = true;
+    $('#detectLimitsBlock').hidden = true;
   }
 
-  function renderDetectResult(data) {
+  function renderDetectResult(data, mode) {
     const score = typeof data.score === 'number' ? Math.max(0, Math.min(100, Math.round(data.score))) : 0;
     $('#detectMeter').style.width = `${score}%`;
     $('#detectScore').textContent = `${score}%`;
@@ -2414,6 +2466,19 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
       : [];
     $('#detectEvidenceBlock').hidden = evidence.length === 0;
     $('#detectEvidenceList').innerHTML = evidence.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+
+    const limits = [
+      mode === 'text'
+        ? 'Automated AI assessment of only the text you submitted — stylometric detection is probabilistic, not proof of authorship.'
+        : 'Automated AI assessment of only the media you uploaded — a sampling of frames and pixels, not proof of origin or certification.',
+      'No external sources or metadata were independently verified.'
+    ];
+    if (Array.isArray(data.limitations)) {
+      data.limitations.filter((item) => typeof item === 'string' && item.trim()).slice(0, 4)
+        .forEach((item) => limits.push(item.trim()));
+    }
+    $('#detectLimitsBlock').hidden = false;
+    $('#detectLimitsList').innerHTML = limits.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
   }
 
   function readImageForAnalysis(file) {
@@ -2578,7 +2643,7 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
 
       button.disabled = false;
       button.innerHTML = savedHTML;
-      if (payload) renderDetectResult(payload);
+      if (payload) renderDetectResult(payload, mode);
     });
   });
 

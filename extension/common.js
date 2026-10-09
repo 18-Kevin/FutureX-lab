@@ -69,7 +69,7 @@ const FX = (() => {
     return `${head}\n\n[... content truncated at ${MAX_CONTENT} characters ...]\n\n${tail}`;
   }
 
-  async function analyze({ type, content, mode }) {
+  async function analyze({ type, content, mode, url }) {
     if (!ALLOWED_TYPES.includes(type)) {
       return { ok: false, error: 'Choose a supported analysis type.', status: 0 };
     }
@@ -79,12 +79,15 @@ const FX = (() => {
     }
 
     const base = await getApiBase();
+    const body = { type, content: truncate(text) };
+    if (url && /^https?:\/\//i.test(url)) body.url = url.slice(0, 2048);
+
     let response;
     try {
       response = await fetch(`${base}/api/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type, content: truncate(text) })
+        body: JSON.stringify(body)
       });
     } catch {
       return {
@@ -131,13 +134,21 @@ const FX = (() => {
 
   function limitationsFor(data) {
     const mode = String(data.__mode || '');
-    const scope = mode === 'page'
-      ? 'Scope: the visible text extracted from this page at analysis time — dynamic content loaded later was not included.'
-      : mode === 'selection'
-      ? 'Scope: only the text you selected was analyzed, not the full page.'
-      : mode === 'url'
-      ? 'Scope: the URL string only — the page itself was not opened or fetched.'
-      : 'Scope: only the content you submitted was analyzed.';
+    const src = data.source && data.source.url ? data.source : null;
+    let scope;
+    if (src && src.fetched) {
+      scope = `Scope: the page at ${src.url} was fetched by the backend and analyzed as a live snapshot at analysis time.`;
+    } else if (src) {
+      scope = `Scope: the URL ${src.url} could not be fetched (${src.note || 'no reason given'}) — only the text you submitted was analyzed.`;
+    } else if (mode === 'page') {
+      scope = 'Scope: the visible text extracted from this page at analysis time — dynamic content loaded later was not included.';
+    } else if (mode === 'selection') {
+      scope = 'Scope: only the text you selected was analyzed, not the full page.';
+    } else if (mode === 'url') {
+      scope = 'Scope: the URL text you submitted — the page itself was not fetched.';
+    } else {
+      scope = 'Scope: only the content you submitted was analyzed.';
+    }
     const list = [
       scope,
       'This is an automated AI assessment provided for guidance — not legal, security or financial advice.',
