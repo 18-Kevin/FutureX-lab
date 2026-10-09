@@ -182,9 +182,11 @@ const REPORT_SHAPE = `Return ONLY valid JSON with this exact shape:
 {
  "score": <0-100 number>,
  "verdict": "<one of the allowed verdicts>",
+ "confidence": "<High|Moderate|Low> (about NN%)",
  "title": "<short overall title>",
  "description": "<2-3 sentence plain-English overall assessment>",
  "signals": [["good"|"warn"|"bad", "<short title>", "<one specific observation citing the content>"]],
+ "evidence": ["<specific concrete indicator you observed in this content>"],
  "findings": [
    {
      "severity": "critical"|"high"|"medium"|"low",
@@ -200,6 +202,8 @@ const REPORT_SHAPE = `Return ONLY valid JSON with this exact shape:
 Rules:
 - Examine EVERY section of the content.
 - Produce 8-14 signals, 5-10 findings, and 3-6 recommendations.
+- confidence = how confident you are in this score and verdict given the content provided (say Low when the content is thin, ambiguous or truncated). Never present guesses as certainty.
+- evidence: 3-6 concrete, observable indicators you actually found in this content (quote or precise reference) — never invented, never vague.
 - Every finding must be specific to THIS content. Quote the real clause where possible. Never invent clauses that are not present.
 - Findings must cover every risky, unsafe, deceptive, or fraudulent practice you can identify — one finding per issue, never merge issues together.
 - Plain English, no legalese, no hedging filler. JSON only — no markdown, no commentary outside the JSON.`;

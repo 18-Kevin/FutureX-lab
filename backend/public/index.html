@@ -1002,12 +1002,17 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
               <p class="micro-label">Trust score</p>
               <h4 id="resultTitle">Analysis complete</h4>
               <p id="resultDesc">Review the signals detected in your submission.</p>
+              <div class="detect-detail" id="resultConfidenceBlock" hidden><b>Model confidence</b><span id="resultConfidence"></span></div>
             </div>
           </div>
           <div class="signals-grid" id="resultSignals"></div>
           <div class="detail-block" id="resultFindings" hidden>
             <p class="micro-label">Detailed findings</p>
             <div class="findings-list" id="resultFindingsList"></div>
+          </div>
+          <div class="detail-block" id="resultEvidence" hidden>
+            <p class="micro-label">Evidence observed</p>
+            <ul class="rec-list" id="resultEvidenceList"></ul>
           </div>
           <div class="detail-block" id="resultRecs" hidden>
             <p class="micro-label">What you should do</p>
@@ -1954,6 +1959,22 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
         }).join('');
       }
 
+      const confBlock = $('#resultConfidenceBlock');
+      if (confBlock) {
+        const showConf = !data.offline && typeof data.confidence === 'string' && data.confidence.trim();
+        confBlock.hidden = !showConf;
+        if (showConf) $('#resultConfidence').textContent = data.confidence;
+      }
+
+      const evidence = (Array.isArray(data.evidence) ? data.evidence : [])
+        .filter((item) => typeof item === 'string' && item.trim())
+        .slice(0, 8);
+      const evBlock = $('#resultEvidence');
+      if (evBlock) {
+        evBlock.hidden = evidence.length === 0;
+        $('#resultEvidenceList').innerHTML = evidence.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+      }
+
       const recs = (Array.isArray(data.recommendations) ? data.recommendations : [])
         .filter((item) => typeof item === 'string' && item.trim())
         .slice(0, 6);
@@ -2029,6 +2050,10 @@ html[data-theme="light"] select:focus-visible{box-shadow:0 0 0 3px rgba(61,52,17
     $('#resultSignals').innerHTML = '';
     const findingsBlock = $('#resultFindings');
     if (findingsBlock) findingsBlock.hidden = true;
+    const evBlock = $('#resultEvidence');
+    if (evBlock) evBlock.hidden = true;
+    const confBlock = $('#resultConfidenceBlock');
+    if (confBlock) confBlock.hidden = true;
     const recsBlock = $('#resultRecs');
     if (recsBlock) recsBlock.hidden = true;
     const limitsBlock = $('#resultLimits');
