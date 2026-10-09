@@ -18,7 +18,7 @@ The extension ID is fixed by the `key` field in `manifest.json`:
 - **Toolbar popup**
   - **This page** — extracts the visible text of the current tab and analyzes it.
   - **Selection** — analyzes the text you have selected on the page.
-  - **URL** — analyzes a URL string (paste any URL, or uses the current page URL).
+  - **URL** — analyzes a URL string (paste any URL, or uses the current page URL). The backend fetches the page's text when it can reach it; if it can't, only the URL string is analyzed and the result says so.
   - Pick an analysis type: scam & misleading claims (default), AI text detection, privacy policy, terms, app/platform, or contract review.
 - **Right-click menu**
   - *Analyze selection with FutureX Lab* — on any selected text.
@@ -31,14 +31,14 @@ The extension ID is fixed by the `key` field in `manifest.json`:
 ## Honest limitations (shown with every result)
 
 - Analysis is an automated AI assessment for guidance, not legal, security, or financial advice.
-- URL analysis reads the URL string only — the page is not opened or fetched by the backend.
+- URL analysis: the backend fetches the page text (public http/https pages only — localhost and private-network addresses are refused). When a fetch fails, only the URL string itself is analyzed, and the Limitations block states this.
 - Page analysis reads the visible text at click time; dynamically loaded content may be missing.
 - No links are opened and no independent sources are verified.
 - The model can add its own limitation notes; they are rendered under **Limitations**.
 
 ## API and limits
 
-- Endpoint: `POST /api/analyze` with `{ type, content }` (15,000 character limit; the extension truncates politely).
+- Endpoint: `POST /api/analyze` with `{ type, content, url? }` (15,000 character limit; the extension truncates politely). `url` triggers the server-side page fetch.
 - Rate limit: **15 analyses per minute per IP**, shared with the website. The popup shows a clear message when you hit it.
 - No account or key required (the endpoint uses optional auth).
 
