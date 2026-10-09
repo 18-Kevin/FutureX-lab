@@ -20,13 +20,22 @@ const PORT = process.env.PORT || 3000;
 
 // Security middleware
 app.use(helmet());
+
+// Approved origins: the production site, local dev, and the pinned FutureX Lab
+// extension (extension ID is fixed via the manifest "key" field).
+const approvedOrigins = new Set([
+  process.env.FRONTEND_URL || 'http://localhost:3000',
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+  'https://futurexlab.vercel.app',
+  'chrome-extension://epebmappddkmmlbieakhafhopbjibbnh'
+]);
+if (process.env.EXTENSION_ORIGIN) approvedOrigins.add(process.env.EXTENSION_ORIGIN);
+
 app.use(cors({
-  origin: [
-    process.env.FRONTEND_URL || 'http://localhost:3000',
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'https://futurexlab.vercel.app'
-  ],
+  origin: (origin, callback) => {
+    callback(null, !origin || approvedOrigins.has(origin));
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']

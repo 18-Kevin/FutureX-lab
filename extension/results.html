@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FutureX Lab — Analysis</title>
+  <link rel="stylesheet" href="popup.css" />
+  <link rel="stylesheet" href="results.css" />
+</head>
+<body class="results-page">
+  <header class="head">
+    <div class="brand">
+      <span class="mark"></span>
+      <span class="name">FutureX Lab</span>
+      <span class="sub">Trust Lens</span>
+    </div>
+    <a class="home-link" href="https://futurexlab.vercel.app/" target="_blank" rel="noopener">Open website ↗</a>
+  </header>
+
+  <main class="results-main">
+    <div class="ctx" id="pageCtx" hidden>
+      <b id="ctxTitle"></b>
+      <span id="ctxUrl"></span>
+    </div>
+
+    <div id="loading" class="loading" hidden>
+      <span class="spinner"></span>
+      <p>Analyzing… this can take up to half a minute.</p>
+    </div>
+
+    <div id="errorBox" class="error-box" hidden></div>
+
+    <section id="result" class="result" hidden>
+      <div class="result-meta">
+        <span id="resultTarget" class="result-target"></span>
+        <span id="resultTime" class="result-time"></span>
+      </div>
+      <div id="resultBody"></div>
+    </section>
+  </main>
+
+  <script src="common.js"></script>
+  <script src="results.js"></script>
+</body>
+</html>

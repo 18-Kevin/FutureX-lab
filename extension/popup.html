@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FutureX Lab — Trust Lens</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="head">
+    <div class="brand">
+      <span class="mark"></span>
+      <span class="name">FutureX Lab</span>
+    </div>
+    <nav class="tabs">
+      <button id="tabAnalyze" class="tab active" type="button">Analyze</button>
+      <button id="tabHistory" class="tab" type="button">History</button>
+      <button id="tabSettings" class="tab" type="button">Settings</button>
+    </nav>
+  </header>
+
+  <main id="analyzeView" class="view">
+    <div class="ctx" id="pageCtx">
+      <b id="ctxTitle">Current page</b>
+      <span id="ctxUrl">Reading page…</span>
+    </div>
+
+    <div class="mode-row">
+      <button class="mode-btn active" id="modePage" data-mode="page" type="button">This page</button>
+      <button class="mode-btn" id="modeSelection" data-mode="selection" type="button">Selection</button>
+      <button class="mode-btn" id="modeUrl" data-mode="url" type="button">URL</button>
+    </div>
+
+    <div class="url-row" id="urlRow" hidden>
+      <input id="urlInput" type="text" placeholder="https://suspicious-site.example/offer" spellcheck="false" />
+    </div>
+
+    <label class="type-label" for="typeSelect">Analysis type</label>
+    <select id="typeSelect"></select>
+
+    <button id="runBtn" class="run-btn" type="button">Run analysis</button>
+
+    <div id="loading" class="loading" hidden>
+      <span class="spinner"></span>
+      <p>Analyzing… this can take up to half a minute.</p>
+    </div>
+
+    <div id="errorBox" class="error-box" hidden></div>
+
+    <section id="result" class="result" hidden>
+      <div class="result-meta">
+        <span id="resultTarget" class="result-target"></span>
+        <span id="resultTime" class="result-time"></span>
+      </div>
+      <div id="resultBody"></div>
+    </section>
+  </main>
+
+  <main id="historyView" class="view" hidden>
+    <div class="history-head">
+      <span id="historyCount">0 saved scans</span>
+      <button id="clearHistory" class="link-btn" type="button">Clear</button>
+    </div>
+    <div id="historyList" class="history-list"></div>
+    <p id="historyEmpty" class="empty" hidden>Analyses you run will be listed here (stored locally in your browser only).</p>
+  </main>
+
+  <main id="settingsView" class="view" hidden>
+    <label class="type-label" for="apiSelect">API target</label>
+    <select id="apiSelect">
+      <option value="prod">Production (futurex-lab-api.onrender.com)</option>
+      <option value="local">Local dev server (localhost:3000)</option>
+    </select>
+    <p class="note">Analyses run on the FutureX Lab backend. Rate limit: 15 analyses per minute (shared with the website). No account or API key is needed.</p>
+    <p class="note">Scan history and settings are stored locally in your browser and never leave this device.</p>
+  </main>
+
+  <footer class="foot">
+    <a href="https://futurexlab.vercel.app/" target="_blank" rel="noopener">futurexlab.vercel.app</a>
+  </footer>
+
+  <script src="common.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

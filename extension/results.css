@@ -1,0 +1,50 @@
+body.results-page {
+  width: auto;
+  max-height: none;
+  min-height: 100vh;
+}
+
+.results-page .head { padding: 14px 22px; }
+.results-page .name { font-size: 15px; }
+
+.sub {
+  font-size: 11px;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.home-link { font-size: 12.5px; text-decoration: none; font-weight: 600; }
+
+.results-main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 22px;
+}
+
+.results-page .ctx {
+  padding: 10px 14px;
+  margin-bottom: 14px;
+}
+
+.results-page .ctx b { font-size: 13.5px; }
+.results-page .ctx span { font-size: 12px; }
+
+.results-page .loading { padding: 30px 4px; font-size: 14px; }
+
+.results-page .error-box {
+  margin-top: 16px;
+  padding: 14px 16px;
+  font-size: 14px;
+}
+
+.results-page .result { padding: 20px; margin-top: 4px; }
+.results-page .result-meta { font-size: 12px; margin-bottom: 14px; }
+.results-page .fx-score-num { font-size: 44px; }
+.results-page .fx-title { font-size: 21px; }
+.results-page .fx-desc, .results-page .fx-row, .results-page .fx-list li,
+.results-page .fx-recs li, .results-page .fx-signal p { font-size: 13.5px; }
+.results-page .fx-signal b, .results-page .fx-finding summary { font-size: 14px; }
+.results-page .fx-finding-body p { font-size: 13px; }
+.results-page .fx-limits li { font-size: 12px; }
