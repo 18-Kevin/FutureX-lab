@@ -1,7 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>try{var _t=localStorage.getItem('fx-theme');document.documentElement.setAttribute('data-theme',_t==='light'?'light':'dark')}catch(e){document.documentElement.setAttribute('data-theme','dark')}</script>
+  <script>
+    (function(){
+      var root = document.documentElement;
+      try {
+        var theme = localStorage.getItem('fx-theme');
+        root.setAttribute('data-theme', theme === 'light' ? 'light' : 'dark');
+      } catch (e) { root.setAttribute('data-theme', 'dark'); }
+      try {
+        var stored = localStorage.getItem('futurex_reduce_motion');
+        var reduce = stored === 'true' || (stored !== 'false' && matchMedia('(prefers-reduced-motion: reduce)').matches);
+        root.setAttribute('data-reduce-motion', String(reduce));
+      } catch (e2) {
+        root.setAttribute('data-reduce-motion', String(matchMedia('(prefers-reduced-motion: reduce)').matches));
+      }
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#070a0b" />
@@ -10,34 +25,33 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b1212'/%3E%3Cpath d='M19 17h27v9H29v8h15v9H29v14H19z' fill='%2373ede4'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
 :root{
-  --legal-bg:#070a0b;--legal-panel:#0b1112;--legal-ink:#f4f7f5;--legal-muted:#a3afab;--legal-dim:#6e7b77;
+  --legal-bg:#070a0b;--legal-panel:#0b1112;--legal-ink:#f4f7f5;--legal-muted:#a3afab;--legal-dim:#788580;
   --legal-line:rgba(255,255,255,.11);--legal-accent:#73ede4;--legal-accent-soft:rgba(115,237,228,.09);
   --legal-sans:'DM Sans',sans-serif;--legal-mono:'DM Mono',monospace;color-scheme:dark;
 }
 html[data-theme="light"]{
-  --legal-bg:#f6f4ed;--legal-panel:#fffdf8;--legal-ink:#17181c;--legal-muted:#555b61;--legal-dim:#7a7f84;
+  --legal-bg:#f6f4ed;--legal-panel:#fffdf8;--legal-ink:#17181c;--legal-muted:#555b61;--legal-dim:#656b70;
   --legal-line:rgba(23,24,28,.12);--legal-accent:#0f746b;--legal-accent-soft:rgba(15,116,107,.08);color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--legal-bg)}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{
-  margin:0;min-height:100vh;background:radial-gradient(900px 500px at 12% 0%,var(--legal-accent-soft),transparent 60%),var(--legal-bg);
+  margin:0;min-height:100vh;background:var(--legal-bg);
   color:var(--legal-ink);font-family:var(--legal-sans);-webkit-font-smoothing:antialiased;overflow-x:hidden
 }
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible{outline:2px solid var(--legal-accent);outline-offset:4px}
 p{margin:0}
-.legal-header{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--legal-line);background:rgba(7,10,11,.84);backdrop-filter:blur(18px)}
-html[data-theme="light"] .legal-header{background:rgba(246,244,237,.88)}
+.legal-header{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--legal-line);background:var(--legal-bg)}
 .legal-header-inner{width:min(1240px,100%);margin:0 auto;padding:14px clamp(22px,5vw,64px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px 24px}
 .legal-brand{display:inline-flex;align-items:center;gap:11px;font-size:19px;font-weight:600;letter-spacing:-.04em;color:var(--legal-ink)}
 .legal-brand em{font-style:normal;color:var(--legal-accent)}
 .legal-mark{display:grid;place-items:center;width:30px;height:30px;flex:0 0 30px;border:1px solid var(--legal-line);border-radius:50%;background:var(--legal-accent-soft)}
-.legal-mark i{width:8px;height:8px;border-radius:50%;background:var(--legal-accent);box-shadow:0 0 16px var(--legal-accent-soft)}
+.legal-mark i{width:8px;height:8px;border-radius:50%;background:var(--legal-accent)}
 .legal-nav{display:flex;align-items:center;gap:22px;font:500 10px var(--legal-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--legal-muted)}
 .legal-nav a{transition:color .2s}
 .legal-nav a:hover{color:var(--legal-ink)}
@@ -47,12 +61,10 @@ html[data-theme="light"] .legal-header{background:rgba(246,244,237,.88)}
 .legal-back span{color:var(--legal-accent)}
 .legal-theme{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid var(--legal-line);border-radius:999px;background:transparent;color:var(--legal-muted);font:500 10px var(--legal-mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:border-color .2s,color .2s}
 .legal-theme:hover{border-color:var(--legal-accent);color:var(--legal-ink)}
-.legal-theme-dot{width:6px;height:6px;border-radius:50%;background:var(--legal-accent);box-shadow:0 0 12px var(--legal-accent)}
+.legal-theme-dot{width:6px;height:6px;border-radius:50%;background:var(--legal-accent)}
 .legal-main{width:min(860px,100%);margin:0 auto;padding:clamp(64px,9vw,118px) clamp(22px,5vw,48px) clamp(72px,8vw,118px)}
 .legal-intro{padding-bottom:clamp(34px,5vw,54px);border-bottom:1px solid var(--legal-line);margin-bottom:clamp(40px,5vw,62px)}
-.legal-kicker{display:flex;align-items:center;gap:12px;margin-bottom:24px;font:500 10px var(--legal-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--legal-accent)}
-.legal-kicker::before{content:"";width:28px;height:1px;background:currentColor;opacity:.6}
-.legal-intro h1{font-size:clamp(2.8rem,7vw,5.2rem);line-height:.95;letter-spacing:-.06em;font-weight:600;color:var(--legal-ink)}
+.legal-intro h1{font-size:clamp(2.3rem,4.8vw,3.4rem);line-height:1.02;letter-spacing:-.045em;font-weight:600;color:var(--legal-ink)}
 .legal-updated{margin-top:22px;font:500 10px var(--legal-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--legal-dim)}
 .legal-updated time{color:var(--legal-muted)}
 .legal-section + .legal-section{margin-top:clamp(40px,5vw,58px);padding-top:clamp(30px,4vw,46px);border-top:1px solid var(--legal-line)}
@@ -80,17 +92,28 @@ html[data-theme="light"] .legal-header{background:rgba(246,244,237,.88)}
   .legal-nav a{white-space:nowrap}
 }
 @media(max-width:600px){
+  .legal-nav{gap:13px;font-size:9px;letter-spacing:.06em}
   .legal-back{display:none}
   .legal-main{padding-top:56px}
-  .legal-intro h1{font-size:clamp(2.55rem,12vw,3.5rem)}
+  .legal-intro h1{font-size:clamp(2.1rem,9vw,2.8rem)}
   .legal-contact{padding:18px}
   .legal-footer-inner{display:block}
   .legal-footer-links{margin-top:12px;gap:14px}
 }
 @media(max-width:380px){
   .legal-brand{font-size:17px}
-  .legal-intro h1{font-size:2.35rem}
+  .legal-intro h1{font-size:2rem}
 }
+.page-motion{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:50;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:9px 12px;border:1px solid var(--legal-line);border-radius:999px;background:var(--legal-panel);box-shadow:0 12px 34px rgba(0,0,0,.24);color:var(--legal-muted);font:600 10px var(--legal-mono);cursor:pointer;transition:border-color .2s,color .2s}
+.page-motion:hover{border-color:var(--legal-accent);color:var(--legal-ink)}
+.page-motion[aria-pressed="true"]{border-color:var(--legal-accent);color:var(--legal-ink)}
+.page-motion-state{min-width:24px;padding:3px 5px;border-radius:999px;background:var(--legal-accent-soft);color:var(--legal-accent);font-size:9px;text-align:center;text-transform:uppercase;letter-spacing:.06em}
+@media(max-width:380px){
+  .page-motion{padding:8px;gap:6px}
+  .page-motion-state{display:none}
+}
+html[data-reduce-motion="true"]{scroll-behavior:auto}
+html[data-reduce-motion="true"] *,html[data-reduce-motion="true"] *::before,html[data-reduce-motion="true"] *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   </style>
 </head>
 <body id="top">
@@ -106,9 +129,10 @@ html[data-theme="light"] .legal-header{background:rgba(246,244,237,.88)}
         <a href="index.html#ai-detect">AI Detection</a>
         <a href="index.html#signals">Signals</a>
         <a href="index.html#news">News</a>
+        <a href="blogs.html">Blogs</a>
       </nav>
       <div class="legal-actions">
-        <a class="legal-back" href="index.html">Back to site <span aria-hidden="true">↗</span></a>
+        <a class="legal-back" href="index.html">Back to home <span aria-hidden="true">↗</span></a>
         <button class="legal-theme" id="themeToggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
           <span class="legal-theme-dot" aria-hidden="true"></span><span class="legal-theme-label">Light</span>
         </button>
@@ -118,7 +142,6 @@ html[data-theme="light"] .legal-header{background:rgba(246,244,237,.88)}
 
   <main class="legal-main">
     <div class="legal-intro">
-      <p class="legal-kicker">FutureX Lab / Legal</p>
       <h1>Terms &amp; Conditions</h1>
       <p class="legal-updated">Last Updated: <time datetime="2026-10-22">October 22, 2026</time></p>
     </div>
@@ -159,15 +182,15 @@ html[data-theme="light"] .legal-header{background:rgba(246,244,237,.88)}
       <section class="legal-section" id="user-content-and-uploads">
         <h2>5. User Content and Uploads</h2>
         <p>You retain ownership of content you upload, subject to any rights belonging to third parties.</p>
-        <p>By submitting content, you authorize FutureX Lab to process it as reasonably necessary to provide the requested service, maintain security, and troubleshoot or improve functionality where permitted by our Privacy Policy and applicable law.</p>
+        <p>By submitting content, you authorize FutureX Lab to process it as reasonably necessary to provide the requested service, maintain security, and troubleshoot or improve functionality where permitted by <a href="privacy.html">our Privacy Policy</a> and applicable law.</p>
         <p>You are responsible for ensuring that you have the necessary rights and permissions to submit that content.</p>
-        <p>We will handle uploaded text, images, videos, URLs, and other content according to our Privacy Policy. We will not claim ownership of your content merely because you use our services.</p>
+        <p>We will handle uploaded text, images, videos, URLs, and other content according to <a href="privacy.html">our Privacy Policy</a>. We will not claim ownership of your content merely because you use our services.</p>
       </section>
 
       <section class="legal-section" id="privacy-and-data-collection">
         <h2>6. Privacy and Data Collection</h2>
-        <p>We may process account information, email addresses, usage records, interactions with our tools, and content submitted for analysis, as described in our Privacy Policy.</p>
-        <p>We will explain the purposes of collection, relevant third-party processing, retention practices, and available privacy rights in that policy.</p>
+        <p>We may process account information, email addresses, usage records, interactions with our tools, and content submitted for analysis, as described in <a href="privacy.html">our Privacy Policy</a>.</p>
+        <p>We will explain the purposes of collection, relevant third-party processing, retention practices, and available privacy rights in <a href="privacy.html">that policy</a>.</p>
         <p>Please do not upload confidential, sensitive, or personal information unless you are authorized to share it and understand how it will be processed.</p>
       </section>
 
@@ -204,7 +227,7 @@ html[data-theme="light"] .legal-header{background:rgba(246,244,237,.88)}
       <section class="legal-section" id="suspension-and-termination">
         <h2>12. Suspension and Termination</h2>
         <p>We may suspend or terminate access where necessary for material violations of these terms, security protection, prevention of abuse, or compliance with law.</p>
-        <p>You may stop using the website at any time. Account deletion and requests concerning personal data will be handled according to our Privacy Policy and applicable law.</p>
+        <p>You may stop using the website at any time. Account deletion and requests concerning personal data will be handled according to <a href="privacy.html">our Privacy Policy</a> and applicable law.</p>
       </section>
 
       <section class="legal-section" id="governing-law">
@@ -224,6 +247,8 @@ html[data-theme="light"] .legal-header{background:rgba(246,244,237,.88)}
           <p><strong>Website:</strong> <a href="https://futurexlab.vercel.app">https://futurexlab.vercel.app</a></p>
           <p><strong>Email:</strong> <a href="mailto:futurexlab1@gmail.com">futurexlab1@gmail.com</a></p>
           <p><strong>Founder backup contact:</strong> <a href="mailto:chaudharykevin1877@gmail.com">chaudharykevin1877@gmail.com</a></p>
+          <p><strong>Instagram:</strong> <a href="https://www.instagram.com/futurex__lab" target="_blank" rel="noopener noreferrer">@futurex__lab</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/18-Kevin/FutureX-lab" target="_blank" rel="noopener noreferrer">18-Kevin/FutureX-lab</a></p>
           <p><strong>Legal entity or responsible operator:</strong> Kevin Chaudhary</p>
         </div>
       </section>
@@ -235,30 +260,56 @@ html[data-theme="light"] .legal-header{background:rgba(246,244,237,.88)}
       <p>© 2026 FutureX Lab. All rights reserved.</p>
       <div class="legal-footer-links">
         <a href="index.html">FutureX Lab</a>
+        <a href="blogs.html">Blogs</a>
         <a href="terms.html" aria-current="page">Terms &amp; Conditions</a>
+        <a href="privacy.html">Privacy Policy</a>
         <a href="#top">Back to top ↑</a>
       </div>
     </div>
   </footer>
+
+  <button class="page-motion" id="motionToggle" type="button" aria-pressed="false">
+    <span aria-hidden="true">◐</span><span>Reduce motion</span><span class="page-motion-state" id="motionState" aria-hidden="true">Off</span>
+  </button>
 
   <script>
     (() => {
       const root = document.documentElement;
       const toggle = document.getElementById('themeToggle');
       const label = toggle.querySelector('.legal-theme-label');
+      const motionToggle = document.getElementById('motionToggle');
+      const motionState = document.getElementById('motionState');
+      const MOTION_KEY = 'futurex_reduce_motion';
+
       const sync = () => {
         const light = root.getAttribute('data-theme') === 'light';
         label.textContent = light ? 'Dark' : 'Light';
         toggle.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
         toggle.setAttribute('aria-pressed', String(light));
       };
+
+      const syncMotion = () => {
+        const reduced = root.getAttribute('data-reduce-motion') === 'true';
+        motionToggle.setAttribute('aria-pressed', String(reduced));
+        motionState.textContent = reduced ? 'On' : 'Off';
+      };
+
       toggle.addEventListener('click', () => {
         const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
         root.setAttribute('data-theme', next);
         try { localStorage.setItem('fx-theme', next); } catch (e) {}
         sync();
       });
+
+      motionToggle.addEventListener('click', () => {
+        const current = root.getAttribute('data-reduce-motion') === 'true';
+        root.setAttribute('data-reduce-motion', String(!current));
+        try { localStorage.setItem(MOTION_KEY, String(!current)); } catch (e) {}
+        syncMotion();
+      });
+
       sync();
+      syncMotion();
     })();
   </script>
 </body>
