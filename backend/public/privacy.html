@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function(){
+      var root = document.documentElement;
+      try {
+        var theme = localStorage.getItem('fx-theme');
+        root.setAttribute('data-theme', theme === 'light' ? 'light' : 'dark');
+      } catch (e) { root.setAttribute('data-theme', 'dark'); }
+      try {
+        var stored = localStorage.getItem('futurex_reduce_motion');
+        var reduce = stored === 'true' || (stored !== 'false' && matchMedia('(prefers-reduced-motion: reduce)').matches);
+        root.setAttribute('data-reduce-motion', String(reduce));
+      } catch (e2) {
+        root.setAttribute('data-reduce-motion', String(matchMedia('(prefers-reduced-motion: reduce)').matches));
+      }
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070a0b" />
+  <meta name="description" content="Privacy Policy for FutureX Lab, describing the account data, tool inputs, browser storage, email, and third-party services used by the current website implementation." />
+  <title>Privacy Policy — FutureX Lab</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b1212'/%3E%3Cpath d='M19 17h27v9H29v8h15v9H29v14H19z' fill='%2373ede4'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+:root{
+  --legal-bg:#070a0b;--legal-panel:#0b1112;--legal-ink:#f4f7f5;--legal-muted:#a3afab;--legal-dim:#788580;
+  --legal-line:rgba(255,255,255,.11);--legal-accent:#73ede4;--legal-accent-soft:rgba(115,237,228,.09);
+  --legal-sans:'DM Sans',sans-serif;--legal-mono:'DM Mono',monospace;color-scheme:dark;
+}
+html[data-theme="light"]{
+  --legal-bg:#f6f4ed;--legal-panel:#fffdf8;--legal-ink:#17181c;--legal-muted:#555b61;--legal-dim:#656b70;
+  --legal-line:rgba(23,24,28,.12);--legal-accent:#0f746b;--legal-accent-soft:rgba(15,116,107,.08);color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--legal-bg)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html[data-reduce-motion="true"]{scroll-behavior:auto}
+body{margin:0;min-height:100vh;background:var(--legal-bg);color:var(--legal-ink);font-family:var(--legal-sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--legal-accent);outline-offset:4px}
+p{margin:0}
+.legal-header{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--legal-line);background:var(--legal-bg)}
+.legal-header-inner{width:min(1240px,100%);margin:0 auto;padding:14px clamp(22px,5vw,64px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px 24px}
+.legal-brand{display:inline-flex;align-items:center;gap:11px;font-size:19px;font-weight:600;letter-spacing:-.04em;color:var(--legal-ink)}
+.legal-brand em{font-style:normal;color:var(--legal-accent)}
+.legal-mark{display:grid;place-items:center;width:30px;height:30px;flex:0 0 30px;border:1px solid var(--legal-line);border-radius:50%;background:var(--legal-accent-soft)}
+.legal-mark i{width:8px;height:8px;border-radius:50%;background:var(--legal-accent)}
+.legal-nav{display:flex;align-items:center;gap:22px;font:500 10px var(--legal-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--legal-muted)}
+.legal-nav a{transition:color .2s}
+.legal-nav a:hover,.legal-nav a[aria-current="page"]{color:var(--legal-ink)}
+.legal-actions{display:flex;align-items:center;gap:12px}
+.legal-back{display:inline-flex;align-items:center;gap:7px;font:500 10px var(--legal-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--legal-muted);transition:color .2s}
+.legal-back:hover{color:var(--legal-ink)}
+.legal-back span{color:var(--legal-accent)}
+.legal-theme{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid var(--legal-line);border-radius:999px;background:transparent;color:var(--legal-muted);font:500 10px var(--legal-mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:border-color .2s,color .2s}
+.legal-theme:hover{border-color:var(--legal-accent);color:var(--legal-ink)}
+.legal-theme-dot{width:6px;height:6px;border-radius:50%;background:var(--legal-accent)}
+.legal-main{width:min(860px,100%);margin:0 auto;padding:clamp(64px,9vw,118px) clamp(22px,5vw,48px) clamp(96px,9vw,130px)}
+.legal-intro{padding-bottom:clamp(34px,5vw,54px);border-bottom:1px solid var(--legal-line);margin-bottom:clamp(40px,5vw,62px)}
+.legal-intro h1{font-size:clamp(2.3rem,4.8vw,3.4rem);line-height:1.02;letter-spacing:-.045em;font-weight:600;color:var(--legal-ink)}
+.legal-updated{margin-top:22px;font:500 10px var(--legal-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--legal-dim)}
+.legal-status{margin-top:26px;padding:16px 18px;border:1px solid var(--legal-line);border-left:2px solid var(--legal-accent);border-radius:0 10px 10px 0;background:var(--legal-accent-soft);font-size:13.5px;line-height:1.7;color:var(--legal-muted)}
+.legal-section + .legal-section{margin-top:clamp(40px,5vw,58px);padding-top:clamp(30px,4vw,46px);border-top:1px solid var(--legal-line)}
+.legal-section h2{margin:0 0 18px;font-size:clamp(1.35rem,2.4vw,1.8rem);line-height:1.2;letter-spacing:-.03em;font-weight:600;color:var(--legal-ink)}
+.legal-section p{font-size:clamp(15px,1.35vw,16.5px);line-height:1.8;color:var(--legal-muted);margin:0 0 18px;overflow-wrap:anywhere}
+.legal-section p:last-child{margin-bottom:0}
+.legal-section strong{color:var(--legal-ink);font-weight:600}
+.legal-section code{font-family:var(--legal-mono);font-size:.9em;color:var(--legal-ink);overflow-wrap:anywhere}
+.legal-section ul{margin:0 0 20px;padding-left:1.2em}
+.legal-section li{font-size:clamp(15px,1.35vw,16.5px);line-height:1.8;color:var(--legal-muted);margin:8px 0;padding-left:4px}
+.legal-section li::marker{color:var(--legal-accent)}
+.legal-placeholder{color:var(--legal-accent);background:var(--legal-accent-soft);border-bottom:1px dashed var(--legal-accent);padding:1px 4px;border-radius:3px;font-size:.92em}
+.legal-contact{margin-top:24px;padding:22px 24px;border:1px solid var(--legal-line);border-radius:12px;background:var(--legal-accent-soft)}
+.legal-contact p{margin:0 0 10px;font-size:clamp(14px,1.25vw,15.5px);line-height:1.7;color:var(--legal-ink)}
+.legal-contact p:last-child{margin-bottom:0}
+.legal-contact a{color:var(--legal-accent);text-decoration:underline;text-underline-offset:3px}
+.legal-footer{border-top:1px solid var(--legal-line);background:var(--legal-panel)}
+.legal-footer-inner{width:min(1240px,100%);margin:0 auto;padding:24px clamp(22px,5vw,64px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px 24px;font:500 9px var(--legal-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--legal-dim)}
+.legal-footer-links{display:flex;align-items:center;flex-wrap:wrap;gap:18px}
+.legal-footer a{transition:color .2s}
+.legal-footer a:hover{color:var(--legal-accent)}
+.page-motion{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:50;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:9px 12px;border:1px solid var(--legal-line);border-radius:999px;background:var(--legal-panel);box-shadow:0 12px 34px rgba(0,0,0,.24);color:var(--legal-muted);font:600 10px var(--legal-mono);cursor:pointer;transition:border-color .2s,color .2s}
+.page-motion:hover{border-color:var(--legal-accent);color:var(--legal-ink)}
+.page-motion[aria-pressed="true"]{border-color:var(--legal-accent);color:var(--legal-ink)}
+.page-motion-state{min-width:24px;padding:3px 5px;border-radius:999px;background:var(--legal-accent-soft);color:var(--legal-accent);font-size:9px;text-align:center;text-transform:uppercase;letter-spacing:.06em}
+@media(max-width:820px){
+  .legal-header-inner{padding-top:12px;padding-bottom:12px}
+  .legal-nav{order:3;width:100%;gap:18px;overflow-x:auto;padding-top:11px;border-top:1px solid var(--legal-line);scrollbar-width:none}
+  .legal-nav::-webkit-scrollbar{display:none}
+  .legal-nav a{white-space:nowrap}
+}
+@media(max-width:600px){
+  .legal-nav{gap:13px;font-size:9px;letter-spacing:.06em}
+  .legal-back{display:none}
+  .legal-main{padding-top:56px;padding-bottom:100px}
+  .legal-intro h1{font-size:clamp(2.1rem,9vw,2.8rem)}
+  .legal-contact{padding:18px}
+  .legal-footer-inner{display:block}
+  .legal-footer-links{margin-top:12px;gap:14px}
+}
+@media(max-width:380px){
+  .legal-brand{font-size:17px}
+  .legal-intro h1{font-size:2rem}
+  .page-motion{padding:8px;gap:6px}
+  .page-motion-state{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+html[data-reduce-motion="true"] *,html[data-reduce-motion="true"] *::before,html[data-reduce-motion="true"] *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  </style>
+</head>
+<body id="top">
+  <header class="legal-header">
+    <div class="legal-header-inner">
+      <a class="legal-brand" href="index.html" aria-label="FutureX Lab home">
+        <span class="legal-mark" aria-hidden="true"><i></i></span>
+        <span>Future<em>X</em> Lab</span>
+      </a>
+      <nav class="legal-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="index.html#trust">Tools</a>
+        <a href="index.html#ai-detect">AI Detection</a>
+        <a href="index.html#signals">Signals</a>
+        <a href="index.html#news">News</a>
+        <a href="blogs.html">Blogs</a>
+      </nav>
+      <div class="legal-actions">
+        <a class="legal-back" href="index.html">Back to home <span aria-hidden="true">↗</span></a>
+        <button class="legal-theme" id="themeToggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
+          <span class="legal-theme-dot" aria-hidden="true"></span><span class="legal-theme-label">Light</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="legal-main">
+    <div class="legal-intro">
+      <h1>Privacy Policy</h1>
+      <p class="legal-updated">Last Updated: <span class="legal-placeholder">[DATE TO BE CONFIRMED BY OWNER]</span></p>
+      <p class="legal-status"><strong>Implementation-based policy.</strong> This page describes the current FutureX Lab website and backend behavior. It is not a claim of legal compliance, certification, or a substitute for review by a qualified legal professional.</p>
+    </div>
+
+    <article class="legal-doc">
+      <section class="legal-section" id="scope">
+        <h2>1. Scope</h2>
+        <p>This Privacy Policy explains how the FutureX Lab website and its related account, analysis, chat, and news features handle information. It applies to the public site at <a href="https://futurexlab.vercel.app">futurexlab.vercel.app</a> and the FutureX Lab backend used by that site.</p>
+        <p>Where this page uses a highlighted placeholder, the final value has not been supplied and must be confirmed by the site owner before publication.</p>
+      </section>
+
+      <section class="legal-section" id="information-we-handle">
+        <h2>2. Information the current site handles</h2>
+        <p>The current implementation handles the following categories of information:</p>
+        <ul>
+          <li><strong>Account details:</strong> name, email address, a password hash, verification status, and account timestamps.</li>
+          <li><strong>Content submitted to tools:</strong> text, URLs, images, or videos submitted for analysis.</li>
+          <li><strong>Chat messages:</strong> messages sent to the Lab Guide assistant.</li>
+          <li><strong>Local browser data:</strong> the login token, theme choice, reduced-motion choice, and a local list of recent scans.</li>
+          <li><strong>Operational request data:</strong> hosting and security providers may process standard request information such as IP address, browser user agent, and timestamps as part of serving and protecting the site.</li>
+        </ul>
+        <p>The current website code does not include third-party analytics scripts and does not set first-party cookies.</p>
+      </section>
+
+      <section class="legal-section" id="accounts">
+        <h2>3. Accounts and authentication</h2>
+        <p>Creating an account requires a name, email address, and password. Passwords are hashed with <strong>bcryptjs</strong>; the plain password is not stored in the account database.</p>
+        <p>Account records are stored in the configured database. When a MongoDB connection is configured, the backend uses MongoDB; otherwise it uses a local <code>database.json</code> file in the backend directory.</p>
+        <p>Login sessions use a JSON Web Token. The current backend configuration sets a seven-day expiry. The browser stores this token in <code>localStorage</code> under <code>futurex_token</code> and removes it on logout.</p>
+      </section>
+
+      <section class="legal-section" id="tool-content">
+        <h2>4. Tool content and AI processing</h2>
+        <p>When you submit text, a URL, an image, or a video for analysis, the request is sent to the FutureX Lab backend. The backend validates the request and may send content to the configured AI provider, <strong>Groq</strong>, to generate a result.</p>
+        <p>The current application code does not write analysis inputs or chat messages into the account database. Requests are processed to produce a response. The AI provider’s own handling of request data is governed by that provider’s terms and privacy policy.</p>
+        <p>URL analysis includes a server-side fetch of the submitted page. The backend restricts requests to public HTTP/HTTPS addresses and applies a timeout and response-size limit.</p>
+      </section>
+
+      <section class="legal-section" id="local-storage">
+        <h2>5. Local browser storage</h2>
+        <p>The current site stores the following values in your browser:</p>
+        <ul>
+          <li><code>futurex_token</code>: the login token for your account session.</li>
+          <li><code>fx-theme</code>: your dark or light theme choice.</li>
+          <li><code>futurex_reduce_motion</code>: your explicit reduced-motion choice.</li>
+          <li><code>fx_recent_scans</code>: a local list of up to ten recent scan labels, verdicts, scores, and times, which you can clear from the Recent scans area.</li>
+        </ul>
+        <p>These values are stored by your browser and are not first-party cookies. You can remove them by clearing site data in your browser.</p>
+      </section>
+
+      <section class="legal-section" id="email">
+        <h2>6. Email</h2>
+        <p>The backend can send account verification and password-reset emails when an email provider is configured. The current configuration supports Brevo’s API and, as a fallback, SMTP delivery through the configured email service.</p>
+        <p>Verification tokens currently expire after 24 hours; password-reset tokens currently expire after one hour. Tokens are deleted after successful use or when the account is deleted.</p>
+      </section>
+
+      <section class="legal-section" id="third-parties">
+        <h2>7. Third-party services</h2>
+        <p>The current implementation can involve these third parties:</p>
+        <ul>
+          <li><strong>Vercel</strong>: hosts the public website.</li>
+          <li><strong>Render</strong>: hosts the backend API.</li>
+          <li><strong>MongoDB Atlas</strong>: stores account data when a MongoDB connection is configured.</li>
+          <li><strong>Groq</strong>: processes AI chat and analysis requests when configured.</li>
+          <li><strong>Brevo or the configured SMTP provider</strong>: delivers account emails when configured.</li>
+          <li><strong>Google Fonts</strong>: supplies the site’s web fonts.</li>
+          <li><strong>News publishers</strong>: the homepage loads article images from sources such as BBC, The Guardian, and The New York Times.</li>
+        </ul>
+        <p>These providers may process technical request data under their own policies. Exact data-processing terms, locations, and retention periods require confirmation from the owner and each provider.</p>
+      </section>
+
+      <section class="legal-section" id="retention">
+        <h2>8. Retention</h2>
+        <p>Account records remain until the account is deleted. Verification and password-reset tokens expire as described above and are deleted after use.</p>
+        <p>The current application code does not store analysis inputs or chat messages in the account database. Retention by hosting, database, AI, email, and font providers is <span class="legal-placeholder">[PROVIDER RETENTION DETAILS: TO BE CONFIRMED]</span>.</p>
+      </section>
+
+      <section class="legal-section" id="security">
+        <h2>9. Security</h2>
+        <p>The current implementation uses password hashing, signed login tokens, HTTPS through the hosting providers, CORS restrictions for approved origins, request-size limits, and rate limiting. These measures reduce risk but do not make any service completely secure.</p>
+        <p>Do not submit confidential, sensitive, or personal information unless you are authorized to share it and understand how it will be processed.</p>
+      </section>
+
+      <section class="legal-section" id="choices">
+        <h2>10. Your choices</h2>
+        <p>The current site provides account password change and account deletion features. Account deletion removes the account record and the account’s verification and reset tokens.</p>
+        <p>You can change your theme and reduced-motion settings in the site controls, and clear local recent scans from the Recent scans area. For other privacy requests, contact the addresses below. Additional rights and request procedures are <span class="legal-placeholder">[RIGHTS AND REQUEST PROCEDURE: TO BE CONFIRMED BY OWNER/LEGAL REVIEW]</span>.</p>
+      </section>
+
+      <section class="legal-section" id="children">
+        <h2>11. Children and age requirements</h2>
+        <p>The site does not request a date of birth or age during registration. The Terms &amp; Conditions require users to meet applicable age requirements and to have any consent required by law. The final age threshold and child-data procedure are <span class="legal-placeholder">[AGE THRESHOLD AND PROCEDURE: TO BE CONFIRMED]</span>.</p>
+      </section>
+
+      <section class="legal-section" id="international">
+        <h2>12. International processing</h2>
+        <p>The current service relies on providers that may process data in countries other than your own. The exact locations, transfer mechanisms, and required safeguards are <span class="legal-placeholder">[INTERNATIONAL TRANSFER DETAILS: TO BE CONFIRMED]</span>.</p>
+      </section>
+
+      <section class="legal-section" id="changes">
+        <h2>13. Changes to this policy</h2>
+        <p>This page may be revised when the website or its providers change. The updated version will be published here with a revised “Last Updated” value. The current date is <span class="legal-placeholder">[DATE TO BE CONFIRMED BY OWNER]</span>.</p>
+      </section>
+
+      <section class="legal-section" id="contact">
+        <h2>14. Contact</h2>
+        <p>For privacy questions or requests, contact:</p>
+        <div class="legal-contact">
+          <p><strong>Website:</strong> <a href="https://futurexlab.vercel.app">https://futurexlab.vercel.app</a></p>
+          <p><strong>Email:</strong> <a href="mailto:futurexlab1@gmail.com">futurexlab1@gmail.com</a></p>
+          <p><strong>Founder backup contact:</strong> <a href="mailto:chaudharykevin1877@gmail.com">chaudharykevin1877@gmail.com</a></p>
+          <p><strong>Instagram:</strong> <a href="https://www.instagram.com/futurex__lab" target="_blank" rel="noopener noreferrer">@futurex__lab</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/18-Kevin/FutureX-lab" target="_blank" rel="noopener noreferrer">18-Kevin/FutureX-lab</a></p>
+          <p><strong>Legal entity or responsible operator:</strong> Kevin Chaudhary</p>
+        </div>
+      </section>
+
+      <section class="legal-section" id="approval-needed">
+        <h2>15. Information required before final legal approval</h2>
+        <p>The following details are not established by the current project files and must be supplied or approved before this policy is treated as final:</p>
+        <ul>
+          <li>Exact legal entity name, registered address, and governing jurisdiction.</li>
+          <li>Approved retention periods for server, database, AI-provider, and email-provider logs.</li>
+          <li>Confirmed international data-transfer locations and safeguards.</li>
+          <li>Approved user-rights procedure and response timeline for access, correction, deletion, and objection requests.</li>
+          <li>Applicable age threshold, child-data procedure, and parental-consent approach.</li>
+          <li>Whether cookie banners, consent management, or additional regional disclosures are required for the intended audience.</li>
+          <li>Security-incident and breach-notification procedure.</li>
+          <li>Final contact role and address for privacy requests.</li>
+        </ul>
+        <p>Until those items are approved, this page should be treated as a transparent implementation summary and editable draft.</p>
+      </section>
+    </article>
+  </main>
+
+  <footer class="legal-footer">
+    <div class="legal-footer-inner">
+      <p>© 2026 FutureX Lab. All rights reserved.</p>
+      <div class="legal-footer-links">
+        <a href="index.html">FutureX Lab</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="privacy.html" aria-current="page">Privacy Policy</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="page-motion" id="motionToggle" type="button" aria-pressed="false">
+    <span aria-hidden="true">◐</span><span>Reduce motion</span><span class="page-motion-state" id="motionState" aria-hidden="true">Off</span>
+  </button>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const themeToggle = document.getElementById('themeToggle');
+      const themeLabel = themeToggle.querySelector('.legal-theme-label');
+      const motionToggle = document.getElementById('motionToggle');
+      const motionState = document.getElementById('motionState');
+      const MOTION_KEY = 'futurex_reduce_motion';
+
+      const syncTheme = () => {
+        const light = root.getAttribute('data-theme') === 'light';
+        themeLabel.textContent = light ? 'Dark' : 'Light';
+        themeToggle.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
+        themeToggle.setAttribute('aria-pressed', String(light));
+      };
+
+      const syncMotion = () => {
+        const reduced = root.getAttribute('data-reduce-motion') === 'true';
+        motionToggle.setAttribute('aria-pressed', String(reduced));
+        motionState.textContent = reduced ? 'On' : 'Off';
+      };
+
+      themeToggle.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('fx-theme', next); } catch (e) {}
+        syncTheme();
+      });
+
+      motionToggle.addEventListener('click', () => {
+        const current = root.getAttribute('data-reduce-motion') === 'true';
+        root.setAttribute('data-reduce-motion', String(!current));
+        try { localStorage.setItem(MOTION_KEY, String(!current)); } catch (e) {}
+        syncMotion();
+      });
+
+      syncTheme();
+      syncMotion();
+    })();
+  </script>
+</body>
+</html>

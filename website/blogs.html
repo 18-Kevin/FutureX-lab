@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function(){
+      var root = document.documentElement;
+      try {
+        var theme = localStorage.getItem('fx-theme');
+        root.setAttribute('data-theme', theme === 'light' ? 'light' : 'dark');
+      } catch (e) { root.setAttribute('data-theme', 'dark'); }
+      try {
+        var stored = localStorage.getItem('futurex_reduce_motion');
+        var reduce = stored === 'true' || (stored !== 'false' && matchMedia('(prefers-reduced-motion: reduce)').matches);
+        root.setAttribute('data-reduce-motion', String(reduce));
+      } catch (e2) {
+        root.setAttribute('data-reduce-motion', String(matchMedia('(prefers-reduced-motion: reduce)').matches));
+      }
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070a0b" />
+  <meta name="description" content="FutureX Lab research paper: a structured, editable page for the forthcoming FutureX Lab paper, including abstract, table of contents, research sections, findings, references, and download placeholder." />
+  <title>Research Paper — FutureX Lab</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b1212'/%3E%3Cpath d='M19 17h27v9H29v8h15v9H29v14H19z' fill='%2373ede4'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+:root{
+  --paper-bg:#070a0b;--paper-panel:#0b1112;--paper-panel-2:#0e1516;--paper-ink:#f4f7f5;--paper-muted:#a3afab;--paper-dim:#788580;
+  --paper-line:rgba(255,255,255,.11);--paper-accent:#73ede4;--paper-accent-soft:rgba(115,237,228,.09);
+  --paper-sans:'DM Sans',sans-serif;--paper-mono:'DM Mono',monospace;color-scheme:dark;
+}
+html[data-theme="light"]{
+  --paper-bg:#f6f4ed;--paper-panel:#fffdf8;--paper-panel-2:#fbf8f1;--paper-ink:#17181c;--paper-muted:#555b61;--paper-dim:#656b70;
+  --paper-line:rgba(23,24,28,.13);--paper-accent:#0f746b;--paper-accent-soft:rgba(15,116,107,.08);color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--paper-bg)}
+html[data-reduce-motion="true"]{scroll-behavior:auto}
+body{margin:0;min-height:100vh;background:var(--paper-bg);color:var(--paper-ink);font-family:var(--paper-sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--paper-accent);outline-offset:4px}
+p{margin:0}
+.paper-header{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--paper-line);background:var(--paper-bg)}
+.paper-header-inner{width:min(1280px,100%);margin:0 auto;padding:14px clamp(22px,5vw,64px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px 24px}
+.paper-brand{display:inline-flex;align-items:center;gap:11px;font-size:19px;font-weight:600;letter-spacing:-.04em}
+.paper-brand em{font-style:normal;color:var(--paper-accent)}
+.paper-mark{display:grid;place-items:center;width:30px;height:30px;flex:0 0 30px;border:1px solid var(--paper-line);border-radius:50%;background:var(--paper-accent-soft)}
+.paper-mark i{width:8px;height:8px;border-radius:50%;background:var(--paper-accent)}
+.paper-nav{display:flex;align-items:center;gap:20px;font:500 10px var(--paper-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--paper-muted)}
+.paper-nav a{transition:color .2s}
+.paper-nav a:hover,.paper-nav a[aria-current="page"]{color:var(--paper-ink)}
+.paper-actions{display:flex;align-items:center;gap:12px}
+.paper-back{display:inline-flex;align-items:center;gap:7px;font:500 10px var(--paper-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--paper-muted);transition:color .2s}
+.paper-back:hover{color:var(--paper-ink)}
+.paper-back span{color:var(--paper-accent)}
+.paper-theme{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid var(--paper-line);border-radius:999px;background:transparent;color:var(--paper-muted);font:500 10px var(--paper-mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:border-color .2s,color .2s}
+.paper-theme:hover{border-color:var(--paper-accent);color:var(--paper-ink)}
+.paper-theme-dot{width:6px;height:6px;border-radius:50%;background:var(--paper-accent)}
+.paper-main{width:min(1240px,100%);margin:0 auto;padding:clamp(64px,9vw,118px) clamp(22px,5vw,64px) clamp(80px,9vw,130px)}
+.paper-hero{max-width:980px;padding-bottom:clamp(36px,5vw,58px);border-bottom:1px solid var(--paper-line);margin-bottom:clamp(36px,5vw,60px)}
+.paper-hero h1{margin:0;font-size:clamp(2.3rem,5vw,3.7rem);line-height:1.02;letter-spacing:-.045em;font-weight:600}
+.paper-hero h1 .editable{display:inline;color:var(--paper-muted);background:transparent;border-bottom:1px dashed var(--paper-accent);border-radius:0;padding:0 0 2px;box-decoration-break:clone}
+.paper-subtitle{max-width:760px;margin-top:22px;font-size:clamp(1rem,1.55vw,1.2rem);line-height:1.7;color:var(--paper-muted)}
+.paper-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:32px;padding-top:24px;border-top:1px solid var(--paper-line)}
+.paper-meta div{min-width:0}
+.paper-meta dt{font:500 9px var(--paper-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--paper-dim);margin-bottom:8px}
+.paper-meta dd{margin:0;font-size:14px;line-height:1.5;color:var(--paper-ink);overflow-wrap:anywhere}
+.paper-layout{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:clamp(36px,6vw,84px);align-items:start}
+.paper-toc{position:sticky;top:104px;padding:22px;border:1px solid var(--paper-line);border-radius:14px;background:var(--paper-panel)}
+.paper-toc h2{margin:0 0 16px;font:500 10px var(--paper-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--paper-dim)}
+.paper-toc ol{margin:0;padding:0;list-style:none;counter-reset:toc}
+.paper-toc li{counter-increment:toc;border-top:1px solid var(--paper-line)}
+.paper-toc li:first-child{border-top:0}
+.paper-toc a{display:flex;gap:10px;padding:10px 0;font-size:13px;line-height:1.45;color:var(--paper-muted);transition:color .2s}
+.paper-toc a::before{content:counter(toc,decimal-leading-zero);font:500 9px var(--paper-mono);letter-spacing:.08em;color:var(--paper-accent);padding-top:2px}
+.paper-toc a:hover{color:var(--paper-ink)}
+.paper-download{margin-top:20px;padding-top:18px;border-top:1px solid var(--paper-line)}
+.paper-download p{font:500 9px var(--paper-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--paper-dim);margin-bottom:8px}
+.paper-download-placeholder{display:block;padding:10px 11px;border:1px dashed var(--paper-line);border-radius:9px;font-size:12px;line-height:1.5;color:var(--paper-muted);background:var(--paper-panel-2)}
+.paper-article{min-width:0;max-width:780px}
+.paper-note{padding:16px 18px;border:1px solid var(--paper-line);border-left:2px solid var(--paper-accent);border-radius:0 10px 10px 0;background:var(--paper-accent-soft);font-size:13px;line-height:1.7;color:var(--paper-muted);margin-bottom:38px}
+.paper-section{padding:0 0 clamp(34px,5vw,52px);margin-bottom:clamp(34px,5vw,52px);border-bottom:1px solid var(--paper-line)}
+.paper-section:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.paper-section h2{margin:0 0 16px;font-size:clamp(1.45rem,2.6vw,2rem);line-height:1.18;letter-spacing:-.035em;font-weight:600}
+.paper-section h3{margin:26px 0 10px;font-size:1.05rem;letter-spacing:-.02em;font-weight:600}
+.paper-section p{font-size:clamp(15px,1.35vw,16.5px);line-height:1.82;color:var(--paper-muted);margin:0 0 17px;overflow-wrap:anywhere}
+.paper-section p:last-child{margin-bottom:0}
+.paper-section ul,.paper-section ol{margin:0 0 20px;padding-left:1.25em}
+.paper-section li{font-size:clamp(15px,1.35vw,16.5px);line-height:1.8;color:var(--paper-muted);margin:8px 0;padding-left:4px}
+.paper-section li::marker{color:var(--paper-accent)}
+.editable{color:var(--paper-accent);background:var(--paper-accent-soft);border-bottom:1px dashed var(--paper-accent);padding:1px 4px;border-radius:3px;font-size:.94em;font-style:normal;font-weight:500}
+.paper-block-placeholder{display:block;padding:18px;border:1px dashed var(--paper-line);border-radius:12px;background:var(--paper-panel);color:var(--paper-muted);font-size:14px;line-height:1.75}
+.paper-refs{list-style:none;padding:0;margin:0}
+.paper-refs li{padding:13px 0;border-top:1px solid var(--paper-line);font-size:14px;line-height:1.7;color:var(--paper-muted)}
+.paper-refs li:first-child{border-top:0;padding-top:0}
+.paper-footer{border-top:1px solid var(--paper-line);background:var(--paper-panel)}
+.paper-footer-inner{width:min(1280px,100%);margin:0 auto;padding:24px clamp(22px,5vw,64px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px 24px;font:500 9px var(--paper-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--paper-dim)}
+.paper-footer-links{display:flex;align-items:center;flex-wrap:wrap;gap:18px}
+.paper-footer a{transition:color .2s}
+.paper-footer a:hover{color:var(--paper-accent)}
+.page-motion{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:50;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:9px 12px;border:1px solid var(--paper-line);border-radius:999px;background:var(--paper-panel);box-shadow:0 12px 34px rgba(0,0,0,.24);color:var(--paper-muted);font:600 10px var(--paper-mono);cursor:pointer;transition:border-color .2s,color .2s}
+.page-motion:hover{border-color:var(--paper-accent);color:var(--paper-ink)}
+.page-motion[aria-pressed="true"]{border-color:var(--paper-accent);color:var(--paper-ink)}
+.page-motion-state{min-width:24px;padding:3px 5px;border-radius:999px;background:var(--paper-accent-soft);color:var(--paper-accent);font-size:9px;text-align:center;text-transform:uppercase;letter-spacing:.06em}
+@media(max-width:1000px){
+  .paper-meta{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .paper-layout{grid-template-columns:1fr}
+  .paper-toc{position:static;order:2;max-width:520px}
+  .paper-article{order:1;max-width:none}
+}
+@media(max-width:900px){
+  .paper-nav{order:3;width:100%;gap:18px;overflow-x:auto;padding-top:11px;border-top:1px solid var(--paper-line);scrollbar-width:none}
+  .paper-nav::-webkit-scrollbar{display:none}
+  .paper-nav a{white-space:nowrap}
+}
+@media(max-width:600px){
+  .paper-nav{gap:13px;font-size:9px;letter-spacing:.06em}
+  .paper-back{display:none}
+  .paper-main{padding-top:56px;padding-bottom:100px}
+  .paper-hero h1{font-size:clamp(2.1rem,9vw,2.8rem)}
+  .paper-meta{grid-template-columns:1fr;gap:14px}
+  .paper-footer-inner{display:block}
+  .paper-footer-links{margin-top:12px;gap:14px}
+}
+@media(max-width:380px){
+  .paper-brand{font-size:17px}
+  .paper-hero h1{font-size:2rem}
+  .page-motion{padding:8px;gap:6px}
+  .page-motion-state{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+html[data-reduce-motion="true"] *,html[data-reduce-motion="true"] *::before,html[data-reduce-motion="true"] *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  </style>
+</head>
+<body id="top">
+  <header class="paper-header">
+    <div class="paper-header-inner">
+      <a class="paper-brand" href="index.html" aria-label="FutureX Lab home">
+        <span class="paper-mark" aria-hidden="true"><i></i></span>
+        <span>Future<em>X</em> Lab</span>
+      </a>
+      <nav class="paper-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="index.html#trust">Tools</a>
+        <a href="index.html#ai-detect">AI Detection</a>
+        <a href="index.html#signals">Signals</a>
+        <a href="index.html#news">News</a>
+        <a href="blogs.html" aria-current="page">Blogs</a>
+      </nav>
+      <div class="paper-actions">
+        <a class="paper-back" href="index.html">Back to home <span aria-hidden="true">↗</span></a>
+        <button class="paper-theme" id="themeToggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
+          <span class="paper-theme-dot" aria-hidden="true"></span><span class="paper-theme-label">Light</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="paper-main">
+    <header class="paper-hero">
+      <h1><span class="editable">[PAPER TITLE: TO BE SUPPLIED]</span></h1>
+      <p class="paper-subtitle"><span class="editable">[SUBTITLE OR ABSTRACT: TO BE SUPPLIED]</span></p>
+      <dl class="paper-meta">
+        <div><dt>Author</dt><dd><span class="editable">[AUTHOR NAME: TO BE SUPPLIED]</span></dd></div>
+        <div><dt>Date</dt><dd><span class="editable">[PUBLICATION DATE: TO BE SUPPLIED]</span></dd></div>
+        <div><dt>Category</dt><dd><span class="editable">[RESEARCH CATEGORY: TO BE SUPPLIED]</span></dd></div>
+        <div><dt>Status</dt><dd>Editable draft structure</dd></div>
+      </dl>
+    </header>
+
+    <div class="paper-layout">
+      <aside class="paper-toc" aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <ol>
+          <li><a href="#abstract">Abstract</a></li>
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#background">Background</a></li>
+          <li><a href="#methodology">Methodology</a></li>
+          <li><a href="#research-sections">Research sections</a></li>
+          <li><a href="#findings">Findings</a></li>
+          <li><a href="#discussion">Discussion</a></li>
+          <li><a href="#limitations">Limitations</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
+          <li><a href="#references">References</a></li>
+        </ol>
+        <div class="paper-download">
+          <p>Optional download</p>
+          <span class="paper-download-placeholder">[VERIFIED PDF URL: TO BE SUPPLIED]</span>
+        </div>
+      </aside>
+
+      <article class="paper-article">
+        <p class="paper-note">This page is a prepared structure for the FutureX Lab research paper. Research content, citations, authors, findings, dates, and the PDF URL have not been supplied. Everything marked in teal is an editable placeholder. No facts have been invented.</p>
+
+        <section class="paper-section" id="abstract">
+          <h2>Abstract</h2>
+          <p class="paper-block-placeholder">[ABSTRACT: TO BE SUPPLIED]</p>
+        </section>
+
+        <section class="paper-section" id="introduction">
+          <h2>1. Introduction</h2>
+          <p class="paper-block-placeholder">[INTRODUCTION: TO BE SUPPLIED]</p>
+        </section>
+
+        <section class="paper-section" id="background">
+          <h2>2. Background</h2>
+          <p class="paper-block-placeholder">[BACKGROUND AND CONTEXT: TO BE SUPPLIED]</p>
+        </section>
+
+        <section class="paper-section" id="methodology">
+          <h2>3. Methodology</h2>
+          <p class="paper-block-placeholder">[METHODOLOGY: TO BE SUPPLIED]</p>
+          <h3>Data and materials</h3>
+          <p class="paper-block-placeholder">[DATA SOURCES, INSTRUMENTS, OR MATERIALS: TO BE SUPPLIED]</p>
+          <h3>Procedure</h3>
+          <p class="paper-block-placeholder">[PROCEDURE: TO BE SUPPLIED]</p>
+        </section>
+
+        <section class="paper-section" id="research-sections">
+          <h2>4. Research sections</h2>
+          <p class="paper-block-placeholder">[PRIMARY RESEARCH NARRATIVE: TO BE SUPPLIED]</p>
+          <h3>Section 4.1</h3>
+          <p class="paper-block-placeholder">[SECTION 4.1: TO BE SUPPLIED]</p>
+          <h3>Section 4.2</h3>
+          <p class="paper-block-placeholder">[SECTION 4.2: TO BE SUPPLIED]</p>
+          <h3>Section 4.3</h3>
+          <p class="paper-block-placeholder">[SECTION 4.3: TO BE SUPPLIED]</p>
+        </section>
+
+        <section class="paper-section" id="findings">
+          <h2>5. Findings</h2>
+          <p class="paper-block-placeholder">[FINDINGS: TO BE SUPPLIED]</p>
+          <ul>
+            <li>[FINDING 1: TO BE SUPPLIED]</li>
+            <li>[FINDING 2: TO BE SUPPLIED]</li>
+            <li>[FINDING 3: TO BE SUPPLIED]</li>
+          </ul>
+        </section>
+
+        <section class="paper-section" id="discussion">
+          <h2>6. Discussion</h2>
+          <p class="paper-block-placeholder">[DISCUSSION: TO BE SUPPLIED]</p>
+        </section>
+
+        <section class="paper-section" id="limitations">
+          <h2>7. Limitations</h2>
+          <p class="paper-block-placeholder">[LIMITATIONS: TO BE SUPPLIED]</p>
+        </section>
+
+        <section class="paper-section" id="conclusion">
+          <h2>8. Conclusion</h2>
+          <p class="paper-block-placeholder">[CONCLUSION: TO BE SUPPLIED]</p>
+        </section>
+
+        <section class="paper-section" id="references">
+          <h2>9. References</h2>
+          <ol class="paper-refs">
+            <li>[REFERENCE 1: TO BE SUPPLIED]</li>
+            <li>[REFERENCE 2: TO BE SUPPLIED]</li>
+            <li>[REFERENCE 3: TO BE SUPPLIED]</li>
+          </ol>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="paper-footer">
+    <div class="paper-footer-inner">
+      <p>© 2026 FutureX Lab. All rights reserved.</p>
+      <div class="paper-footer-links">
+        <a href="index.html">FutureX Lab</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="page-motion" id="motionToggle" type="button" aria-pressed="false">
+    <span aria-hidden="true">◐</span><span>Reduce motion</span><span class="page-motion-state" id="motionState" aria-hidden="true">Off</span>
+  </button>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const themeToggle = document.getElementById('themeToggle');
+      const themeLabel = themeToggle.querySelector('.paper-theme-label');
+      const motionToggle = document.getElementById('motionToggle');
+      const motionState = document.getElementById('motionState');
+      const MOTION_KEY = 'futurex_reduce_motion';
+
+      const syncTheme = () => {
+        const light = root.getAttribute('data-theme') === 'light';
+        themeLabel.textContent = light ? 'Dark' : 'Light';
+        themeToggle.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
+        themeToggle.setAttribute('aria-pressed', String(light));
+      };
+
+      const syncMotion = () => {
+        const reduced = root.getAttribute('data-reduce-motion') === 'true';
+        motionToggle.setAttribute('aria-pressed', String(reduced));
+        motionState.textContent = reduced ? 'On' : 'Off';
+      };
+
+      themeToggle.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('fx-theme', next); } catch (e) {}
+        syncTheme();
+      });
+
+      motionToggle.addEventListener('click', () => {
+        const next = root.getAttribute('data-reduce-motion') === 'true';
+        root.setAttribute('data-reduce-motion', String(!next));
+        try { localStorage.setItem(MOTION_KEY, String(!next)); } catch (e) {}
+        syncMotion();
+      });
+
+      syncTheme();
+      syncMotion();
+    })();
+  </script>
+</body>
+</html>
